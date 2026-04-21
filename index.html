@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Zayrho7 — Roblox Builder</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0c0c0c;
+  --bg1:#111;
+  --bg2:#161616;
+  --bg3:#1c1c1c;
+  --white:#f0ece4;
+  --dim:#666;
+  --dim2:#3a3a3a;
+  --accent:#d4c5a9;
+  --hi:#fff;
+  --sans:'Space Grotesk',sans-serif;
+  --mono:'Space Mono',monospace;
+  --border:1px solid rgba(255,255,255,0.07);
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--white);font-family:var(--sans);overflow-x:hidden;line-height:1.6}
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--dim2)}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 60px;height:60px;
+  border-bottom:var(--border);
+  background:rgba(12,12,12,0.95);
+  backdrop-filter:blur(20px);
+}
+.nav-logo{font-family:var(--mono);font-size:13px;letter-spacing:.1em;color:var(--white);text-decoration:none;font-weight:700}
+.nav-links{display:flex;gap:40px;list-style:none}
+.nav-links a{font-size:12px;letter-spacing:.08em;color:var(--dim);text-decoration:none;transition:color .2s;font-weight:500}
+.nav-links a:hover{color:var(--white)}
+.controls{display:flex;gap:6px;align-items:center}
+.ctrl{
+  font-family:var(--mono);font-size:10px;letter-spacing:.1em;
+  padding:6px 12px;border:var(--border);background:transparent;
+  color:var(--dim);cursor:pointer;border-radius:3px;transition:all .2s;
+}
+.ctrl.on{background:var(--white);color:var(--bg);border-color:var(--white)}
+.ctrl:hover:not(.on){color:var(--white);border-color:rgba(255,255,255,0.2)}
+
+/* ── HERO — fixed: no top padding, starts right after nav ── */
+#hero{
+  min-height:100vh;
+  display:flex;flex-direction:column;
+  justify-content:flex-end;
+  padding:60px 60px 80px; /* top = nav height so content isn't hidden */
+  position:relative;overflow:hidden;
+}
+.hero-lines{
+  position:absolute;top:0;left:0;right:0;bottom:0;
+  background-image:repeating-linear-gradient(
+    90deg,rgba(255,255,255,0.02) 0,rgba(255,255,255,0.02) 1px,
+    transparent 1px,transparent calc(100%/12)
+  );
+  pointer-events:none;
+}
+.hero-tag{font-family:var(--mono);font-size:11px;letter-spacing:.15em;color:var(--dim);margin-bottom:32px;display:flex;align-items:center;gap:12px}
+.hero-tag::before{content:'';width:32px;height:1px;background:var(--dim)}
+.hero-h1{font-size:clamp(64px,10vw,140px);font-weight:700;line-height:.95;letter-spacing:-.04em;color:var(--hi);margin-bottom:40px}
+.hero-h1 em{font-style:normal;color:var(--dim)}
+.hero-bottom{display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:32px}
+.hero-desc{max-width:440px;font-size:16px;color:var(--dim);line-height:1.75;font-weight:300}
+.hero-cta-row{display:flex;gap:12px;flex-wrap:wrap}
+.btn{font-family:var(--mono);font-size:11px;letter-spacing:.1em;padding:14px 28px;border:var(--border);background:transparent;color:var(--white);cursor:pointer;border-radius:3px;transition:all .25s;text-decoration:none;display:inline-block}
+.btn:hover{background:var(--white);color:var(--bg)}
+.btn-fill{background:var(--white);color:var(--bg);border-color:var(--white)}
+.btn-fill:hover{background:var(--accent);border-color:var(--accent)}
+
+/* ── SECTION ── */
+.section{padding:120px 60px;max-width:1400px;margin:0 auto}
+.s-eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--dim);display:flex;align-items:center;gap:10px;margin-bottom:48px}
+.s-eyebrow::after{content:'';flex:1;height:1px;background:var(--dim2);max-width:60px}
+.s-title{font-size:clamp(32px,4vw,52px);font-weight:600;letter-spacing:-.03em;line-height:1.1;margin-bottom:16px}
+
+/* ── STATS ── */
+.stats-row{display:grid;grid-template-columns:repeat(3,1fr);border-top:var(--border);border-left:var(--border)}
+.stat-cell{padding:48px 40px;border-right:var(--border);border-bottom:var(--border)}
+.stat-num{font-size:clamp(36px,5vw,64px);font-weight:700;letter-spacing:-.04em;color:var(--hi);line-height:1}
+.stat-label{font-size:13px;color:var(--dim);margin-top:8px}
+
+/* ── SERVICES ── */
+.services-list{border-top:var(--border)}
+.svc-row{display:flex;align-items:center;justify-content:space-between;padding:32px 0;border-bottom:var(--border);gap:24px;transition:padding .25s;cursor:default}
+.svc-row:hover{padding:32px 16px}
+.svc-num{font-family:var(--mono);font-size:11px;color:var(--dim);min-width:36px}
+.svc-name{font-size:clamp(18px,2.5vw,26px);font-weight:500;letter-spacing:-.02em;flex:1}
+.svc-desc{font-size:13px;color:var(--dim);max-width:340px;line-height:1.6;text-align:right}
+.svc-arr{font-size:20px;color:var(--dim);transition:transform .2s,color .2s}
+.svc-row:hover .svc-arr{transform:translateX(6px);color:var(--white)}
+
+/* ── GALLERY (public view) ── */
+.gallery-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:48px;flex-wrap:wrap;gap:16px}
+.gallery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:2px}
+.gitem{position:relative;aspect-ratio:16/10;overflow:hidden;cursor:pointer}
+.gitem img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s}
+.gitem:hover img{transform:scale(1.04)}
+.goverlay{position:absolute;inset:0;background:rgba(0,0,0,0);display:flex;flex-direction:column;justify-content:flex-end;padding:20px;transition:background .3s}
+.gitem:hover .goverlay{background:rgba(0,0,0,.55)}
+.gov-text{opacity:0;transform:translateY(8px);transition:all .3s}
+.gitem:hover .gov-text{opacity:1;transform:none}
+.gov-title{font-size:15px;font-weight:600;color:#fff}
+.gov-tag{font-family:var(--mono);font-size:10px;color:rgba(255,255,255,.5);letter-spacing:.1em;margin-top:4px}
+.gallery-empty{grid-column:1/-1;padding:80px 0;text-align:center}
+.gallery-empty p{font-family:var(--mono);font-size:12px;color:var(--dim2)}
+
+/* ── ADMIN PANEL (hidden by default) ── */
+#admin-panel{display:none;margin-top:32px;border:1px solid rgba(255,255,255,.1);border-radius:4px;padding:32px;background:var(--bg2)}
+.admin-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:2px;margin-top:24px}
+.admin-item{position:relative;aspect-ratio:16/10;overflow:hidden}
+.admin-item img{width:100%;height:100%;object-fit:cover}
+.admin-del{position:absolute;top:8px;right:8px;background:rgba(0,0,0,.7);border:none;color:#fff;cursor:pointer;border-radius:2px;padding:4px 8px;font-size:10px;font-family:var(--mono);transition:background .2s}
+.admin-del:hover{background:rgba(200,60,60,.9)}
+.upload-zone{
+  grid-column:1/-1;border:1px dashed var(--dim2);padding:40px;
+  text-align:center;border-radius:3px;cursor:pointer;transition:border-color .2s,background .2s;
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+}
+.upload-zone:hover{border-color:var(--dim);background:var(--bg3)}
+.upload-zone p{font-family:var(--mono);font-size:12px;color:var(--dim)}
+.upload-zone small{font-size:11px;color:var(--dim2)}
+.admin-form{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:24px}
+.admin-form input{background:var(--bg3);border:var(--border);color:var(--white);font-family:var(--sans);font-size:14px;padding:10px 14px;border-radius:3px;outline:none}
+.admin-form input:focus{border-color:rgba(255,255,255,.2)}
+.admin-actions{display:flex;gap:8px;align-items:center;margin-bottom:24px;flex-wrap:wrap}
+#file-input{display:none}
+
+/* ── ADMIN LOGIN ── */
+#admin-lock{
+  display:none;position:fixed;inset:0;z-index:600;
+  background:rgba(0,0,0,.92);backdrop-filter:blur(12px);
+  align-items:center;justify-content:center;
+}
+#admin-lock.open{display:flex}
+.lock-box{background:var(--bg2);border:var(--border);border-radius:4px;padding:40px;width:100%;max-width:360px;text-align:center}
+.lock-box h3{font-family:var(--mono);font-size:13px;letter-spacing:.15em;color:var(--dim);margin-bottom:24px}
+.lock-box input{width:100%;background:var(--bg3);border:var(--border);color:var(--white);font-family:var(--mono);font-size:16px;padding:12px 16px;border-radius:3px;outline:none;text-align:center;letter-spacing:.2em;margin-bottom:12px}
+.lock-box input:focus{border-color:rgba(255,255,255,.2)}
+.lock-err{font-family:var(--mono);font-size:11px;color:#e05555;margin-top:8px;display:none}
+
+/* ── PRICING ── */
+.pricing-controls{display:flex;gap:6px;margin-bottom:48px}
+.pricing-grid{display:grid;grid-template-columns:repeat(4,1fr);border:var(--border);background:rgba(255,255,255,0.04);gap:1px}
+@media(max-width:1000px){.pricing-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:580px){.pricing-grid{grid-template-columns:1fr}}
+.plan{background:var(--bg1);padding:40px 32px;display:flex;flex-direction:column;position:relative}
+.plan.pop{background:var(--bg2)}
+.pop-badge{position:absolute;top:0;left:32px;font-family:var(--mono);font-size:9px;letter-spacing:.15em;background:var(--white);color:var(--bg);padding:3px 10px;transform:translateY(-50%);border-radius:2px}
+.plan-name{font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--dim);margin-bottom:28px}
+.plan-amount{font-size:clamp(36px,4vw,54px);font-weight:700;letter-spacing:-.04em;color:var(--hi);line-height:1;margin-bottom:4px;transition:color .25s,transform .25s}
+.plan-amount .cur{font-size:.42em;font-weight:400;color:var(--dim);vertical-align:super}
+.plan-amount.custom{font-size:clamp(22px,3vw,34px);line-height:1.2}
+.plan-sub{font-size:12px;color:var(--dim);letter-spacing:.04em;margin-bottom:32px;font-family:var(--mono)}
+.plan-sep{height:1px;background:rgba(255,255,255,0.07);margin-bottom:28px}
+.plan-feats{list-style:none;display:flex;flex-direction:column;gap:12px;flex:1}
+.plan-feats li{font-size:14px;color:var(--dim);display:flex;align-items:flex-start;gap:10px;line-height:1.5}
+.plan-feats li.yes{color:var(--white)}
+.plan-feats li.yes::before{content:'↳';color:var(--dim);font-family:var(--mono);font-size:12px;margin-top:1px;flex-shrink:0}
+.plan-feats li.no::before{content:'–';color:var(--dim2);font-family:var(--mono);font-size:12px;flex-shrink:0}
+.plan-btn{margin-top:32px;font-family:var(--mono);font-size:10px;letter-spacing:.12em;padding:13px;width:100%;border:var(--border);background:transparent;color:var(--dim);cursor:pointer;transition:all .2s;border-radius:3px}
+.plan-btn:hover,.plan-btn.hi{border-color:var(--white);color:var(--white)}
+.plan-btn.hi{background:var(--white);color:var(--bg)}
+.plan-btn.hi:hover{background:var(--accent);border-color:var(--accent)}
+
+/* ── ABOUT ── */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+@media(max-width:768px){.about-grid{grid-template-columns:1fr}}
+.about-body{font-size:16px;color:var(--dim);line-height:1.8;font-weight:300}
+.skills-wrap{display:flex;flex-wrap:wrap;gap:8px;margin-top:40px}
+.skill-chip{font-family:var(--mono);font-size:11px;letter-spacing:.08em;padding:6px 14px;border:var(--border);color:var(--dim);border-radius:3px}
+.about-aside{border-left:var(--border);padding-left:48px}
+.aside-block{margin-bottom:40px}
+.aside-label{font-family:var(--mono);font-size:10px;color:var(--dim2);letter-spacing:.15em;margin-bottom:10px}
+.aside-val{font-size:22px;font-weight:600;letter-spacing:-.02em;color:var(--hi)}
+.aside-note{font-size:13px;color:var(--dim);margin-top:4px}
+
+/* ── CONTACT ── */
+.contact-wrap{border:var(--border);padding:80px 60px;text-align:center}
+.contact-title{font-size:clamp(36px,6vw,80px);font-weight:700;letter-spacing:-.04em;line-height:1;margin-bottom:24px}
+.contact-sub{font-size:16px;color:var(--dim);max-width:460px;margin:0 auto 48px;font-weight:300}
+.contact-links{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+.contact-card{display:flex;align-items:center;gap:12px;padding:16px 24px;border:var(--border);border-radius:3px;text-decoration:none;color:var(--white);transition:all .2s;background:var(--bg2)}
+.contact-card:hover{background:var(--bg3);border-color:rgba(255,255,255,.18)}
+.cc-label{font-family:var(--mono);font-size:10px;color:var(--dim);letter-spacing:.1em;display:block}
+.cc-val{font-size:14px;font-weight:500;display:block;margin-top:2px}
+
+/* ── AI CHAT ── */
+#ai-chat{
+  position:fixed;bottom:24px;right:24px;z-index:300;
+  display:flex;flex-direction:column;align-items:flex-end;gap:12px;
+}
+#chat-bubble{
+  width:52px;height:52px;border-radius:50%;background:var(--white);
+  display:flex;align-items:center;justify-content:center;cursor:pointer;
+  box-shadow:0 4px 24px rgba(0,0,0,.4);transition:transform .2s;flex-shrink:0;border:none;
+}
+#chat-bubble:hover{transform:scale(1.08)}
+#chat-bubble svg{width:22px;height:22px}
+#chat-box{
+  width:340px;background:var(--bg2);border:var(--border);
+  border-radius:8px;overflow:hidden;display:none;flex-direction:column;
+  box-shadow:0 8px 40px rgba(0,0,0,.6);
+}
+#chat-box.open{display:flex}
+.chat-head{
+  padding:16px 20px;border-bottom:var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+}
+.chat-head-info{display:flex;align-items:center;gap:10px}
+.chat-dot{width:8px;height:8px;border-radius:50%;background:#7aff9a;flex-shrink:0;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.chat-head-name{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--white)}
+.chat-head-sub{font-size:11px;color:var(--dim);margin-top:1px}
+.chat-close{background:transparent;border:none;color:var(--dim);cursor:pointer;font-size:16px;transition:color .2s;font-family:var(--sans)}
+.chat-close:hover{color:var(--white)}
+.chat-msgs{height:280px;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:12px;scroll-behavior:smooth}
+.chat-msgs::-webkit-scrollbar{width:2px}
+.chat-msgs::-webkit-scrollbar-thumb{background:var(--dim2)}
+.msg{max-width:85%;font-size:13px;line-height:1.55;padding:10px 14px;border-radius:12px}
+.msg.bot{background:var(--bg3);color:var(--white);align-self:flex-start;border-bottom-left-radius:3px}
+.msg.user{background:var(--white);color:var(--bg);align-self:flex-end;border-bottom-right-radius:3px;font-weight:500}
+.msg.typing{display:flex;gap:4px;align-items:center;padding:12px 14px}
+.tdot{width:6px;height:6px;border-radius:50%;background:var(--dim);animation:td .9s infinite}
+.tdot:nth-child(2){animation-delay:.15s}
+.tdot:nth-child(3){animation-delay:.3s}
+@keyframes td{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-5px)}}
+.chat-footer{padding:12px;border-top:var(--border);display:flex;gap:8px}
+.chat-input{
+  flex:1;background:var(--bg3);border:var(--border);color:var(--white);
+  font-family:var(--sans);font-size:13px;padding:9px 12px;border-radius:4px;outline:none;
+}
+.chat-input:focus{border-color:rgba(255,255,255,.2)}
+.chat-input::placeholder{color:var(--dim)}
+.chat-send{
+  background:var(--white);color:var(--bg);border:none;cursor:pointer;
+  border-radius:4px;padding:9px 14px;font-family:var(--mono);font-size:10px;
+  transition:background .2s;flex-shrink:0;
+}
+.chat-send:hover{background:var(--accent)}
+
+/* ── FOOTER ── */
+footer{border-top:var(--border);padding:28px 60px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+footer span{font-family:var(--mono);font-size:10px;color:var(--dim);letter-spacing:.08em}
+
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+
+/* ── RESPONSIVE ── */
+@media(max-width:768px){
+  nav{padding:0 24px}
+  .nav-links{display:none}
+  .section{padding:80px 24px}
+  #hero{padding:60px 24px 60px}
+  .stats-row{grid-template-columns:1fr}
+  .svc-desc{display:none}
+  .about-aside{border-left:none;padding-left:0;border-top:var(--border);padding-top:40px}
+  .contact-wrap{padding:48px 24px}
+  footer{padding:24px}
+  #chat-box{width:calc(100vw - 48px)}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">ZRH7</a>
+  <ul class="nav-links">
+    <li><a href="#services" data-fr="Services"  data-en="Services">Services</a></li>
+    <li><a href="#works"    data-fr="Créations"  data-en="Works">Créations</a></li>
+    <li><a href="#pricing"  data-fr="Tarifs"     data-en="Pricing">Tarifs</a></li>
+    <li><a href="#about"    data-fr="À propos"   data-en="About">À propos</a></li>
+    <li><a href="#contact"  data-fr="Contact"    data-en="Contact">Contact</a></li>
+  </ul>
+  <div class="controls">
+    <button class="ctrl on" id="btn-fr" onclick="setLang('fr')">FR</button>
+    <button class="ctrl"    id="btn-en" onclick="setLang('en')">EN</button>
+    <!-- Secret admin button — hidden visually, double-click logo to trigger -->
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-lines"></div>
+  <div class="hero-tag" data-fr="Roblox Builder Professionnel" data-en="Professional Roblox Builder">Roblox Builder Professionnel</div>
+  <h1 class="hero-h1">ZAYR<em>HO7</em></h1>
+  <div class="hero-bottom">
+    <p class="hero-desc"
+       data-fr="Je conçois des maps Roblox immersives — du projet simple au monde entier. Précis, ponctuel, soigné."
+       data-en="I design immersive Roblox maps — from simple projects to entire worlds. Precise, on time, polished.">
+      Je conçois des maps Roblox immersives — du projet simple au monde entier. Précis, ponctuel, soigné.
+    </p>
+    <div class="hero-cta-row">
+      <a href="#works"   class="btn btn-fill" data-fr="Voir mes créations" data-en="View my work">Voir mes créations</a>
+      <a href="#contact" class="btn"          data-fr="Me contacter"       data-en="Contact me">Me contacter</a>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-row">
+  <div class="stat-cell">
+    <div class="stat-num">50+</div>
+    <div class="stat-label" data-fr="Projets livrés" data-en="Projects delivered">Projets livrés</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-num">3+</div>
+    <div class="stat-label" data-fr="Années d'expérience" data-en="Years of experience">Années d'expérience</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-num">100%</div>
+    <div class="stat-label" data-fr="Clients satisfaits" data-en="Satisfied clients">Clients satisfaits</div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="services" class="section">
+  <div class="reveal">
+    <p class="s-eyebrow" data-fr="CE QUE JE FAIS" data-en="WHAT I DO">CE QUE JE FAIS</p>
+  </div>
+  <div class="services-list reveal">
+    <div class="svc-row">
+      <span class="svc-num">01</span>
+      <span class="svc-name" data-fr="Map personnalisée"     data-en="Custom map">Map personnalisée</span>
+      <span class="svc-desc" data-fr="RP, obby, simulateur — chaque détail soigné selon ton thème." data-en="RP, obby, simulator — every detail crafted to match your theme.">RP, obby, simulateur — chaque détail soigné selon ton thème.</span>
+      <span class="svc-arr">→</span>
+    </div>
+    <div class="svc-row">
+      <span class="svc-num">02</span>
+      <span class="svc-name" data-fr="Level design"          data-en="Level design">Level design</span>
+      <span class="svc-desc" data-fr="Zones cohérentes, flux de gameplay fluide, architecture narrative." data-en="Coherent zones, smooth gameplay flow, narrative architecture.">Zones cohérentes, flux de gameplay fluide, architecture narrative.</span>
+      <span class="svc-arr">→</span>
+    </div>
+    <div class="svc-row">
+      <span class="svc-num">03</span>
+      <span class="svc-name" data-fr="Ambiance & lore"       data-en="Atmosphere & lore">Ambiance & lore</span>
+      <span class="svc-desc" data-fr="Éclairages, textures, décors — une identité visuelle forte." data-en="Lighting, textures, scenery — a strong visual identity.">Éclairages, textures, décors — une identité visuelle forte.</span>
+      <span class="svc-arr">→</span>
+    </div>
+    <div class="svc-row">
+      <span class="svc-num">04</span>
+      <span class="svc-name" data-fr="Optimisation"          data-en="Optimization">Optimisation</span>
+      <span class="svc-desc" data-fr="Maps fluides même en surcharge — perf & expérience joueur." data-en="Smooth maps even under load — peak performance & player experience.">Maps fluides même en surcharge — perf & expérience joueur.</span>
+      <span class="svc-arr">→</span>
+    </div>
+    <div class="svc-row">
+      <span class="svc-num">05</span>
+      <span class="svc-name" data-fr="Projet studio complet" data-en="Full studio project">Projet studio complet</span>
+      <span class="svc-desc" data-fr="Monde entier, multi-zones, livraisons par étapes avec contrat." data-en="Full world, multi-zone, staged deliveries with professional contract.">Monde entier, multi-zones, livraisons par étapes avec contrat.</span>
+      <span class="svc-arr">→</span>
+    </div>
+  </div>
+</section>
+
+<!-- CREATIONS (public view) -->
+<section id="works" class="section">
+  <div class="reveal gallery-header">
+    <div>
+      <p class="s-eyebrow" data-fr="MES CRÉATIONS" data-en="MY WORK">MES CRÉATIONS</p>
+      <h2 class="s-title" data-fr="Ce que j'ai construit" data-en="What I've built">Ce que j'ai construit</h2>
+    </div>
+  </div>
+
+  <!-- PUBLIC GALLERY -->
+  <div class="gallery-grid reveal" id="public-gallery"></div>
+
+  <!-- ADMIN PANEL (hidden until logged in) -->
+  <div id="admin-panel">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:12px">
+      <span style="font-family:var(--mono);font-size:11px;color:var(--dim);letter-spacing:.1em">▲ MODE ADMIN ACTIVÉ</span>
+      <button class="ctrl" onclick="logout()" data-fr="Déconnexion" data-en="Logout">Déconnexion</button>
+    </div>
+    <div class="admin-form">
+      <input id="a-title" type="text" data-ph-fr="Titre du projet" data-ph-en="Project title" placeholder="Titre du projet"/>
+      <input id="a-type"  type="text" data-ph-fr="Type (RP, Obby...)" data-ph-en="Type (RP, Obby...)" placeholder="Type (RP, Obby...)"/>
+    </div>
+    <div class="admin-grid" id="admin-grid">
+      <label class="upload-zone" for="file-input">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" style="color:var(--dim2)"><path d="M12 16V8m0 0-3 3m3-3 3 3M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1"/></svg>
+        <p data-fr="Glisse tes screenshots ici" data-en="Drop your screenshots here">Glisse tes screenshots ici</p>
+        <small data-fr="PNG, JPG, WEBP — plusieurs fichiers OK" data-en="PNG, JPG, WEBP — multiple files OK">PNG, JPG, WEBP — plusieurs fichiers OK</small>
+      </label>
+      <input type="file" id="file-input" accept="image/*" multiple/>
+    </div>
+  </div>
+</section>
+
+<!-- ADMIN LOGIN OVERLAY -->
+<div id="admin-lock">
+  <div class="lock-box">
+    <h3 data-fr="ACCÈS ADMIN" data-en="ADMIN ACCESS">ACCÈS ADMIN</h3>
+    <input id="pwd-input" type="password" placeholder="••••••••" autocomplete="off"/>
+    <div style="display:flex;gap:8px;justify-content:center">
+      <button class="ctrl" onclick="closeLock()" data-fr="Annuler" data-en="Cancel">Annuler</button>
+      <button class="ctrl on" onclick="tryLogin()" data-fr="Entrer" data-en="Enter">Entrer</button>
+    </div>
+    <div class="lock-err" id="lock-err" data-fr="Mot de passe incorrect" data-en="Wrong password">Mot de passe incorrect</div>
+  </div>
+</div>
+
+<!-- PRICING -->
+<section id="pricing" class="section">
+  <div class="reveal">
+    <p class="s-eyebrow" data-fr="TARIFS" data-en="PRICING">TARIFS</p>
+    <h2 class="s-title" style="margin-bottom:32px" data-fr="Investissement" data-en="Investment">Investissement</h2>
+    <div class="pricing-controls">
+      <button class="ctrl on" id="c-eur"   onclick="setCur('eur')"   data-fr="€ EUR"    data-en="€ EUR">€ EUR</button>
+      <button class="ctrl"    id="c-robux" onclick="setCur('robux')" data-fr="R$ Robux" data-en="R$ Robux">R$ Robux</button>
+    </div>
+  </div>
+  <div class="pricing-grid reveal">
+    <div class="plan">
+      <div class="plan-name">STARTER</div>
+      <div class="plan-amount" id="pa-s"><span class="cur" id="c-s">€</span><span id="v-s">20</span></div>
+      <div class="plan-sub" data-fr="par map / projet simple" data-en="per map / simple project">par map / projet simple</div>
+      <div class="plan-sep"></div>
+      <ul class="plan-feats">
+        <li class="yes" data-fr="1 map personnalisée"  data-en="1 custom map">1 map personnalisée</li>
+        <li class="yes" data-fr="Thème au choix"       data-en="Theme of your choice">Thème au choix</li>
+        <li class="yes" data-fr="2 révisions incluses" data-en="2 revisions included">2 révisions incluses</li>
+        <li class="no"  data-fr="Livraison 5 jours"    data-en="5-day delivery">Livraison 5 jours</li>
+        <li class="no"  data-fr="Fichiers sources"     data-en="Source files">Fichiers sources</li>
+      </ul>
+      <button class="plan-btn" onclick="goContact()" data-fr="COMMENCER" data-en="GET STARTED">COMMENCER</button>
+    </div>
+    <div class="plan pop">
+      <div class="pop-badge" data-fr="POPULAIRE" data-en="POPULAR">POPULAIRE</div>
+      <div class="plan-name">PRO</div>
+      <div class="plan-amount" id="pa-p"><span class="cur" id="c-p">€</span><span id="v-p">45</span></div>
+      <div class="plan-sub" data-fr="par projet élaboré" data-en="per elaborated project">par projet élaboré</div>
+      <div class="plan-sep"></div>
+      <ul class="plan-feats">
+        <li class="yes" data-fr="Map détaillée & optimisée" data-en="Detailed & optimized map">Map détaillée & optimisée</li>
+        <li class="yes" data-fr="Ambiance / lore inclus"    data-en="Atmosphere / lore included">Ambiance / lore inclus</li>
+        <li class="yes" data-fr="4 révisions incluses"      data-en="4 revisions included">4 révisions incluses</li>
+        <li class="yes" data-fr="Livraison 7 jours"         data-en="7-day delivery">Livraison 7 jours</li>
+        <li class="no"  data-fr="Fichiers sources"          data-en="Source files">Fichiers sources</li>
+      </ul>
+      <button class="plan-btn hi" onclick="goContact()" data-fr="CHOISIR PRO" data-en="CHOOSE PRO">CHOISIR PRO</button>
+    </div>
+    <div class="plan">
+      <div class="plan-name">ELITE</div>
+      <div class="plan-amount" id="pa-e"><span class="cur" id="c-e">€</span><span id="v-e">150</span></div>
+      <div class="plan-sub" data-fr="projet complet" data-en="complete project">projet complet</div>
+      <div class="plan-sep"></div>
+      <ul class="plan-feats">
+        <li class="yes" data-fr="Zone / monde entier"    data-en="Full zone / world">Zone / monde entier</li>
+        <li class="yes" data-fr="Level design narratif"  data-en="Narrative level design">Level design narratif</li>
+        <li class="yes" data-fr="Révisions illimitées"   data-en="Unlimited revisions">Révisions illimitées</li>
+        <li class="yes" data-fr="Support post-livraison" data-en="Post-delivery support">Support post-livraison</li>
+        <li class="yes" data-fr="Fichiers sources"        data-en="Source files">Fichiers sources</li>
+      </ul>
+      <button class="plan-btn" onclick="goContact()" data-fr="CHOISIR ELITE" data-en="CHOOSE ELITE">CHOISIR ELITE</button>
+    </div>
+    <div class="plan">
+      <div class="plan-name" data-fr="SUR MESURE" data-en="CUSTOM">SUR MESURE</div>
+      <div class="plan-amount custom" id="pa-c" data-fr="SUR<br>DEVIS" data-en="ON<br>QUOTE">SUR<br>DEVIS</div>
+      <div class="plan-sub" data-fr="projet unique / studio" data-en="unique project / studio">projet unique / studio</div>
+      <div class="plan-sep"></div>
+      <ul class="plan-feats">
+        <li class="yes" data-fr="Brief personnalisé"     data-en="Custom brief">Brief personnalisé</li>
+        <li class="yes" data-fr="Équipe & collaboration" data-en="Team & collaboration">Équipe & collaboration</li>
+        <li class="yes" data-fr="Livraisons par étapes"  data-en="Staged deliveries">Livraisons par étapes</li>
+        <li class="yes" data-fr="Contrat professionnel"  data-en="Professional contract">Contrat professionnel</li>
+        <li class="yes" data-fr="NDA possible"           data-en="NDA possible">NDA possible</li>
+      </ul>
+      <button class="plan-btn" onclick="goContact()" data-fr="ME CONTACTER" data-en="CONTACT ME">ME CONTACTER</button>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="section">
+  <div class="about-grid reveal">
+    <div>
+      <p class="s-eyebrow" data-fr="À PROPOS" data-en="ABOUT">À PROPOS</p>
+      <h2 class="s-title" style="margin-bottom:32px">Zayrho7</h2>
+      <p class="about-body"
+         data-fr="Builder Roblox avec plus de 3 ans d'expérience sur Roblox Studio. Je me spécialise dans les maps immersives et les environnements de jeu optimisés, pensés pour durer."
+         data-en="Roblox builder with 3+ years on Roblox Studio. I specialize in immersive maps and optimized game environments, built to last.">Builder Roblox avec plus de 3 ans d'expérience sur Roblox Studio. Je me spécialise dans les maps immersives et les environnements de jeu optimisés, pensés pour durer.</p>
+      <p class="about-body" style="margin-top:16px"
+         data-fr="Chaque projet est livré avec soin, dans les délais convenus. Je travaille directement avec mes clients pour capturer exactement ce qu'ils imaginent."
+         data-en="Every project is delivered with care, on schedule. I work directly with clients to capture exactly what they envision.">Chaque projet est livré avec soin, dans les délais convenus. Je travaille directement avec mes clients pour capturer exactement ce qu'ils imaginent.</p>
+      <div class="skills-wrap">
+        <span class="skill-chip">Roblox Studio</span>
+        <span class="skill-chip">Level Design</span>
+        <span class="skill-chip">Terrain</span>
+        <span class="skill-chip">Lighting</span>
+        <span class="skill-chip">Optimization</span>
+        <span class="skill-chip">Lore Building</span>
+        <span class="skill-chip">UI/UX</span>
+      </div>
+    </div>
+    <div class="about-aside">
+      <div class="aside-block">
+        <div class="aside-label" data-fr="STATUT" data-en="STATUS">STATUT</div>
+        <div class="aside-val" style="color:#7aff9a" data-fr="Disponible" data-en="Available">Disponible</div>
+        <div class="aside-note" data-fr="Ouvert aux nouvelles commandes" data-en="Open to new orders">Ouvert aux nouvelles commandes</div>
+      </div>
+      <div class="aside-block">
+        <div class="aside-label" data-fr="DÉLAI MOYEN" data-en="AVG DELIVERY">DÉLAI MOYEN</div>
+        <div class="aside-val" data-fr="5–7 jours" data-en="5–7 days">5–7 jours</div>
+        <div class="aside-note" data-fr="Selon la complexité" data-en="Depending on complexity">Selon la complexité</div>
+      </div>
+      <div class="aside-block">
+        <div class="aside-label">DISCORD</div>
+        <div class="aside-val" style="font-size:18px">zayrho7</div>
+        <div class="aside-note" data-fr="Contact préféré" data-en="Preferred contact">Contact préféré</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="section" style="padding-top:0">
+  <div class="contact-wrap reveal">
+    <h2 class="contact-title" data-fr="Travaillons<br>ensemble." data-en="Let's build<br>together.">Travaillons<br>ensemble.</h2>
+    <p class="contact-sub"
+       data-fr="Un projet en tête ? Écris-moi directement. Je réponds en moins de 24h."
+       data-en="Have a project in mind? Write to me directly. I reply within 24h.">Un projet en tête ? Écris-moi directement. Je réponds en moins de 24h.</p>
+    <div class="contact-links">
+      <a href="https://discord.com" target="_blank" class="contact-card">
+        <div><span class="cc-label">DISCORD</span><span class="cc-val">zayrho7</span></div>
+      </a>
+      <a href="https://www.roblox.com" target="_blank" class="contact-card">
+        <div><span class="cc-label">ROBLOX</span><span class="cc-val">@Zayrho7</span></div>
+      </a>
+      <a href="mailto:contact@zayrho7.com" class="contact-card">
+        <div>
+          <span class="cc-label">EMAIL</span>
+          <span class="cc-val" data-fr="Envoyer un mail" data-en="Send an email">Envoyer un mail</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span>ZAYRHO7 — ROBLOX BUILDER</span>
+  <span data-fr="© 2025 — Tous droits réservés" data-en="© 2025 — All rights reserved">© 2026 — Tous droits réservés</span>
+</footer>
+
+<!-- AI CHAT -->
+<div id="ai-chat">
+  <div id="chat-box">
+    <div class="chat-head">
+      <div class="chat-head-info">
+        <div class="chat-dot"></div>
+        <div>
+          <div class="chat-head-name">ZRH7 — Assistant</div>
+          <div class="chat-head-sub" data-fr="Posez vos questions" data-en="Ask me anything">Posez vos questions</div>
+        </div>
+      </div>
+      <button class="chat-close" onclick="toggleChat()">✕</button>
+    </div>
+    <div class="chat-msgs" id="chat-msgs">
+      <div class="msg bot" data-fr="Bonjour ! Je suis l'assistant de Zayrho7. Vous pouvez me poser des questions sur ses services, ses tarifs ou son travail 🎮" data-en="Hello! I'm Zayrho7's assistant. Feel free to ask me about his services, pricing or his work 🎮">Bonjour ! Je suis l'assistant de Zayrho7. Vous pouvez me poser des questions sur ses services, ses tarifs ou son travail 🎮</div>
+    </div>
+    <div class="chat-footer">
+      <input class="chat-input" id="chat-input" type="text"
+             placeholder="Votre question..."
+             data-ph-fr="Votre question..."
+             data-ph-en="Your question..."
+             onkeydown="if(event.key==='Enter')sendMsg()"/>
+      <button class="chat-send" onclick="sendMsg()">→</button>
+    </div>
+  </div>
+  <button id="chat-bubble" onclick="toggleChat()" title="Assistant">
+    <svg viewBox="0 0 24 24" fill="none" stroke="#0c0c0c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
+    </svg>
+  </button>
+</div>
+
+<script>
+/* ══════════════════════════════════════════
+   CONFIGURATION — MODIFIE CES VALEURS
+   ══════════════════════════════════════════ */
+const ADMIN_PASSWORD = 'zayrho7admin'; // ← change ton mot de passe ici
+const STORAGE_KEY    = 'zrh7_creations_v2';
+
+/* ══════════════════════════════════════════
+   STATE
+   ══════════════════════════════════════════ */
+let lang       = 'fr';
+let curCurrency = 'eur';
+let isAdmin    = false;
+let creations  = [];
+let logoClicks = 0;
+let logoTimer  = null;
+
+/* ══════════════════════════════════════════
+   STORAGE — sessionStorage for admin flag (clears on tab close)
+   creations stored in localStorage (only images, no edit outside admin)
+   ══════════════════════════════════════════ */
+function loadCreations() {
+  try { creations = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'); }
+  catch(e) { creations = []; }
+}
+function saveCreations() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(creations));
+}
+
+/* ══════════════════════════════════════════
+   LANGUAGE
+   ══════════════════════════════════════════ */
+function setLang(l) {
+  lang = l;
+  document.getElementById('btn-fr').classList.toggle('on', l==='fr');
+  document.getElementById('btn-en').classList.toggle('on', l==='en');
+  document.documentElement.lang = l;
+  document.querySelectorAll('[data-fr][data-en]').forEach(el => {
+    const v = el.getAttribute('data-'+l);
+    if (v === null) return;
+    if (v.includes('<br>')) el.innerHTML = v; else el.textContent = v;
+  });
+  document.querySelectorAll('[data-ph-fr]').forEach(el => {
+    el.placeholder = el.getAttribute('data-ph-'+l) || el.placeholder;
+  });
+  renderPublicGallery();
+  if (isAdmin) renderAdminGrid();
+}
+
+/* ══════════════════════════════════════════
+   CURRENCY
+   ══════════════════════════════════════════ */
+const PRICES = {
+  eur:   {s:['€','20'],    p:['€','45'],    e:['€','150']},
+  robux: {s:['R$','4 500'],p:['R$','7 500'],e:['R$','25 000']}
+};
+function setCur(c) {
+  curCurrency = c;
+  document.getElementById('c-eur').classList.toggle('on',   c==='eur');
+  document.getElementById('c-robux').classList.toggle('on', c==='robux');
+  const d = PRICES[c];
+  [['s',d.s],['p',d.p],['e',d.e]].forEach(([k,v]) => {
+    document.getElementById('c-'+k).textContent = v[0];
+    document.getElementById('v-'+k).textContent = v[1];
+    const el = document.getElementById('pa-'+k);
+    el.style.transform='scale(1.07)'; el.style.color='#aaa';
+    setTimeout(()=>{ el.style.transform=''; el.style.color=''; }, 280);
+  });
+}
+
+/* ══════════════════════════════════════════
+   GALLERY — PUBLIC VIEW
+   ══════════════════════════════════════════ */
+function renderPublicGallery() {
+  const g = document.getElementById('public-gallery');
+  g.innerHTML = '';
+  if (creations.length === 0) {
+    g.innerHTML = `<div class="gallery-empty"><p data-fr="Bientôt disponible..." data-en="Coming soon...">${lang==='fr'?'Bientôt disponible...':'Coming soon...'}</p></div>`;
+    return;
+  }
+  creations.forEach(item => {
+    if (!item.img) return;
+    const d = document.createElement('div');
+    d.className = 'gitem';
+    d.innerHTML = `
+      <img src="${item.img}" alt="${item.title}" loading="lazy"/>
+      <div class="goverlay">
+        <div class="gov-text">
+          <div class="gov-title">${item.title}</div>
+          <div class="gov-tag">${item.type || 'Roblox Build'}</div>
+        </div>
+      </div>`;
+    g.appendChild(d);
+  });
+}
+
+/* ══════════════════════════════════════════
+   ADMIN — SECRET ENTRY: double-clic sur logo
+   ══════════════════════════════════════════ */
+document.querySelector('.nav-logo').addEventListener('click', e => {
+  e.preventDefault();
+  logoClicks++;
+  clearTimeout(logoTimer);
+  if (logoClicks >= 2) {
+    logoClicks = 0;
+    if (isAdmin) { logout(); return; }
+    openLock();
+  } else {
+    logoTimer = setTimeout(() => { logoClicks = 0; }, 600);
+  }
+});
+
+function openLock() {
+  document.getElementById('admin-lock').classList.add('open');
+  document.getElementById('lock-err').style.display = 'none';
+  document.getElementById('pwd-input').value = '';
+  setTimeout(() => document.getElementById('pwd-input').focus(), 100);
+}
+function closeLock() {
+  document.getElementById('admin-lock').classList.remove('open');
+  document.getElementById('pwd-input').value = '';
+}
+function tryLogin() {
+  const v = document.getElementById('pwd-input').value;
+  if (v === ADMIN_PASSWORD) {
+    isAdmin = true;
+    closeLock();
+    document.getElementById('admin-panel').style.display = 'block';
+    renderAdminGrid();
+  } else {
+    const err = document.getElementById('lock-err');
+    err.style.display = 'block';
+    document.getElementById('pwd-input').value = '';
+    document.getElementById('pwd-input').focus();
+    setTimeout(() => { err.style.display = 'none'; }, 2500);
+  }
+}
+document.getElementById('pwd-input').addEventListener('keydown', e => {
+  if (e.key === 'Enter') tryLogin();
+});
+function logout() {
+  isAdmin = false;
+  document.getElementById('admin-panel').style.display = 'none';
+}
+
+/* ══════════════════════════════════════════
+   ADMIN — GRID RENDER
+   ══════════════════════════════════════════ */
+function renderAdminGrid() {
+  const grid = document.getElementById('admin-grid');
+  const uploadZone = grid.querySelector('label');
+  const fileInput  = document.getElementById('file-input');
+  Array.from(grid.children).forEach(c => {
+    if (c !== uploadZone && c !== fileInput) c.remove();
+  });
+  creations.forEach((item, i) => {
+    const d = document.createElement('div');
+    d.className = 'admin-item';
+    if (item.img) {
+      d.style.cssText = 'position:relative;aspect-ratio:16/10;overflow:hidden;background:var(--bg3)';
+      d.innerHTML = `<img src="${item.img}" style="width:100%;height:100%;object-fit:cover"/>
+        <div style="position:absolute;bottom:0;left:0;right:0;padding:10px 12px;background:rgba(0,0,0,.6)">
+          <div style="font-size:12px;font-weight:600;color:#fff">${item.title}</div>
+          <div style="font-size:10px;color:rgba(255,255,255,.5);font-family:var(--mono)">${item.type||''}</div>
+        </div>
+        <button class="admin-del" onclick="removeItem(${i})">✕ suppr.</button>`;
+    }
+    grid.insertBefore(d, uploadZone);
+  });
+}
+
+function removeItem(i) {
+  creations.splice(i, 1);
+  saveCreations();
+  renderPublicGallery();
+  renderAdminGrid();
+}
+
+/* ── FILE UPLOAD ── */
+document.getElementById('file-input').addEventListener('change', function() {
+  const title = document.getElementById('a-title').value.trim();
+  const type  = document.getElementById('a-type').value.trim();
+  Array.from(this.files).forEach(f => {
+    const r = new FileReader();
+    r.onload = e => {
+      creations.push({
+        title: title || f.name.replace(/\.[^.]+$/,''),
+        type:  type  || 'Roblox Build',
+        img:   e.target.result
+      });
+      saveCreations();
+      renderPublicGallery();
+      renderAdminGrid();
+    };
+    r.readAsDataURL(f);
+  });
+  this.value = '';
+  document.getElementById('a-title').value = '';
+  document.getElementById('a-type').value  = '';
+});
+
+/* ══════════════════════════════════════════
+   AI CHAT
+   ══════════════════════════════════════════ */
+let chatOpen = false;
+let chatHistory = [];
+
+const SYSTEM_PROMPT = `Tu es l'assistant virtuel de Zayrho7, un Roblox Builder professionnel. Tu réponds aux questions des visiteurs de son portfolio de façon concise, chaleureuse et professionnelle.
+
+Voici les informations sur Zayrho7 :
+- Pseudo : Zayrho7
+- Métier : Roblox Builder professionnel, spécialisé en level design, maps immersives et optimisation
+- Expérience : 3+ ans sur Roblox Studio
+- Statut : Disponible pour de nouvelles commandes
+- Délai moyen : 5 à 7 jours selon la complexité
+- Contact préféré : Discord (zayrho7)
+- Langues : Français et Anglais
+
+Tarifs EUR :
+- Starter : 20€ — 1 map personnalisée, thème au choix, 2 révisions
+- Pro : 45€ — Map détaillée & optimisée, ambiance/lore inclus, 4 révisions, livraison 7 jours (POPULAIRE)
+- Elite : 150€ — Zone/monde entier, level design narratif, révisions illimitées, support post-livraison, fichiers sources
+- Sur mesure : prix à discuter — brief personnalisé, équipe & collaboration, livraisons par étapes, contrat professionnel, NDA possible
+
+Tarifs Robux :
+- Starter : 4 500 R$
+- Pro : 7 500 R$
+- Elite : 25 000 R$
+- Sur mesure : à discuter
+
+Services proposés : Map personnalisée, Level design, Ambiance & lore, Optimisation, Projet studio complet.
+
+Réponds toujours en moins de 3 phrases. Si quelqu'un veut commander, dis-lui de contacter Zayrho7 sur Discord (zayrho7). Si la question n'est pas liée à Zayrho7 ou Roblox, redirige poliment vers les services proposés.`;
+
+function toggleChat() {
+  chatOpen = !chatOpen;
+  document.getElementById('chat-box').classList.toggle('open', chatOpen);
+  if (chatOpen) setTimeout(() => document.getElementById('chat-input').focus(), 200);
+}
+
+function addMsg(text, role) {
+  const msgs = document.getElementById('chat-msgs');
+  const d = document.createElement('div');
+  d.className = 'msg ' + (role === 'user' ? 'user' : 'bot');
+  d.textContent = text;
+  msgs.appendChild(d);
+  msgs.scrollTop = msgs.scrollHeight;
+  return d;
+}
+
+function showTyping() {
+  const msgs = document.getElementById('chat-msgs');
+  const d = document.createElement('div');
+  d.className = 'msg bot typing';
+  d.id = 'typing-indicator';
+  d.innerHTML = '<div class="tdot"></div><div class="tdot"></div><div class="tdot"></div>';
+  msgs.appendChild(d);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+function hideTyping() {
+  const t = document.getElementById('typing-indicator');
+  if (t) t.remove();
+}
+
+async function sendMsg() {
+  const input = document.getElementById('chat-input');
+  const text  = input.value.trim();
+  if (!text) return;
+  input.value = '';
+
+  addMsg(text, 'user');
+  chatHistory.push({ role: 'user', content: text });
+  showTyping();
+
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 300,
+        system: SYSTEM_PROMPT,
+        messages: chatHistory
+      })
+    });
+    const data = await res.json();
+    const reply = data.content?.[0]?.text || (lang === 'fr'
+      ? "Désolé, je n'ai pas pu répondre. Contactez Zayrho7 sur Discord !"
+      : "Sorry, I couldn't reply. Contact Zayrho7 on Discord!");
+    hideTyping();
+    addMsg(reply, 'bot');
+    chatHistory.push({ role: 'assistant', content: reply });
+    if (chatHistory.length > 20) chatHistory = chatHistory.slice(-20);
+  } catch(err) {
+    hideTyping();
+    addMsg(lang==='fr'
+      ? "Une erreur s'est produite. Contacte Zayrho7 directement sur Discord !"
+      : "An error occurred. Contact Zayrho7 directly on Discord!", 'bot');
+  }
+}
+
+/* ══════════════════════════════════════════
+   MISC
+   ══════════════════════════════════════════ */
+function goContact() { document.getElementById('contact').scrollIntoView({behavior:'smooth'}); }
+
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const t = document.querySelector(a.getAttribute('href'));
+    if (t) t.scrollIntoView({behavior:'smooth'});
+  });
+});
+
+const obs = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting) e.target.classList.add('in');
+}), {threshold:.08});
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+/* ── INIT ── */
+loadCreations();
+renderPublicGallery();
+</script>
+</body>
+</html>
