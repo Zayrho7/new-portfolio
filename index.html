@@ -114,25 +114,47 @@ nav{
 .gallery-empty{grid-column:1/-1;padding:80px 0;text-align:center}
 .gallery-empty p{font-family:var(--mono);font-size:12px;color:var(--dim2)}
 
-/* ── ADMIN PANEL (hidden by default) ── */
-#admin-panel{display:none;margin-top:32px;border:1px solid rgba(255,255,255,.1);border-radius:4px;padding:32px;background:var(--bg2)}
-.admin-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:2px;margin-top:24px}
-.admin-item{position:relative;aspect-ratio:16/10;overflow:hidden}
-.admin-item img{width:100%;height:100%;object-fit:cover}
-.admin-del{position:absolute;top:8px;right:8px;background:rgba(0,0,0,.7);border:none;color:#fff;cursor:pointer;border-radius:2px;padding:4px 8px;font-size:10px;font-family:var(--mono);transition:background .2s}
-.admin-del:hover{background:rgba(200,60,60,.9)}
-.upload-zone{
-  grid-column:1/-1;border:1px dashed var(--dim2);padding:40px;
-  text-align:center;border-radius:3px;cursor:pointer;transition:border-color .2s,background .2s;
-  display:flex;flex-direction:column;align-items:center;gap:8px;
+/* ── ADMIN PANEL ── */
+#admin-panel{display:none;margin-top:40px}
+.admin-bar{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;background:var(--bg2);border:var(--border);border-radius:4px;margin-bottom:24px;flex-wrap:wrap;gap:12px}
+.admin-bar-left{display:flex;align-items:center;gap:12px}
+.admin-dot{width:7px;height:7px;border-radius:50%;background:#7aff9a}
+.admin-label{font-family:var(--mono);font-size:10px;letter-spacing:.15em;color:var(--dim)}
+.admin-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
+.admin-card{background:var(--bg2);border:var(--border);border-radius:4px;overflow:hidden;display:flex;flex-direction:column}
+.admin-card-img{width:100%;aspect-ratio:16/10;object-fit:cover;display:block;background:var(--bg3)}
+.admin-card-img-empty{width:100%;aspect-ratio:16/10;background:var(--bg3);display:flex;align-items:center;justify-content:center}
+.admin-card-body{padding:16px}
+.admin-card-title{font-size:14px;font-weight:600;color:var(--white);margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.admin-card-desc{font-size:12px;color:var(--dim);line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.admin-card-footer{padding:12px 16px;border-top:var(--border);display:flex;justify-content:flex-end}
+.del-btn{font-family:var(--mono);font-size:10px;letter-spacing:.08em;padding:6px 14px;border:1px solid rgba(220,60,60,.3);background:transparent;color:#e05555;cursor:pointer;border-radius:3px;transition:all .2s}
+.del-btn:hover{background:rgba(220,60,60,.15);border-color:#e05555}
+/* New creation modal */
+#new-modal{display:none;position:fixed;inset:0;z-index:700;background:rgba(0,0,0,.92);backdrop-filter:blur(12px);align-items:center;justify-content:center;padding:24px}
+#new-modal.open{display:flex}
+.nm-box{background:var(--bg2);border:var(--border);border-radius:6px;width:100%;max-width:520px;overflow:hidden}
+.nm-head{padding:24px 28px;border-bottom:var(--border);display:flex;align-items:center;justify-content:space-between}
+.nm-head h3{font-family:var(--mono);font-size:12px;letter-spacing:.15em;color:var(--white)}
+.nm-close{background:transparent;border:none;color:var(--dim);cursor:pointer;font-size:18px;line-height:1;transition:color .2s}
+.nm-close:hover{color:var(--white)}
+.nm-body{padding:28px}
+.nm-drop{
+  border:1px dashed var(--dim2);border-radius:4px;padding:40px 20px;
+  text-align:center;cursor:pointer;transition:all .25s;margin-bottom:20px;position:relative;
 }
-.upload-zone:hover{border-color:var(--dim);background:var(--bg3)}
-.upload-zone p{font-family:var(--mono);font-size:12px;color:var(--dim)}
-.upload-zone small{font-size:11px;color:var(--dim2)}
-.admin-form{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:24px}
-.admin-form input{background:var(--bg3);border:var(--border);color:var(--white);font-family:var(--sans);font-size:14px;padding:10px 14px;border-radius:3px;outline:none}
-.admin-form input:focus{border-color:rgba(255,255,255,.2)}
-.admin-actions{display:flex;gap:8px;align-items:center;margin-bottom:24px;flex-wrap:wrap}
+.nm-drop.dragover{border-color:var(--white);background:var(--bg3)}
+.nm-drop.has-file{border-color:rgba(122,255,154,.4);background:rgba(122,255,154,.04)}
+.nm-drop-icon{font-size:28px;margin-bottom:10px;display:block;pointer-events:none}
+.nm-drop p{font-family:var(--mono);font-size:11px;color:var(--dim);letter-spacing:.08em;pointer-events:none}
+.nm-drop small{font-size:11px;color:var(--dim2);display:block;margin-top:4px;pointer-events:none}
+.nm-drop-preview{width:100%;border-radius:3px;margin-bottom:10px;max-height:160px;object-fit:cover;display:none}
+#nm-file{display:none}
+.nm-field{margin-bottom:14px}
+.nm-field label{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--dim);margin-bottom:6px}
+.nm-field input,.nm-field textarea{width:100%;background:var(--bg3);border:var(--border);color:var(--white);font-family:var(--sans);font-size:14px;padding:10px 14px;border-radius:3px;outline:none;resize:none}
+.nm-field input:focus,.nm-field textarea:focus{border-color:rgba(255,255,255,.2)}
+.nm-foot{padding:20px 28px;border-top:var(--border);display:flex;gap:10px;justify-content:flex-end}
 #file-input{display:none}
 
 /* ── ADMIN LOGIN ── */
@@ -375,26 +397,58 @@ footer span{font-family:var(--mono);font-size:10px;color:var(--dim);letter-spaci
   <!-- PUBLIC GALLERY -->
   <div class="gallery-grid reveal" id="public-gallery"></div>
 
-  <!-- ADMIN PANEL (hidden until logged in) -->
+  <!-- ADMIN PANEL -->
   <div id="admin-panel">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:12px">
-      <span style="font-family:var(--mono);font-size:11px;color:var(--dim);letter-spacing:.1em">▲ MODE ADMIN ACTIVÉ</span>
-      <button class="ctrl" onclick="logout()" data-fr="Déconnexion" data-en="Logout">Déconnexion</button>
+    <div class="admin-bar">
+      <div class="admin-bar-left">
+        <div class="admin-dot"></div>
+        <span class="admin-label">MODE ADMIN — VUE PRIVÉE</span>
+      </div>
+      <div style="display:flex;gap:8px">
+        <button class="ctrl on" onclick="openNewModal()">+ NOUVEAU</button>
+        <button class="ctrl" onclick="logout()">DÉCONNEXION</button>
+      </div>
     </div>
-    <div class="admin-form">
-      <input id="a-title" type="text" data-ph-fr="Titre du projet" data-ph-en="Project title" placeholder="Titre du projet"/>
-      <input id="a-type"  type="text" data-ph-fr="Type (RP, Obby...)" data-ph-en="Type (RP, Obby...)" placeholder="Type (RP, Obby...)"/>
-    </div>
-    <div class="admin-grid" id="admin-grid">
-      <label class="upload-zone" for="file-input">
-        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" style="color:var(--dim2)"><path d="M12 16V8m0 0-3 3m3-3 3 3M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1"/></svg>
-        <p data-fr="Glisse tes screenshots ici" data-en="Drop your screenshots here">Glisse tes screenshots ici</p>
-        <small data-fr="PNG, JPG, WEBP — plusieurs fichiers OK" data-en="PNG, JPG, WEBP — multiple files OK">PNG, JPG, WEBP — plusieurs fichiers OK</small>
-      </label>
-      <input type="file" id="file-input" accept="image/*" multiple/>
-    </div>
+    <div class="admin-cards" id="admin-cards"></div>
   </div>
 </section>
+
+<!-- MODAL NOUVELLE CRÉATION -->
+<div id="new-modal">
+  <div class="nm-box">
+    <div class="nm-head">
+      <h3>NOUVELLE CRÉATION</h3>
+      <button class="nm-close" onclick="closeNewModal()">✕</button>
+    </div>
+    <div class="nm-body">
+      <!-- Drop zone -->
+      <div class="nm-drop" id="nm-drop" onclick="document.getElementById('nm-file').click()">
+        <img id="nm-preview" class="nm-drop-preview"/>
+        <span class="nm-drop-icon">↑</span>
+        <p>Glisse ton image ici</p>
+        <small>ou clique pour choisir — PNG, JPG, WEBP</small>
+      </div>
+      <input type="file" id="nm-file" accept="image/*"/>
+      <!-- Champs -->
+      <div class="nm-field">
+        <label>NOM DU PROJET</label>
+        <input id="nm-title" type="text" placeholder="ex: Map Roleplay Ville"/>
+      </div>
+      <div class="nm-field">
+        <label>DESCRIPTION</label>
+        <textarea id="nm-desc" rows="3" placeholder="ex: Map RP complète avec 3 quartiers distincts, système de nuit/jour..."></textarea>
+      </div>
+      <div class="nm-field">
+        <label>TYPE</label>
+        <input id="nm-type" type="text" placeholder="ex: RP / Obby / Simulateur / Level Design"/>
+      </div>
+    </div>
+    <div class="nm-foot">
+      <button class="ctrl" onclick="closeNewModal()">Annuler</button>
+      <button class="ctrl on" onclick="publishCreation()">✓ PUBLIER</button>
+    </div>
+  </div>
+</div>
 
 <!-- ADMIN LOGIN OVERLAY -->
 <div id="admin-lock">
@@ -531,12 +585,15 @@ footer span{font-family:var(--mono);font-size:10px;color:var(--dim);letter-spaci
        data-en="Have a project in mind? Write to me directly. I reply within 24h.">Un projet en tête ? Écris-moi directement. Je réponds en moins de 24h.</p>
     <div class="contact-links">
       <a href="https://discord.com" target="_blank" class="contact-card">
+        <span style="font-size:18px">💬</span>
         <div><span class="cc-label">DISCORD</span><span class="cc-val">zayrho7</span></div>
       </a>
       <a href="https://www.roblox.com" target="_blank" class="contact-card">
+        <span style="font-size:18px">🎮</span>
         <div><span class="cc-label">ROBLOX</span><span class="cc-val">@Zayrho7</span></div>
       </a>
       <a href="mailto:contact@zayrho7.com" class="contact-card">
+        <span style="font-size:18px">✉️</span>
         <div>
           <span class="cc-label">EMAIL</span>
           <span class="cc-val" data-fr="Envoyer un mail" data-en="Send an email">Envoyer un mail</span>
@@ -549,7 +606,7 @@ footer span{font-family:var(--mono);font-size:10px;color:var(--dim);letter-spaci
 <!-- FOOTER -->
 <footer>
   <span>ZAYRHO7 — ROBLOX BUILDER</span>
-  <span data-fr="© 2025 — Tous droits réservés" data-en="© 2025 — All rights reserved">© 2026 — Tous droits réservés</span>
+  <span data-fr="© 2025 — Tous droits réservés" data-en="© 2025 — All rights reserved">© 2025 — Tous droits réservés</span>
 </footer>
 
 <!-- AI CHAT -->
@@ -660,12 +717,12 @@ function setCur(c) {
 function renderPublicGallery() {
   const g = document.getElementById('public-gallery');
   g.innerHTML = '';
-  if (creations.length === 0) {
-    g.innerHTML = `<div class="gallery-empty"><p data-fr="Bientôt disponible..." data-en="Coming soon...">${lang==='fr'?'Bientôt disponible...':'Coming soon...'}</p></div>`;
+  const visible = creations.filter(c => c.img);
+  if (visible.length === 0) {
+    g.innerHTML = `<div class="gallery-empty"><p>${lang==='fr'?'Bientôt disponible...':'Coming soon...'}</p></div>`;
     return;
   }
-  creations.forEach(item => {
-    if (!item.img) return;
+  visible.forEach(item => {
     const d = document.createElement('div');
     d.className = 'gitem';
     d.innerHTML = `
@@ -673,7 +730,8 @@ function renderPublicGallery() {
       <div class="goverlay">
         <div class="gov-text">
           <div class="gov-title">${item.title}</div>
-          <div class="gov-tag">${item.type || 'Roblox Build'}</div>
+          ${item.desc ? `<div style="font-size:12px;color:rgba(255,255,255,.55);margin-top:4px;line-height:1.4">${item.desc}</div>` : ''}
+          <div class="gov-tag" style="margin-top:6px">${item.type || 'Roblox Build'}</div>
         </div>
       </div>`;
     g.appendChild(d);
@@ -733,90 +791,123 @@ function logout() {
    ADMIN — GRID RENDER
    ══════════════════════════════════════════ */
 function renderAdminGrid() {
-  const grid = document.getElementById('admin-grid');
-  const uploadZone = grid.querySelector('label');
-  const fileInput  = document.getElementById('file-input');
-  Array.from(grid.children).forEach(c => {
-    if (c !== uploadZone && c !== fileInput) c.remove();
-  });
+  const grid = document.getElementById('admin-cards');
+  grid.innerHTML = '';
+  if (creations.length === 0) {
+    grid.innerHTML = `<div style="grid-column:1/-1;padding:60px 0;text-align:center"><p style="font-family:var(--mono);font-size:11px;color:var(--dim2)">Aucune création — clique sur + NOUVEAU pour ajouter</p></div>`;
+    return;
+  }
   creations.forEach((item, i) => {
-    const d = document.createElement('div');
-    d.className = 'admin-item';
-    if (item.img) {
-      d.style.cssText = 'position:relative;aspect-ratio:16/10;overflow:hidden;background:var(--bg3)';
-      d.innerHTML = `<img src="${item.img}" style="width:100%;height:100%;object-fit:cover"/>
-        <div style="position:absolute;bottom:0;left:0;right:0;padding:10px 12px;background:rgba(0,0,0,.6)">
-          <div style="font-size:12px;font-weight:600;color:#fff">${item.title}</div>
-          <div style="font-size:10px;color:rgba(255,255,255,.5);font-family:var(--mono)">${item.type||''}</div>
-        </div>
-        <button class="admin-del" onclick="removeItem(${i})">✕ suppr.</button>`;
-    }
-    grid.insertBefore(d, uploadZone);
+    const card = document.createElement('div');
+    card.className = 'admin-card';
+    const imgHtml = item.img
+      ? `<img class="admin-card-img" src="${item.img}" alt="${item.title}"/>`
+      : `<div class="admin-card-img-empty"><span style="font-family:var(--mono);font-size:10px;color:var(--dim2)">PAS D'IMAGE</span></div>`;
+    card.innerHTML = `
+      ${imgHtml}
+      <div class="admin-card-body">
+        <div class="admin-card-title">${item.title || 'Sans titre'}</div>
+        ${item.type ? `<div style="font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:var(--dim);margin-bottom:6px">${item.type}</div>` : ''}
+        ${item.desc ? `<div class="admin-card-desc">${item.desc}</div>` : ''}
+      </div>
+      <div class="admin-card-footer">
+        <button class="del-btn" onclick="removeItem(${i})">✕ Supprimer</button>
+      </div>`;
+    grid.appendChild(card);
   });
 }
 
 function removeItem(i) {
+  if (!confirm('Supprimer cette création ?')) return;
   creations.splice(i, 1);
   saveCreations();
   renderPublicGallery();
   renderAdminGrid();
 }
 
-/* ── FILE UPLOAD ── */
-document.getElementById('file-input').addEventListener('change', function() {
-  const title = document.getElementById('a-title').value.trim();
-  const type  = document.getElementById('a-type').value.trim();
-  Array.from(this.files).forEach(f => {
-    const r = new FileReader();
-    r.onload = e => {
-      creations.push({
-        title: title || f.name.replace(/\.[^.]+$/,''),
-        type:  type  || 'Roblox Build',
-        img:   e.target.result
-      });
-      saveCreations();
-      renderPublicGallery();
-      renderAdminGrid();
-    };
-    r.readAsDataURL(f);
-  });
-  this.value = '';
-  document.getElementById('a-title').value = '';
-  document.getElementById('a-type').value  = '';
+/* ══════════════════════════════════════════
+   MODAL NOUVELLE CRÉATION
+   ══════════════════════════════════════════ */
+let pendingImg = null;
+
+function openNewModal() {
+  pendingImg = null;
+  document.getElementById('nm-title').value = '';
+  document.getElementById('nm-desc').value  = '';
+  document.getElementById('nm-type').value  = '';
+  document.getElementById('nm-preview').style.display = 'none';
+  document.getElementById('nm-drop').classList.remove('has-file');
+  const icon = document.querySelector('.nm-drop-icon');
+  const p    = document.querySelector('.nm-drop p');
+  const sm   = document.querySelector('.nm-drop small');
+  if (icon) icon.style.display = 'block';
+  if (p)    p.style.display    = 'block';
+  if (sm)   sm.style.display   = 'block';
+  document.getElementById('nm-file').value = '';
+  document.getElementById('new-modal').classList.add('open');
+}
+
+function closeNewModal() {
+  document.getElementById('new-modal').classList.remove('open');
+}
+
+function publishCreation() {
+  const title = document.getElementById('nm-title').value.trim();
+  const desc  = document.getElementById('nm-desc').value.trim();
+  const type  = document.getElementById('nm-type').value.trim();
+  if (!title) { document.getElementById('nm-title').focus(); return; }
+  creations.push({ title, desc, type: type || 'Roblox Build', img: pendingImg });
+  saveCreations();
+  renderPublicGallery();
+  renderAdminGrid();
+  closeNewModal();
+}
+
+/* drag & drop + file pick */
+const nmDrop = document.getElementById('nm-drop');
+const nmFile = document.getElementById('nm-file');
+
+nmDrop.addEventListener('dragover',  e => { e.preventDefault(); nmDrop.classList.add('dragover'); });
+nmDrop.addEventListener('dragleave', () => nmDrop.classList.remove('dragover'));
+nmDrop.addEventListener('drop', e => {
+  e.preventDefault();
+  nmDrop.classList.remove('dragover');
+  const f = e.dataTransfer.files[0];
+  if (f && f.type.startsWith('image/')) loadPreview(f);
+});
+nmFile.addEventListener('change', function() {
+  if (this.files[0]) loadPreview(this.files[0]);
+});
+
+function loadPreview(file) {
+  const r = new FileReader();
+  r.onload = e => {
+    pendingImg = e.target.result;
+    const preview = document.getElementById('nm-preview');
+    preview.src = pendingImg;
+    preview.style.display = 'block';
+    nmDrop.classList.add('has-file');
+    const icon = document.querySelector('.nm-drop-icon');
+    const p    = document.querySelector('.nm-drop p');
+    const sm   = document.querySelector('.nm-drop small');
+    if (icon) icon.style.display = 'none';
+    if (p)    p.textContent = file.name;
+    if (sm)   sm.style.display = 'none';
+  };
+  r.readAsDataURL(file);
+}
+
+document.getElementById('new-modal').addEventListener('click', function(e) {
+  if (e.target === this) closeNewModal();
 });
 
 /* ══════════════════════════════════════════
-   AI CHAT
+   AI CHAT ENGINE
    ══════════════════════════════════════════ */
 let chatOpen = false;
-let chatHistory = [];
-
-const SYSTEM_PROMPT = `Tu es l'assistant virtuel de Zayrho7, un Roblox Builder professionnel. Tu réponds aux questions des visiteurs de son portfolio de façon concise, chaleureuse et professionnelle.
-
-Voici les informations sur Zayrho7 :
-- Pseudo : Zayrho7
-- Métier : Roblox Builder professionnel, spécialisé en level design, maps immersives et optimisation
-- Expérience : 3+ ans sur Roblox Studio
-- Statut : Disponible pour de nouvelles commandes
-- Délai moyen : 5 à 7 jours selon la complexité
-- Contact préféré : Discord (zayrho7)
-- Langues : Français et Anglais
-
-Tarifs EUR :
-- Starter : 20€ — 1 map personnalisée, thème au choix, 2 révisions
-- Pro : 45€ — Map détaillée & optimisée, ambiance/lore inclus, 4 révisions, livraison 7 jours (POPULAIRE)
-- Elite : 150€ — Zone/monde entier, level design narratif, révisions illimitées, support post-livraison, fichiers sources
-- Sur mesure : prix à discuter — brief personnalisé, équipe & collaboration, livraisons par étapes, contrat professionnel, NDA possible
-
-Tarifs Robux :
-- Starter : 4 500 R$
-- Pro : 7 500 R$
-- Elite : 25 000 R$
-- Sur mesure : à discuter
-
-Services proposés : Map personnalisée, Level design, Ambiance & lore, Optimisation, Projet studio complet.
-
-Réponds toujours en moins de 3 phrases. Si quelqu'un veut commander, dis-lui de contacter Zayrho7 sur Discord (zayrho7). Si la question n'est pas liée à Zayrho7 ou Roblox, redirige poliment vers les services proposés.`;
+let msgCount = 0;
+let lastTopic = null;
+const chatCtx = []; // keeps last 4 exchanges for context
 
 function toggleChat() {
   chatOpen = !chatOpen;
@@ -828,6 +919,8 @@ function addMsg(text, role) {
   const msgs = document.getElementById('chat-msgs');
   const d = document.createElement('div');
   d.className = 'msg ' + (role === 'user' ? 'user' : 'bot');
+  // support line breaks
+  d.style.whiteSpace = 'pre-wrap';
   d.textContent = text;
   msgs.appendChild(d);
   msgs.scrollTop = msgs.scrollHeight;
@@ -848,41 +941,429 @@ function hideTyping() {
   if (t) t.remove();
 }
 
-async function sendMsg() {
+/* ── NORMALISE ── */
+const norm = s => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/['']/g,"'");
+
+/* ── KNOWLEDGE BASE ── */
+const KB = {
+  greet: {
+    keys: ['bonjour','salut','hello','hi','hey','coucou','bonsoir','yo','wesh','bah','bien le','good morning','good evening','good afternoon','howdy','sup','what\'s up','whats up'],
+    fr: [
+      'Salut ! 👋 Bienvenue sur le portfolio de Zayrho7. Je suis son assistant — pose-moi n\'importe quelle question sur ses services, tarifs ou délais !',
+      'Hey ! Content de te voir ici 😄 Tu cherches à faire construire une map Roblox ? Je suis là pour t\'aider !',
+      'Bonjour ! Je suis l\'assistant de Zayrho7. Dis-moi ce dont tu as besoin et je t\'aide à trouver la bonne formule !',
+      'Yo ! T\'es au bon endroit si tu cherches un Roblox Builder sérieux. Comment je peux t\'aider ?',
+      'Salut ! Tu veux en savoir plus sur Zayrho7 ? Tarifs, délais, types de maps... demande-moi tout !'
+    ],
+    en: [
+      'Hey! 👋 Welcome to Zayrho7\'s portfolio. I\'m his assistant — ask me anything about his services, pricing or deadlines!',
+      'Hello! Great to have you here 😄 Looking to get a Roblox map built? I\'m here to help!',
+      'Hi there! I\'m Zayrho7\'s assistant. Tell me what you need and I\'ll help you find the right plan!',
+      'Hey! You\'re in the right place if you\'re looking for a serious Roblox Builder. How can I help?'
+    ]
+  },
+
+  prices_all: {
+    keys: ['prix','tarif','cout','coute','combien','formule','offre','plan','package','option','budget','investissement','payer','payment','price','pricing','how much','cost','expensive','cheap','afford'],
+    fr: [
+      'Voici les 4 formules de Zayrho7 👇\n\n🔹 Starter — 20€ / 4 500 R$\n   1 map personnalisée, thème au choix, 2 révisions\n\n🔸 Pro — 45€ / 7 500 R$ ⭐ populaire\n   Map détaillée & optimisée, ambiance/lore, 4 révisions, livraison 7j\n\n🔶 Elite — 150€ / 25 000 R$\n   Monde entier, level design narratif, révisions illimitées, fichiers sources\n\n🔷 Sur mesure — Prix à discuter\n   Projet studio, contrat pro, NDA possible\n\nTu veux qu\'on rentre dans les détails d\'une formule ?',
+      'Les tarifs de Zayrho7 sont clairs et fixes 💰\n\n• Starter : 20€ ou 4 500 Robux — idéal pour débuter\n• Pro : 45€ ou 7 500 Robux — le plus choisi ⭐\n• Elite : 150€ ou 25 000 Robux — le full package\n• Sur mesure : devis personnalisé pour les gros projets\n\nTu peux aussi switcher entre € et R$ en haut de la page !'
+    ],
+    en: [
+      'Here are Zayrho7\'s 4 plans 👇\n\n🔹 Starter — €20 / 4,500 R$\n   1 custom map, theme of choice, 2 revisions\n\n🔸 Pro — €45 / 7,500 R$ ⭐ most popular\n   Detailed & optimized map, atmosphere/lore, 4 revisions, 7-day delivery\n\n🔶 Elite — €150 / 25,000 R$\n   Full world, narrative level design, unlimited revisions, source files\n\n🔷 Custom — Price on request\n   Studio project, professional contract, NDA possible\n\nWant details on any specific plan?',
+      'Zayrho7\'s pricing is clear and fixed 💰\n\n• Starter: €20 or 4,500 Robux — perfect for simple projects\n• Pro: €45 or 7,500 Robux — most popular ⭐\n• Elite: €150 or 25,000 Robux — the full package\n• Custom: personalized quote for large projects\n\nYou can also switch between € and R$ at the top of the page!'
+    ]
+  },
+
+  starter: {
+    keys: ['starter','debutant','petit projet','simple','basic','basique','premier','first'],
+    fr: [
+      'Le plan Starter à 20€ (4 500 R$) c\'est parfait pour démarrer 🙂\n\nCe qu\'il inclut :\n✅ 1 map personnalisée\n✅ Thème au choix\n✅ 2 révisions incluses\n\nC\'est idéal pour un obby simple, une petite map RP ou un premier projet Roblox. Intéressé ?',
+      'Starter = 20€ ou 4 500 Robux. Simple, propre, efficace ✔️\n\nTu as 1 map sur mesure avec le thème que tu veux et 2 aller-retours de modifications. Pour les petits budgets ou les projets simples, c\'est la formule parfaite !'
+    ],
+    en: [
+      'The Starter plan at €20 (4,500 R$) is perfect to get started 🙂\n\nWhat\'s included:\n✅ 1 custom map\n✅ Theme of your choice\n✅ 2 revisions included\n\nGreat for a simple obby, small RP map or first Roblox project. Interested?',
+      'Starter = €20 or 4,500 Robux. Simple, clean, effective ✔️\n\nYou get 1 custom map with the theme you want and 2 rounds of modifications. For smaller budgets or simple projects, this is the perfect plan!'
+    ]
+  },
+
+  pro: {
+    keys: ['pro','populaire','popular','milieu','medium','intermediaire','intermédiaire','moyen'],
+    fr: [
+      'Le plan Pro à 45€ (7 500 R$), c\'est le plus choisi et pour une bonne raison ⭐\n\nCe qu\'il inclut :\n✅ Map détaillée & optimisée\n✅ Ambiance & lore inclus\n✅ 4 révisions\n✅ Livraison en 7 jours\n\nParfait pour des maps RP élaborées, des simulateurs ou des projets avec une vraie identité visuelle. C\'est le sweet spot qualité/prix !',
+      'Le Pro c\'est 45€ / 7 500 R$ et c\'est honnêtement le meilleur rapport qualité-prix 💎\n\nAvec l\'ambiance et le lore inclus, ta map aura une vraie identité. Tu as 4 révisions pour peaufiner chaque détail et la livraison se fait en 7 jours max.'
+    ],
+    en: [
+      'The Pro plan at €45 (7,500 R$) is the most popular for a good reason ⭐\n\nWhat\'s included:\n✅ Detailed & optimized map\n✅ Atmosphere & lore included\n✅ 4 revisions\n✅ 7-day delivery\n\nPerfect for elaborate RP maps, simulators or projects with a real visual identity. It\'s the best value for money!',
+      'Pro is €45 / 7,500 R$ and honestly the best quality-price ratio 💎\n\nWith atmosphere and lore included, your map will have a real identity. You get 4 revisions to perfect every detail and delivery within 7 days max.'
+    ]
+  },
+
+  elite: {
+    keys: ['elite','complet','full','monde entier','full world','gros projet','big project','illimite','illimité','unlimited','max','premium'],
+    fr: [
+      'Le plan Elite à 150€ (25 000 R$), c\'est le package complet 🔥\n\nCe qu\'il inclut :\n✅ Zone / monde entier\n✅ Level design narratif\n✅ Révisions illimitées\n✅ Support post-livraison\n✅ Fichiers sources inclus\n\nPour les projets ambitieux — un vrai monde Roblox avec une histoire, une cohérence visuelle et un suivi après livraison. Le top niveau !',
+      'Elite = 150€ ou 25 000 Robux. Le niveau maximum 👑\n\nTu veux un monde entier bien construit avec un level design pensé pour le gameplay ? C\'est ce plan qu\'il te faut. Révisions illimitées, fichiers sources, support après livraison — tout est inclus.'
+    ],
+    en: [
+      'The Elite plan at €150 (25,000 R$) is the complete package 🔥\n\nWhat\'s included:\n✅ Full zone / entire world\n✅ Narrative level design\n✅ Unlimited revisions\n✅ Post-delivery support\n✅ Source files included\n\nFor ambitious projects — a real Roblox world with a story, visual consistency and after-delivery support. Top level!',
+      'Elite = €150 or 25,000 Robux. Maximum level 👑\n\nWant a fully built world with gameplay-driven level design? This is the plan. Unlimited revisions, source files, post-delivery support — all included.'
+    ]
+  },
+
+  custom: {
+    keys: ['sur mesure','custom','personnalise','personnalisé','studio','entreprise','company','gros','studio','label','team','equipe','équipe','devis','quote'],
+    fr: [
+      'Le plan Sur Mesure c\'est pour les projets d\'envergure — studios, équipes, projets complexes 🏢\n\nCe que ça inclut :\n✅ Brief personnalisé\n✅ Collaboration en équipe\n✅ Livraisons par étapes\n✅ Contrat professionnel\n✅ NDA possible\n\nLe prix se discute selon la portée du projet. Contacte Zayrho7 directement sur Discord : zayrho7',
+      'Pour les gros projets ou les studios, la formule Sur Mesure est faite pour toi. Prix à définir ensemble, contrat pro, NDA possible — tout est négociable. Envoie un message sur Discord (zayrho7) pour démarrer la discussion !'
+    ],
+    en: [
+      'The Custom plan is for large-scale projects — studios, teams, complex builds 🏢\n\nWhat\'s included:\n✅ Personalized brief\n✅ Team collaboration\n✅ Staged deliveries\n✅ Professional contract\n✅ NDA possible\n\nPrice is discussed based on scope. Contact Zayrho7 directly on Discord: zayrho7',
+      'For large projects or studios, the Custom plan is made for you. Price defined together, pro contract, NDA possible — everything is negotiable. Send a message on Discord (zayrho7) to start the discussion!'
+    ]
+  },
+
+  robux: {
+    keys: ['robux','r$','roblox money','monnaie roblox','rb','rbx'],
+    fr: [
+      'Oui, Zayrho7 accepte les Robux 🎮\n\nLes prix en R$ :\n• Starter : 4 500 R$\n• Pro : 7 500 R$\n• Elite : 25 000 R$\n• Sur mesure : à discuter\n\nTu peux switcher entre € et R$ directement sur la page tarifs !',
+      'Paiement en Robux accepté ! Les tarifs en R$ :\n\n4 500 → Starter | 7 500 → Pro ⭐ | 25 000 → Elite\n\nContacte Zayrho7 sur Discord (zayrho7) pour organiser le paiement.'
+    ],
+    en: [
+      'Yes, Zayrho7 accepts Robux 🎮\n\nPrices in R$:\n• Starter: 4,500 R$\n• Pro: 7,500 R$\n• Elite: 25,000 R$\n• Custom: on request\n\nYou can switch between € and R$ directly on the pricing page!',
+      'Robux payment accepted! Prices in R$:\n\n4,500 → Starter | 7,500 → Pro ⭐ | 25,000 → Elite\n\nContact Zayrho7 on Discord (zayrho7) to arrange payment.'
+    ]
+  },
+
+  delay: {
+    keys: ['délai','delai','livraison','livrer','rapide','vite','quand','long','duree','durée','jour','semaine','time','deadline','delivery','fast','quick','soon','urgence','urgent'],
+    fr: [
+      'Zayrho7 livre en moyenne en 5 à 7 jours ⏱️\n\nCela dépend de la complexité :\n• Starter : souvent 2-4 jours\n• Pro : 5-7 jours\n• Elite : 7-14 jours selon l\'envergure\n• Sur mesure : à définir ensemble\n\nIl te donne toujours une estimation précise avant de commencer. Pas de mauvaises surprises !',
+      'Les délais sont clairs 📅\n\nStarter → 2 à 4 jours\nPro → 5 à 7 jours\nElite → 7 à 14 jours\nSur mesure → selon le brief\n\nSi tu as une date limite précise, dis-le à Zayrho7 sur Discord, il fera son maximum pour la respecter !',
+      'En moyenne 5 à 7 jours. Pour les projets urgents, Zayrho7 peut s\'adapter — parles-en directement sur Discord (zayrho7). Il ne prend un projet que s\'il est sûr de le livrer dans les temps ✅'
+    ],
+    en: [
+      'Zayrho7 delivers in 5 to 7 days on average ⏱️\n\nDepends on complexity:\n• Starter: often 2-4 days\n• Pro: 5-7 days\n• Elite: 7-14 days depending on scope\n• Custom: to be defined together\n\nHe always gives you a precise estimate before starting. No bad surprises!',
+      'Clear timelines 📅\n\nStarter → 2 to 4 days\nPro → 5 to 7 days\nElite → 7 to 14 days\nCustom → based on brief\n\nIf you have a specific deadline, tell Zayrho7 on Discord, he\'ll do his best to meet it!',
+      'Average 5 to 7 days. For urgent projects, Zayrho7 can adapt — discuss it directly on Discord (zayrho7). He only takes a project if he\'s confident he can deliver on time ✅'
+    ]
+  },
+
+  contact: {
+    keys: ['contact','discord','contacter','commander','commande','dm','message','joindre','parler','ecrire','écrire','reach','order','hire','book','start','commencer','lancer','demarrer','démarrer'],
+    fr: [
+      'Pour contacter Zayrho7, le plus simple c\'est Discord 💬\n\n👉 zayrho7\n\nIl répond en moins de 24h. Tu peux aussi envoyer un mail ou aller sur son profil Roblox — les liens sont en bas du portfolio !',
+      'La meilleure façon de démarrer un projet, c\'est d\'envoyer un message sur Discord : zayrho7 📩\n\nExplique ton projet (type de map, thème, budget) et il te répondra avec une estimation et ses disponibilités. Simple et rapide !',
+      'Discord : zayrho7 🎮\n\nC\'est son contact préféré. Il répond généralement dans la journée. Prépare une petite description de ton projet pour gagner du temps — type de map, ambiance souhaitée, délai si tu en as un !'
+    ],
+    en: [
+      'To contact Zayrho7, the easiest way is Discord 💬\n\n👉 zayrho7\n\nHe replies within 24h. You can also email him or visit his Roblox profile — links are at the bottom of the portfolio!',
+      'The best way to start a project is to send a message on Discord: zayrho7 📩\n\nExplain your project (map type, theme, budget) and he\'ll reply with an estimate and his availability. Simple and quick!',
+      'Discord: zayrho7 🎮\n\nThat\'s his preferred contact. He usually replies the same day. Prepare a short description of your project to save time — map type, desired atmosphere, deadline if you have one!'
+    ]
+  },
+
+  revisions: {
+    keys: ['revision','révision','modifier','modification','changer','change','corriger','correction','retouche','ajustement','feedback','retour'],
+    fr: [
+      'Les révisions incluses selon le plan ✏️\n\n• Starter : 2 révisions\n• Pro : 4 révisions\n• Elite : révisions illimitées ♾️\n• Sur mesure : à définir\n\nChaque révision = un aller-retour où tu donnes tes retours et Zayrho7 effectue les modifications demandées. Des révisions supplémentaires peuvent être ajoutées.',
+      'C\'est important les révisions ! Voici le détail :\n\n2 révisions avec le Starter, 4 avec le Pro, illimitées avec l\'Elite 🔁\n\nPour les plans Starter et Pro, des révisions supplémentaires peuvent être négociées en supplément. Contacte Zayrho7 sur Discord pour en discuter !'
+    ],
+    en: [
+      'Included revisions by plan ✏️\n\n• Starter: 2 revisions\n• Pro: 4 revisions\n• Elite: unlimited revisions ♾️\n• Custom: to be defined\n\nEach revision = one round where you give feedback and Zayrho7 makes the requested changes. Extra revisions can be added.',
+      'Revisions matter! Here\'s the breakdown:\n\n2 revisions with Starter, 4 with Pro, unlimited with Elite 🔁\n\nFor Starter and Pro plans, extra revisions can be negotiated for an additional fee. Contact Zayrho7 on Discord to discuss!'
+    ]
+  },
+
+  maptype: {
+    keys: ['map','type','genre','sorte','categorie','catégorie','quoi','what','kind','quel type','quel genre'],
+    fr: [
+      'Zayrho7 crée tous types de maps Roblox 🗺️\n\n🏙️ Maps RP — villes, quartiers, intérieurs\n🏃 Obby — parcours originaux, thèmes variés\n🎮 Simulateur — environnements immersifs\n⚔️ Aventure / Action — donjons, arènes, mondes\n🌍 Monde ouvert — exploration, lore profond\n🏆 Compétitif — maps PvP, courses\n\nTu as un type de projet en tête ? Dis-le moi et je t\'oriente vers la bonne formule !',
+      'Il peut tout faire : RP, obby, simulateur, aventure, monde ouvert, maps PvP... 🎯\n\nChaque projet est unique et construit sur mesure. Dis-moi ce que tu veux créer et je t\'aide à choisir le bon plan !'
+    ],
+    en: [
+      'Zayrho7 creates all types of Roblox maps 🗺️\n\n🏙️ RP Maps — cities, districts, interiors\n🏃 Obby — original courses, varied themes\n🎮 Simulator — immersive environments\n⚔️ Adventure / Action — dungeons, arenas, worlds\n🌍 Open world — exploration, deep lore\n🏆 Competitive — PvP maps, races\n\nHave a project type in mind? Tell me and I\'ll point you to the right plan!',
+      'He can do it all: RP, obby, simulator, adventure, open world, PvP maps... 🎯\n\nEvery project is unique and custom-built. Tell me what you want to create and I\'ll help you pick the right plan!'
+    ]
+  },
+
+  rp: {
+    keys: ['rp','roleplay','role play','ville','city','quarter','quartier','interieur','intérieur','maison','house','building','immeuble','rue','street'],
+    fr: [
+      'Les maps RP c\'est l\'une des spécialités de Zayrho7 🏙️\n\nVilles détaillées, quartiers distincts, intérieurs réalistes, ambiance jour/nuit... Il crée des environnements qui donnent vraiment envie d\'y jouer et de roleplay.\n\nPour un projet RP, le plan Pro (45€) ou Elite (150€) est recommandé selon la taille.',
+      'Pour un jeu RP, Zayrho7 est vraiment dans son élément 💪 Environnements cohérents, lore visuel, ambiances soignées — chaque zone a son identité propre. Le plan Pro est idéal pour ça !'
+    ],
+    en: [
+      'RP maps are one of Zayrho7\'s specialties 🏙️\n\nDetailed cities, distinct districts, realistic interiors, day/night atmosphere... He creates environments that make you actually want to play and roleplay.\n\nFor an RP project, the Pro (€45) or Elite (€150) plan is recommended depending on size.',
+      'For an RP game, Zayrho7 is really in his element 💪 Coherent environments, visual lore, polished atmospheres — each area has its own identity. The Pro plan is ideal for this!'
+    ]
+  },
+
+  obby: {
+    keys: ['obby','obstacle','parcours','course','platformer','jump','saut','plateforme'],
+    fr: [
+      'Pour un obby, Zayrho7 crée des parcours originaux avec de vrais thèmes visuels 🏃\n\nScience-fiction, naturel, industriel, fantasy... Le niveau de difficulté et l\'esthétique sont définis avec toi. Le plan Starter (20€) convient pour un obby basique, Pro pour quelque chose de plus élaboré !',
+      'Obby ? Pas de souci 😄 Zayrho7 maîtrise les parcours à obstacles originaux. Il travaille avec toi sur le thème, la difficulté, la progression... Starter pour petit budget, Pro pour plus de détails !'
+    ],
+    en: [
+      'For an obby, Zayrho7 creates original courses with real visual themes 🏃\n\nSci-fi, natural, industrial, fantasy... Difficulty level and aesthetic are defined with you. Starter plan (€20) works for a basic obby, Pro for something more elaborate!',
+      'Obby? No problem 😄 Zayrho7 masters original obstacle courses. He works with you on theme, difficulty, progression... Starter for tight budget, Pro for more detail!'
+    ]
+  },
+
+  simulator: {
+    keys: ['simulateur','simulator','simul','farming','tycoon','mining','pet','clicke','click','idle'],
+    fr: [
+      'Pour un simulateur, l\'environnement visuel est super important — c\'est ce qui fidélise les joueurs 🎮\n\nZayrho7 construit des mondes optimisés pour les simulateurs : zones de spawn, biomes, zones de jeu claires... Le plan Pro ou Elite selon la taille du monde !',
+      'Simulateurs, tycoons, farming games... Zayrho7 sait créer des environnements qui servent vraiment le gameplay. Bien construit, bien optimisé, bien rendu. Pro ou Elite recommandé 👍'
+    ],
+    en: [
+      'For a simulator, the visual environment is super important — it\'s what keeps players coming back 🎮\n\nZayrho7 builds worlds optimized for simulators: spawn zones, biomes, clear play areas... Pro or Elite plan depending on world size!',
+      'Simulators, tycoons, farming games... Zayrho7 knows how to create environments that truly serve the gameplay. Well built, well optimized, well rendered. Pro or Elite recommended 👍'
+    ]
+  },
+
+  optimization: {
+    keys: ['optimis','optim','performance','lag','lagger','fps','serveur','server','lourd','heavy','fluide','smooth','freeze'],
+    fr: [
+      'L\'optimisation c\'est une priorité pour Zayrho7 ⚡\n\nSes maps sont pensées pour être fluides même avec beaucoup de joueurs simultanés : gestion des instances, LOD, assets optimisés, découpage intelligent des zones.\n\nLes plans Pro, Elite et Sur mesure incluent une optimisation poussée. Le Starter reste propre aussi !',
+      'Pas de lag avec Zayrho7 😤 Il optimise chaque build pour que les performances soient au top, peu importe le nombre de joueurs. Une map belle ET fluide, c\'est possible !'
+    ],
+    en: [
+      'Optimization is a priority for Zayrho7 ⚡\n\nHis maps are designed to run smoothly even with many simultaneous players: instance management, LOD, optimized assets, smart zone partitioning.\n\nPro, Elite and Custom plans include thorough optimization. Starter stays clean too!',
+      'No lag with Zayrho7 😤 He optimizes every build so performance is top-notch, regardless of player count. A beautiful AND smooth map — it\'s possible!'
+    ]
+  },
+
+  atmosphere: {
+    keys: ['ambiance','atmosphere','lore','décor','decor','lumiere','lumière','lighting','eclairage','éclairage','texture','visuel','visuelle','aesthetique','esthétique','esthetique','beau','belle','joli','jolies'],
+    fr: [
+      'L\'ambiance et le lore, c\'est ce qui rend une map mémorable ✨\n\nZayrho7 travaille l\'éclairage, les textures, les petits détails qui donnent une vraie personnalité à chaque zone. Le plan Pro inclut déjà l\'ambiance et le lore — l\'Elite pousse ça encore plus loin.',
+      'Une map sans ambiance, c\'est une map oubliable 😅 Zayrho7 crée des identités visuelles fortes : chaque zone a sa palette, son éclairage, ses assets cohérents. Inclus dès le plan Pro !'
+    ],
+    en: [
+      'Atmosphere and lore are what make a map memorable ✨\n\nZayrho7 works on lighting, textures, the little details that give each zone a real personality. The Pro plan already includes atmosphere and lore — Elite takes it even further.',
+      'A map without atmosphere is a forgettable map 😅 Zayrho7 creates strong visual identities: each zone has its palette, lighting, coherent assets. Included from Pro plan!'
+    ]
+  },
+
+  experience: {
+    keys: ['experience','expérience','depuis','longtemps','ans','annees','années','projets','clients','portfolio','travaux','skill','competence','compétence'],
+    fr: [
+      'Zayrho7 a plus de 3 ans d\'expérience sur Roblox Studio 🎖️\n\nEn chiffres :\n• 50+ projets livrés\n• 100% de clients satisfaits\n• FR + EN\n• Disponible sur Discord\n\nSes créations sont visibles dans la section dédiée du portfolio. Des maps de tous styles, toutes tailles !',
+      '3 ans de build intensif sur Roblox Studio, 50+ projets, 0 client déçu 💪 Zayrho7 a un vrai niveau et ça se voit dans ses créations. Tu peux juger par toi-même dans la galerie !'
+    ],
+    en: [
+      'Zayrho7 has over 3 years of experience on Roblox Studio 🎖️\n\nBy the numbers:\n• 50+ projects delivered\n• 100% satisfied clients\n• FR + EN\n• Available on Discord\n\nHis work is visible in the dedicated section of the portfolio. Maps of all styles, all sizes!',
+      '3 years of intensive building on Roblox Studio, 50+ projects, 0 disappointed clients 💪 Zayrho7 has real skill and it shows in his creations. Judge for yourself in the gallery!'
+    ]
+  },
+
+  available: {
+    keys: ['disponible','dispo','libre','occupé','occupe','pris','place','ouvert','open','slot','commande en cours'],
+    fr: [
+      'Zayrho7 est actuellement disponible pour de nouvelles commandes ✅\n\nTu peux le contacter directement sur Discord (zayrho7) pour discuter de ton projet. Il répond généralement dans la journée !',
+      'Bonne nouvelle : il est dispo ! ✅ Pas de liste d\'attente pour l\'instant. Contacte-le sur Discord (zayrho7) avant que ça change 😄'
+    ],
+    en: [
+      'Zayrho7 is currently available for new orders ✅\n\nYou can contact him directly on Discord (zayrho7) to discuss your project. He usually replies the same day!',
+      'Good news: he\'s available! ✅ No waiting list for now. Contact him on Discord (zayrho7) before that changes 😄'
+    ]
+  },
+
+  sourcefiles: {
+    keys: ['source','fichier','rbxl','studio','file','fichiers sources','source file'],
+    fr: [
+      'Les fichiers sources (.rbxl) :\n\n✅ Inclus dans Elite et Sur mesure\n❌ Non inclus dans Starter et Pro (mais peuvent être ajoutés en supplément)\n\nSi c\'est important pour toi, mentionne-le à Zayrho7 dès le départ sur Discord !',
+      'Les .rbxl sont inclus dans Elite et Sur mesure 📁 Pour Starter et Pro, c\'est possible moyennant un petit supplément. Parles-en directement sur Discord (zayrho7) !'
+    ],
+    en: [
+      'Source files (.rbxl):\n\n✅ Included in Elite and Custom\n❌ Not included in Starter and Pro (but can be added for extra)\n\nIf this matters to you, mention it to Zayrho7 from the start on Discord!',
+      '.rbxl files included in Elite and Custom 📁 For Starter and Pro, possible for a small extra fee. Talk about it directly on Discord (zayrho7)!'
+    ]
+  },
+
+  nda: {
+    keys: ['nda','confidentiel','confidentialite','confidentialité','secret','anonyme','privé','prive'],
+    fr: [
+      'Oui, Zayrho7 peut signer un NDA (accord de non-divulgation) 🔒\n\nC\'est disponible dans le plan Sur Mesure, ou peut être arrangé pour tout autre plan sur demande. Contacte-le sur Discord (zayrho7) pour en discuter.',
+      'NDA possible, pas de problème 🔐 Zayrho7 travaille de façon professionnelle et respecte la confidentialité de ses clients. Mentionnes-le dès le premier message sur Discord !'
+    ],
+    en: [
+      'Yes, Zayrho7 can sign an NDA (non-disclosure agreement) 🔒\n\nAvailable in the Custom plan, or can be arranged for any plan on request. Contact him on Discord (zayrho7) to discuss.',
+      'NDA possible, no problem 🔐 Zayrho7 works professionally and respects client confidentiality. Mention it in your first message on Discord!'
+    ]
+  },
+
+  payment: {
+    keys: ['paiement','payer','payment','pay','virement','paypal','crypto','moyen','methode','méthode','comment payer','how to pay'],
+    fr: [
+      'Pour le paiement, Zayrho7 accepte :\n\n💶 Euros (virement, PayPal, etc.)\n🎮 Robux directement in-game\n\nLes détails se règlent sur Discord avant de commencer. En général, un acompte est demandé puis le solde à la livraison.',
+      'Zayrho7 accepte les euros et les Robux 💰 Les modalités de paiement précises (acompte, virement, PayPal...) se discutent sur Discord avant de démarrer le projet. Contacte-le : zayrho7 !'
+    ],
+    en: [
+      'For payment, Zayrho7 accepts:\n\n💶 Euros (bank transfer, PayPal, etc.)\n🎮 Robux directly in-game\n\nDetails are sorted on Discord before starting. Generally, a deposit is required then the balance on delivery.',
+      'Zayrho7 accepts euros and Robux 💰 Specific payment terms (deposit, bank transfer, PayPal...) are discussed on Discord before starting the project. Contact him: zayrho7!'
+    ]
+  },
+
+  who: {
+    keys: ['qui est','who is','zayrho','zayrho7','builder','créateur','createur','auteur','tu es','t\'es','you are','cest qui','c\'est qui','presenta','présentat'],
+    fr: [
+      'Zayrho7, c\'est un Roblox Builder professionnel passionné 🎮\n\n• 3+ ans d\'expérience sur Roblox Studio\n• Spécialisé en level design et maps immersives\n• 50+ projets livrés, 100% de clients satisfaits\n• Parle français et anglais\n• Disponible sur Discord : zayrho7\n\nIl crée des maps sur mesure pour tous types de projets Roblox — du simple obby au monde entier !',
+      'Zayrho7 est un builder sérieux et passionné qui fait du Roblox Studio son métier depuis plus de 3 ans 💪 Qualité, respect des délais, communication claire — c\'est sa façon de travailler. Tu peux voir ses créations dans la galerie du portfolio !'
+    ],
+    en: [
+      'Zayrho7 is a passionate professional Roblox Builder 🎮\n\n• 3+ years of experience on Roblox Studio\n• Specialized in level design and immersive maps\n• 50+ projects delivered, 100% satisfied clients\n• Speaks French and English\n• Available on Discord: zayrho7\n\nHe creates custom maps for all types of Roblox projects — from simple obbies to full worlds!',
+      'Zayrho7 is a serious and passionate builder who has made Roblox Studio his profession for 3+ years 💪 Quality, respecting deadlines, clear communication — that\'s how he works. You can see his creations in the portfolio gallery!'
+    ]
+  },
+
+  thanks: {
+    keys: ['merci','thanks','thank you','thank','parfait','super','cool','nickel','top','genial','génial','ok','okay','great','perfect','amazing','nice','bien','bonne journee','bonne journée','good day','bonne soiree','bonne soirée'],
+    fr: [
+      'Avec plaisir ! 😊 Si t\'as d\'autres questions n\'hésite pas. Et si tu veux lancer un projet, contacte Zayrho7 sur Discord : zayrho7 !',
+      'Pas de souci ! 🙌 Pour toute commande ou question, Discord c\'est zayrho7. Bonne continuation !',
+      'Cool ! 😄 Si tu décides de te lancer, passe un message sur Discord (zayrho7). Bonne journée !',
+      'Avec plaisir 🤝 N\'oublie pas — Discord : zayrho7 pour démarrer un projet. À bientôt !'
+    ],
+    en: [
+      'You\'re welcome! 😊 Feel free to ask if you have more questions. And if you want to start a project, contact Zayrho7 on Discord: zayrho7!',
+      'No problem! 🙌 For any order or question, Discord is zayrho7. Have a great day!',
+      'Cool! 😄 If you decide to go for it, send a message on Discord (zayrho7). Have a good one!',
+      'My pleasure 🤝 Don\'t forget — Discord: zayrho7 to start a project. See you!'
+    ]
+  },
+
+  help: {
+    keys: ['aide','help','sais pas','je sais pas','quoi choisir','quel plan','conseil','recommande','recommandation','which plan','what plan','suggest','advise','guide'],
+    fr: [
+      'Je vais t\'aider à choisir ! 🤔\n\nDis-moi :\n1️⃣ Quel type de map tu veux (RP, obby, simulateur, autre ?)\n2️⃣ Quelle est l\'envergure du projet (petite, moyenne, grande ?)\n3️⃣ Ton budget approximatif\n\nAvec ces infos je pourrai te recommander la bonne formule !',
+      'Pas de souci, je t\'aide à choisir 😊\n\nQuel genre de map tu veux créer ? RP, obby, simulateur, aventure, monde ouvert ? Et tu as un budget en tête ou tu veux d\'abord voir les options ?'
+    ],
+    en: [
+      'I\'ll help you choose! 🤔\n\nTell me:\n1️⃣ What type of map you want (RP, obby, simulator, other?)\n2️⃣ What\'s the scale of the project (small, medium, large?)\n3️⃣ Your approximate budget\n\nWith that info I can recommend the right plan!',
+      'No worries, I\'ll help you choose 😊\n\nWhat kind of map do you want to create? RP, obby, simulator, adventure, open world? And do you have a budget in mind or do you want to see the options first?'
+    ]
+  },
+
+  negative: {
+    keys: ['cher','trop cher','expensive','too expensive','pas les moyens','afford','discount','reduction','réduction','reduc','negocier','négocier','negociation'],
+    fr: [
+      'Je comprends que le budget c\'est important 💰 Le plan Starter à 20€ (ou 4 500 R$) est la formule la plus accessible. Pour des projets avec un petit budget, c\'est vraiment le bon point de départ !\n\nPour les gros projets, la formule Sur Mesure permet de définir un budget ensemble avec Zayrho7 sur Discord.',
+      'Si le budget est serré, commence par le Starter à 20€ — c\'est la meilleure option pour avoir une vraie map de qualité sans se ruiner 🙌 Et si tu veux négocier pour un gros projet, passe sur Discord (zayrho7) directement !'
+    ],
+    en: [
+      'I understand budget matters 💰 The Starter plan at €20 (or 4,500 R$) is the most accessible option. For projects with a tight budget, it\'s really the right starting point!\n\nFor larger projects, the Custom plan lets you define a budget together with Zayrho7 on Discord.',
+      'If budget is tight, start with Starter at €20 — it\'s the best option to get a quality map without breaking the bank 🙌 And if you want to negotiate for a big project, go directly on Discord (zayrho7)!'
+    ]
+  }
+};
+
+/* ── INTENT MATCHER — score-based ── */
+function detectIntent(msg) {
+  const m = norm(msg);
+  const words = m.split(/\s+/);
+  let best = null, bestScore = 0;
+  for (const [intent, data] of Object.entries(KB)) {
+    let score = 0;
+    for (const key of data.keys) {
+      if (m.includes(key)) {
+        score += key.split(' ').length * 2; // multi-word keys score higher
+      }
+    }
+    // context boost: if last topic was pricing and user says "elite" bump that
+    if (lastTopic === 'prices_all' && (intent === 'starter' || intent === 'pro' || intent === 'elite' || intent === 'custom')) {
+      score += 1;
+    }
+    if (score > bestScore) { bestScore = score; best = intent; }
+  }
+  return bestScore > 0 ? best : null;
+}
+
+function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+
+function buildResponse(msg) {
+  const l = lang === 'fr' ? 'fr' : 'en';
+  const intent = detectIntent(msg);
+
+  if (intent) {
+    lastTopic = intent;
+    return pick(KB[intent][l]);
+  }
+
+  // Contextual follow-ups
+  const m = norm(msg);
+
+  // "oui / non / ok"
+  if (/^(oui|ouais|yes|yep|yeah|no|non|nope|pas vraiment|not really)$/.test(m.trim())) {
+    if (lastTopic) {
+      const follow = {
+        fr: `D\'accord ! Tu veux que je t\'en dise plus sur les ${lastTopic === 'prices_all' ? 'formules' : 'services'} ou tu as une question spécifique ? 😊`,
+        en: `Alright! Do you want me to tell you more about the ${lastTopic === 'prices_all' ? 'plans' : 'services'} or do you have a specific question? 😊`
+      };
+      return follow[l];
+    }
+  }
+
+  // Short messages
+  if (msg.trim().length < 4) {
+    return l === 'fr'
+      ? 'Tu peux me poser une question sur les tarifs, les délais, les services ou comment contacter Zayrho7 ! 😊'
+      : 'You can ask me about pricing, deadlines, services or how to contact Zayrho7! 😊';
+  }
+
+  // Fallback pool — varied
+  const fallbacks = {
+    fr: [
+      'Je ne suis pas sûr de bien comprendre 😅 Essaie de me demander quelque chose comme "c\'est combien ?", "quel délai ?", "il fait quoi comme map ?" ou "comment le contacter ?"',
+      'Hmm, cette question dépasse mes connaissances 🤔 Pour une réponse précise, contacte Zayrho7 directement sur Discord : zayrho7. Il répond vite !',
+      'Je peux t\'aider sur les tarifs, les délais, les types de maps ou les infos de contact. Pour tout le reste, Discord (zayrho7) est ton meilleur ami ! 😄',
+      'Je ne suis pas sûr d\'avoir la bonne réponse pour ça. Essaie de reformuler ou demande directement à Zayrho7 sur Discord (zayrho7) !'
+    ],
+    en: [
+      'I\'m not sure I understand 😅 Try asking something like "how much does it cost?", "what\'s the deadline?", "what maps does he make?" or "how to contact him?"',
+      'Hmm, this question is beyond my knowledge 🤔 For a precise answer, contact Zayrho7 directly on Discord: zayrho7. He replies quickly!',
+      'I can help with pricing, deadlines, map types or contact info. For everything else, Discord (zayrho7) is your best bet! 😄',
+      'I\'m not sure I have the right answer for that. Try rephrasing or ask Zayrho7 directly on Discord (zayrho7)!'
+    ]
+  };
+  return pick(fallbacks[l]);
+}
+
+function sendMsg() {
   const input = document.getElementById('chat-input');
-  const text  = input.value.trim();
+  const text = input.value.trim();
   if (!text) return;
   input.value = '';
+  msgCount++;
 
   addMsg(text, 'user');
-  chatHistory.push({ role: 'user', content: text });
+  chatCtx.push({ role: 'user', msg: text });
+  if (chatCtx.length > 8) chatCtx.shift();
+
   showTyping();
 
-  try {
-    const res = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 300,
-        system: SYSTEM_PROMPT,
-        messages: chatHistory
-      })
-    });
-    const data = await res.json();
-    const reply = data.content?.[0]?.text || (lang === 'fr'
-      ? "Désolé, je n'ai pas pu répondre. Contactez Zayrho7 sur Discord !"
-      : "Sorry, I couldn't reply. Contact Zayrho7 on Discord!");
+  // Simulate realistic typing delay based on response length
+  const response = buildResponse(text);
+  const delay = Math.min(400 + response.length * 8, 2200);
+  setTimeout(() => {
     hideTyping();
-    addMsg(reply, 'bot');
-    chatHistory.push({ role: 'assistant', content: reply });
-    if (chatHistory.length > 20) chatHistory = chatHistory.slice(-20);
-  } catch(err) {
-    hideTyping();
-    addMsg(lang==='fr'
-      ? "Une erreur s'est produite. Contacte Zayrho7 directement sur Discord !"
-      : "An error occurred. Contact Zayrho7 directly on Discord!", 'bot');
-  }
+    addMsg(response, 'bot');
+    chatCtx.push({ role: 'bot', msg: response });
+
+    // Occasional follow-up suggestion after a few messages
+    if (msgCount % 4 === 0) {
+      setTimeout(() => {
+        const suggestions = {
+          fr: ['💡 Tu peux aussi me demander : "quel plan me conseilles-tu ?" ou "comment payer en Robux ?"'],
+          en: ['💡 You can also ask me: "which plan do you recommend?" or "how to pay in Robux?"']
+        };
+        const l = lang === 'fr' ? 'fr' : 'en';
+        addMsg(pick(suggestions[l]), 'bot');
+      }, 1200);
+    }
+  }, delay);
 }
 
 /* ══════════════════════════════════════════
