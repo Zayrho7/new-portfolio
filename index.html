@@ -8,63 +8,29 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#0c0c0c;
-  --bg1:#111;
-  --bg2:#161616;
-  --bg3:#1c1c1c;
-  --white:#f0ece4;
-  --dim:#666;
-  --dim2:#3a3a3a;
-  --accent:#d4c5a9;
-  --hi:#fff;
-  --sans:'Space Grotesk',sans-serif;
-  --mono:'Space Mono',monospace;
+  --bg:#0c0c0c;--bg1:#111;--bg2:#161616;--bg3:#1c1c1c;
+  --white:#f0ece4;--dim:#666;--dim2:#3a3a3a;--accent:#d4c5a9;--hi:#fff;
+  --sans:'Space Grotesk',sans-serif;--mono:'Space Mono',monospace;
   --border:1px solid rgba(255,255,255,0.07);
 }
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--white);font-family:var(--sans);overflow-x:hidden;line-height:1.6}
-::-webkit-scrollbar{width:3px}
-::-webkit-scrollbar-track{background:var(--bg)}
-::-webkit-scrollbar-thumb{background:var(--dim2)}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--dim2)}
 
-/* ── NAV ── */
-nav{
-  position:fixed;top:0;left:0;right:0;z-index:200;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:0 60px;height:60px;
-  border-bottom:var(--border);
-  background:rgba(12,12,12,0.95);
-  backdrop-filter:blur(20px);
-}
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:0 60px;height:60px;border-bottom:var(--border);background:rgba(12,12,12,0.95);backdrop-filter:blur(20px)}
 .nav-logo{font-family:var(--mono);font-size:13px;letter-spacing:.1em;color:var(--white);text-decoration:none;font-weight:700}
-.nav-links{display:flex;gap:40px;list-style:none}
+.nav-links{display:flex;gap:36px;list-style:none}
 .nav-links a{font-size:12px;letter-spacing:.08em;color:var(--dim);text-decoration:none;transition:color .2s;font-weight:500}
 .nav-links a:hover{color:var(--white)}
 .controls{display:flex;gap:6px;align-items:center}
-.ctrl{
-  font-family:var(--mono);font-size:10px;letter-spacing:.1em;
-  padding:6px 12px;border:var(--border);background:transparent;
-  color:var(--dim);cursor:pointer;border-radius:3px;transition:all .2s;
-}
+.ctrl{font-family:var(--mono);font-size:10px;letter-spacing:.1em;padding:6px 12px;border:var(--border);background:transparent;color:var(--dim);cursor:pointer;border-radius:3px;transition:all .2s}
 .ctrl.on{background:var(--white);color:var(--bg);border-color:var(--white)}
 .ctrl:hover:not(.on){color:var(--white);border-color:rgba(255,255,255,0.2)}
 
-/* ── HERO — fixed: no top padding, starts right after nav ── */
-#hero{
-  min-height:100vh;
-  display:flex;flex-direction:column;
-  justify-content:flex-end;
-  padding:60px 60px 80px; /* top = nav height so content isn't hidden */
-  position:relative;overflow:hidden;
-}
-.hero-lines{
-  position:absolute;top:0;left:0;right:0;bottom:0;
-  background-image:repeating-linear-gradient(
-    90deg,rgba(255,255,255,0.02) 0,rgba(255,255,255,0.02) 1px,
-    transparent 1px,transparent calc(100%/12)
-  );
-  pointer-events:none;
-}
+/* HERO */
+#hero{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:60px 60px 80px;position:relative;overflow:hidden}
+.hero-lines{position:absolute;inset:0;background-image:repeating-linear-gradient(90deg,rgba(255,255,255,0.02) 0,rgba(255,255,255,0.02) 1px,transparent 1px,transparent calc(100%/12));pointer-events:none}
 .hero-tag{font-family:var(--mono);font-size:11px;letter-spacing:.15em;color:var(--dim);margin-bottom:32px;display:flex;align-items:center;gap:12px}
 .hero-tag::before{content:'';width:32px;height:1px;background:var(--dim)}
 .hero-h1{font-size:clamp(64px,10vw,140px);font-weight:700;line-height:.95;letter-spacing:-.04em;color:var(--hi);margin-bottom:40px}
@@ -77,19 +43,19 @@ nav{
 .btn-fill{background:var(--white);color:var(--bg);border-color:var(--white)}
 .btn-fill:hover{background:var(--accent);border-color:var(--accent)}
 
-/* ── SECTION ── */
-.section{padding:120px 60px;max-width:1400px;margin:0 auto}
-.s-eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--dim);display:flex;align-items:center;gap:10px;margin-bottom:48px}
-.s-eyebrow::after{content:'';flex:1;height:1px;background:var(--dim2);max-width:60px}
-.s-title{font-size:clamp(32px,4vw,52px);font-weight:600;letter-spacing:-.03em;line-height:1.1;margin-bottom:16px}
-
-/* ── STATS ── */
+/* STATS */
 .stats-row{display:grid;grid-template-columns:repeat(3,1fr);border-top:var(--border);border-left:var(--border)}
 .stat-cell{padding:48px 40px;border-right:var(--border);border-bottom:var(--border)}
 .stat-num{font-size:clamp(36px,5vw,64px);font-weight:700;letter-spacing:-.04em;color:var(--hi);line-height:1}
 .stat-label{font-size:13px;color:var(--dim);margin-top:8px}
 
-/* ── SERVICES ── */
+/* SECTION */
+.section{padding:120px 60px;max-width:1400px;margin:0 auto}
+.s-eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--dim);display:flex;align-items:center;gap:10px;margin-bottom:48px}
+.s-eyebrow::after{content:'';flex:1;height:1px;background:var(--dim2);max-width:60px}
+.s-title{font-size:clamp(32px,4vw,52px);font-weight:600;letter-spacing:-.03em;line-height:1.1;margin-bottom:16px}
+
+/* SERVICES */
 .services-list{border-top:var(--border)}
 .svc-row{display:flex;align-items:center;justify-content:space-between;padding:32px 0;border-bottom:var(--border);gap:24px;transition:padding .25s;cursor:default}
 .svc-row:hover{padding:32px 16px}
@@ -99,14 +65,14 @@ nav{
 .svc-arr{font-size:20px;color:var(--dim);transition:transform .2s,color .2s}
 .svc-row:hover .svc-arr{transform:translateX(6px);color:var(--white)}
 
-/* ── GALLERY (public view) ── */
+/* GALLERY */
 .gallery-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:48px;flex-wrap:wrap;gap:16px}
 .gallery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:2px}
 .gitem{position:relative;aspect-ratio:16/10;overflow:hidden;cursor:pointer}
 .gitem img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s}
 .gitem:hover img{transform:scale(1.04)}
 .goverlay{position:absolute;inset:0;background:rgba(0,0,0,0);display:flex;flex-direction:column;justify-content:flex-end;padding:20px;transition:background .3s}
-.gitem:hover .goverlay{background:rgba(0,0,0,.55)}
+.gitem:hover .goverlay{background:rgba(0,0,0,.6)}
 .gov-text{opacity:0;transform:translateY(8px);transition:all .3s}
 .gitem:hover .gov-text{opacity:1;transform:none}
 .gov-title{font-size:15px;font-weight:600;color:#fff}
@@ -114,7 +80,7 @@ nav{
 .gallery-empty{grid-column:1/-1;padding:80px 0;text-align:center}
 .gallery-empty p{font-family:var(--mono);font-size:12px;color:var(--dim2)}
 
-/* ── ADMIN PANEL ── */
+/* ADMIN PANEL */
 #admin-panel{display:none;margin-top:40px}
 .admin-bar{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;background:var(--bg2);border:var(--border);border-radius:4px;margin-bottom:24px;flex-wrap:wrap;gap:12px}
 .admin-bar-left{display:flex;align-items:center;gap:12px}
@@ -122,47 +88,42 @@ nav{
 .admin-label{font-family:var(--mono);font-size:10px;letter-spacing:.15em;color:var(--dim)}
 .admin-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
 .admin-card{background:var(--bg2);border:var(--border);border-radius:4px;overflow:hidden;display:flex;flex-direction:column}
-.admin-card-img{width:100%;aspect-ratio:16/10;object-fit:cover;display:block;background:var(--bg3)}
-.admin-card-img-empty{width:100%;aspect-ratio:16/10;background:var(--bg3);display:flex;align-items:center;justify-content:center}
-.admin-card-body{padding:16px}
-.admin-card-title{font-size:14px;font-weight:600;color:var(--white);margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.admin-card-desc{font-size:12px;color:var(--dim);line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.admin-card-footer{padding:12px 16px;border-top:var(--border);display:flex;justify-content:flex-end}
-.del-btn{font-family:var(--mono);font-size:10px;letter-spacing:.08em;padding:6px 14px;border:1px solid rgba(220,60,60,.3);background:transparent;color:#e05555;cursor:pointer;border-radius:3px;transition:all .2s}
+.admin-card img{width:100%;aspect-ratio:16/10;object-fit:cover;display:block;background:var(--bg3)}
+.admin-card-empty{width:100%;aspect-ratio:16/10;background:var(--bg3);display:flex;align-items:center;justify-content:center}
+.admin-card-body{padding:16px;flex:1}
+.admin-card-title{font-size:14px;font-weight:600;color:var(--white);margin-bottom:4px}
+.admin-card-desc{font-size:12px;color:var(--dim);line-height:1.5}
+.admin-card-foot{padding:12px 16px;border-top:var(--border);display:flex;gap:8px;justify-content:flex-end}
+.edit-btn{font-family:var(--mono);font-size:10px;padding:6px 14px;border:var(--border);background:transparent;color:var(--dim);cursor:pointer;border-radius:3px;transition:all .2s}
+.edit-btn:hover{color:var(--white);border-color:rgba(255,255,255,.3)}
+.del-btn{font-family:var(--mono);font-size:10px;padding:6px 14px;border:1px solid rgba(220,60,60,.3);background:transparent;color:#e05555;cursor:pointer;border-radius:3px;transition:all .2s}
 .del-btn:hover{background:rgba(220,60,60,.15);border-color:#e05555}
-/* New creation modal */
-#new-modal{display:none;position:fixed;inset:0;z-index:700;background:rgba(0,0,0,.92);backdrop-filter:blur(12px);align-items:center;justify-content:center;padding:24px}
-#new-modal.open{display:flex}
-.nm-box{background:var(--bg2);border:var(--border);border-radius:6px;width:100%;max-width:520px;overflow:hidden}
-.nm-head{padding:24px 28px;border-bottom:var(--border);display:flex;align-items:center;justify-content:space-between}
-.nm-head h3{font-family:var(--mono);font-size:12px;letter-spacing:.15em;color:var(--white)}
-.nm-close{background:transparent;border:none;color:var(--dim);cursor:pointer;font-size:18px;line-height:1;transition:color .2s}
-.nm-close:hover{color:var(--white)}
-.nm-body{padding:28px}
-.nm-drop{
-  border:1px dashed var(--dim2);border-radius:4px;padding:40px 20px;
-  text-align:center;cursor:pointer;transition:all .25s;margin-bottom:20px;position:relative;
-}
-.nm-drop.dragover{border-color:var(--white);background:var(--bg3)}
-.nm-drop.has-file{border-color:rgba(122,255,154,.4);background:rgba(122,255,154,.04)}
-.nm-drop-icon{font-size:28px;margin-bottom:10px;display:block;pointer-events:none}
-.nm-drop p{font-family:var(--mono);font-size:11px;color:var(--dim);letter-spacing:.08em;pointer-events:none}
-.nm-drop small{font-size:11px;color:var(--dim2);display:block;margin-top:4px;pointer-events:none}
-.nm-drop-preview{width:100%;border-radius:3px;margin-bottom:10px;max-height:160px;object-fit:cover;display:none}
-#nm-file{display:none}
-.nm-field{margin-bottom:14px}
-.nm-field label{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--dim);margin-bottom:6px}
-.nm-field input,.nm-field textarea{width:100%;background:var(--bg3);border:var(--border);color:var(--white);font-family:var(--sans);font-size:14px;padding:10px 14px;border-radius:3px;outline:none;resize:none}
-.nm-field input:focus,.nm-field textarea:focus{border-color:rgba(255,255,255,.2)}
-.nm-foot{padding:20px 28px;border-top:var(--border);display:flex;gap:10px;justify-content:flex-end}
-#file-input{display:none}
 
-/* ── ADMIN LOGIN ── */
-#admin-lock{
-  display:none;position:fixed;inset:0;z-index:600;
-  background:rgba(0,0,0,.92);backdrop-filter:blur(12px);
-  align-items:center;justify-content:center;
-}
+/* CREATION MODAL */
+.cmodal{display:none;position:fixed;inset:0;z-index:700;background:rgba(0,0,0,.92);backdrop-filter:blur(12px);align-items:center;justify-content:center;padding:24px}
+.cmodal.open{display:flex}
+.cm-box{background:var(--bg2);border:var(--border);border-radius:6px;width:100%;max-width:520px;overflow:hidden;max-height:90vh;overflow-y:auto}
+.cm-head{padding:22px 28px;border-bottom:var(--border);display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:var(--bg2);z-index:1}
+.cm-head h3{font-family:var(--mono);font-size:12px;letter-spacing:.15em;color:var(--white)}
+.cm-close{background:transparent;border:none;color:var(--dim);cursor:pointer;font-size:18px;line-height:1;transition:color .2s}
+.cm-close:hover{color:var(--white)}
+.cm-body{padding:28px}
+.cm-drop{border:1px dashed var(--dim2);border-radius:4px;padding:36px 20px;text-align:center;cursor:pointer;transition:all .25s;margin-bottom:20px;position:relative}
+.cm-drop.dragover{border-color:var(--white);background:var(--bg3)}
+.cm-drop.has-file{border-color:rgba(122,255,154,.4);background:rgba(122,255,154,.04)}
+.cm-drop-icon{font-size:24px;margin-bottom:8px;display:block;pointer-events:none}
+.cm-drop p{font-family:var(--mono);font-size:11px;color:var(--dim);letter-spacing:.08em;pointer-events:none}
+.cm-drop small{font-size:11px;color:var(--dim2);display:block;margin-top:3px;pointer-events:none}
+.cm-preview{width:100%;border-radius:3px;margin-bottom:10px;max-height:150px;object-fit:cover;display:none}
+.cm-field{margin-bottom:14px}
+.cm-field label{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--dim);margin-bottom:6px}
+.cm-field input,.cm-field textarea,.cm-field select{width:100%;background:var(--bg3);border:var(--border);color:var(--white);font-family:var(--sans);font-size:14px;padding:10px 14px;border-radius:3px;outline:none;resize:none}
+.cm-field input:focus,.cm-field textarea:focus{border-color:rgba(255,255,255,.2)}
+.cm-foot{padding:18px 28px;border-top:var(--border);display:flex;gap:10px;justify-content:flex-end;position:sticky;bottom:0;background:var(--bg2)}
+#cm-file{display:none}
+
+/* ADMIN LOGIN */
+#admin-lock{display:none;position:fixed;inset:0;z-index:600;background:rgba(0,0,0,.92);backdrop-filter:blur(12px);align-items:center;justify-content:center}
 #admin-lock.open{display:flex}
 .lock-box{background:var(--bg2);border:var(--border);border-radius:4px;padding:40px;width:100%;max-width:360px;text-align:center}
 .lock-box h3{font-family:var(--mono);font-size:13px;letter-spacing:.15em;color:var(--dim);margin-bottom:24px}
@@ -170,7 +131,7 @@ nav{
 .lock-box input:focus{border-color:rgba(255,255,255,.2)}
 .lock-err{font-family:var(--mono);font-size:11px;color:#e05555;margin-top:8px;display:none}
 
-/* ── PRICING ── */
+/* PRICING */
 .pricing-controls{display:flex;gap:6px;margin-bottom:48px}
 .pricing-grid{display:grid;grid-template-columns:repeat(4,1fr);border:var(--border);background:rgba(255,255,255,0.04);gap:1px}
 @media(max-width:1000px){.pricing-grid{grid-template-columns:repeat(2,1fr)}}
@@ -194,7 +155,43 @@ nav{
 .plan-btn.hi{background:var(--white);color:var(--bg)}
 .plan-btn.hi:hover{background:var(--accent);border-color:var(--accent)}
 
-/* ── ABOUT ── */
+/* REVIEWS */
+#reviews{background:var(--bg1)}
+.reviews-header{display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-bottom:48px}
+.reviews-avg{display:flex;align-items:baseline;gap:12px}
+.reviews-avg-num{font-size:clamp(40px,5vw,64px);font-weight:700;letter-spacing:-.04em;color:var(--hi)}
+.reviews-avg-stars{display:flex;gap:3px}
+.star{font-size:20px;color:var(--dim2);line-height:1}
+.star.on{color:#f5c842}
+.star.half{position:relative;color:var(--dim2)}
+.star.half::after{content:'★';position:absolute;left:0;top:0;width:50%;overflow:hidden;color:#f5c842}
+.reviews-count{font-family:var(--mono);font-size:11px;color:var(--dim);letter-spacing:.1em;margin-top:4px}
+.reviews-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px;margin-bottom:40px}
+.review-card{background:var(--bg2);border:var(--border);border-radius:4px;padding:24px}
+.rc-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:12px}
+.rc-name{font-size:14px;font-weight:600;color:var(--white)}
+.rc-plan{font-family:var(--mono);font-size:9px;letter-spacing:.12em;color:var(--dim);margin-top:3px}
+.rc-stars{display:flex;gap:2px}
+.rc-star{font-size:14px;color:var(--dim2)}
+.rc-star.on{color:#f5c842}
+.rc-text{font-size:14px;color:var(--dim);line-height:1.6}
+.rc-date{font-family:var(--mono);font-size:10px;color:var(--dim2);margin-top:10px}
+.rc-del{background:transparent;border:none;color:var(--dim2);cursor:pointer;font-size:12px;font-family:var(--mono);transition:color .2s;white-space:nowrap;flex-shrink:0}
+.rc-del:hover{color:#e05555}
+.review-form{background:var(--bg2);border:var(--border);border-radius:4px;padding:28px}
+.rf-title{font-family:var(--mono);font-size:11px;letter-spacing:.15em;color:var(--dim);margin-bottom:20px}
+.rf-stars{display:flex;gap:6px;margin-bottom:20px;cursor:pointer}
+.rf-star{font-size:28px;color:var(--dim2);transition:color .15s;cursor:pointer;line-height:1}
+.rf-star.on,.rf-star:hover{color:#f5c842}
+.rf-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+.rf-field label{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--dim);margin-bottom:6px}
+.rf-field input,.rf-field select,.rf-field textarea{width:100%;background:var(--bg3);border:var(--border);color:var(--white);font-family:var(--sans);font-size:14px;padding:10px 14px;border-radius:3px;outline:none;resize:none}
+.rf-field input:focus,.rf-field select:focus,.rf-field textarea:focus{border-color:rgba(255,255,255,.2)}
+.rf-field select option{background:var(--bg3)}
+.reviews-empty{padding:40px;text-align:center}
+.reviews-empty p{font-family:var(--mono);font-size:12px;color:var(--dim2)}
+
+/* ABOUT */
 .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
 @media(max-width:768px){.about-grid{grid-template-columns:1fr}}
 .about-body{font-size:16px;color:var(--dim);line-height:1.8;font-weight:300}
@@ -206,7 +203,7 @@ nav{
 .aside-val{font-size:22px;font-weight:600;letter-spacing:-.02em;color:var(--hi)}
 .aside-note{font-size:13px;color:var(--dim);margin-top:4px}
 
-/* ── CONTACT ── */
+/* CONTACT */
 .contact-wrap{border:var(--border);padding:80px 60px;text-align:center}
 .contact-title{font-size:clamp(36px,6vw,80px);font-weight:700;letter-spacing:-.04em;line-height:1;margin-bottom:24px}
 .contact-sub{font-size:16px;color:var(--dim);max-width:460px;margin:0 auto 48px;font-weight:300}
@@ -216,28 +213,14 @@ nav{
 .cc-label{font-family:var(--mono);font-size:10px;color:var(--dim);letter-spacing:.1em;display:block}
 .cc-val{font-size:14px;font-weight:500;display:block;margin-top:2px}
 
-/* ── AI CHAT ── */
-#ai-chat{
-  position:fixed;bottom:24px;right:24px;z-index:300;
-  display:flex;flex-direction:column;align-items:flex-end;gap:12px;
-}
-#chat-bubble{
-  width:52px;height:52px;border-radius:50%;background:var(--white);
-  display:flex;align-items:center;justify-content:center;cursor:pointer;
-  box-shadow:0 4px 24px rgba(0,0,0,.4);transition:transform .2s;flex-shrink:0;border:none;
-}
+/* AI CHAT */
+#ai-chat{position:fixed;bottom:24px;right:24px;z-index:300;display:flex;flex-direction:column;align-items:flex-end;gap:12px}
+#chat-bubble{width:52px;height:52px;border-radius:50%;background:var(--white);display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 4px 24px rgba(0,0,0,.4);transition:transform .2s;flex-shrink:0;border:none}
 #chat-bubble:hover{transform:scale(1.08)}
 #chat-bubble svg{width:22px;height:22px}
-#chat-box{
-  width:340px;background:var(--bg2);border:var(--border);
-  border-radius:8px;overflow:hidden;display:none;flex-direction:column;
-  box-shadow:0 8px 40px rgba(0,0,0,.6);
-}
+#chat-box{width:360px;background:var(--bg2);border:var(--border);border-radius:8px;overflow:hidden;display:none;flex-direction:column;box-shadow:0 8px 40px rgba(0,0,0,.6)}
 #chat-box.open{display:flex}
-.chat-head{
-  padding:16px 20px;border-bottom:var(--border);
-  display:flex;align-items:center;justify-content:space-between;
-}
+.chat-head{padding:16px 20px;border-bottom:var(--border);display:flex;align-items:center;justify-content:space-between}
 .chat-head-info{display:flex;align-items:center;gap:10px}
 .chat-dot{width:8px;height:8px;border-radius:50%;background:#7aff9a;flex-shrink:0;animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
@@ -245,51 +228,42 @@ nav{
 .chat-head-sub{font-size:11px;color:var(--dim);margin-top:1px}
 .chat-close{background:transparent;border:none;color:var(--dim);cursor:pointer;font-size:16px;transition:color .2s;font-family:var(--sans)}
 .chat-close:hover{color:var(--white)}
-.chat-msgs{height:280px;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:12px;scroll-behavior:smooth}
+.chat-msgs{height:300px;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px;scroll-behavior:smooth}
 .chat-msgs::-webkit-scrollbar{width:2px}
 .chat-msgs::-webkit-scrollbar-thumb{background:var(--dim2)}
-.msg{max-width:85%;font-size:13px;line-height:1.55;padding:10px 14px;border-radius:12px}
+.msg{max-width:88%;font-size:13px;line-height:1.6;padding:10px 14px;border-radius:12px;white-space:pre-wrap;word-break:break-word}
 .msg.bot{background:var(--bg3);color:var(--white);align-self:flex-start;border-bottom-left-radius:3px}
 .msg.user{background:var(--white);color:var(--bg);align-self:flex-end;border-bottom-right-radius:3px;font-weight:500}
 .msg.typing{display:flex;gap:4px;align-items:center;padding:12px 14px}
 .tdot{width:6px;height:6px;border-radius:50%;background:var(--dim);animation:td .9s infinite}
-.tdot:nth-child(2){animation-delay:.15s}
-.tdot:nth-child(3){animation-delay:.3s}
+.tdot:nth-child(2){animation-delay:.15s}.tdot:nth-child(3){animation-delay:.3s}
 @keyframes td{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-5px)}}
+.chat-suggestions{display:flex;gap:6px;padding:0 12px 8px;flex-wrap:wrap}
+.chat-sug{font-family:var(--mono);font-size:10px;padding:5px 10px;border:var(--border);border-radius:12px;color:var(--dim);cursor:pointer;transition:all .2s;background:transparent;white-space:nowrap}
+.chat-sug:hover{color:var(--white);border-color:rgba(255,255,255,.25)}
 .chat-footer{padding:12px;border-top:var(--border);display:flex;gap:8px}
-.chat-input{
-  flex:1;background:var(--bg3);border:var(--border);color:var(--white);
-  font-family:var(--sans);font-size:13px;padding:9px 12px;border-radius:4px;outline:none;
-}
+.chat-input{flex:1;background:var(--bg3);border:var(--border);color:var(--white);font-family:var(--sans);font-size:13px;padding:9px 12px;border-radius:4px;outline:none}
 .chat-input:focus{border-color:rgba(255,255,255,.2)}
 .chat-input::placeholder{color:var(--dim)}
-.chat-send{
-  background:var(--white);color:var(--bg);border:none;cursor:pointer;
-  border-radius:4px;padding:9px 14px;font-family:var(--mono);font-size:10px;
-  transition:background .2s;flex-shrink:0;
-}
+.chat-send{background:var(--white);color:var(--bg);border:none;cursor:pointer;border-radius:4px;padding:9px 14px;font-family:var(--mono);font-size:10px;transition:background .2s;flex-shrink:0}
 .chat-send:hover{background:var(--accent)}
 
-/* ── FOOTER ── */
+/* FOOTER */
 footer{border-top:var(--border);padding:28px 60px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
 footer span{font-family:var(--mono);font-size:10px;color:var(--dim);letter-spacing:.08em}
 
-/* ── REVEAL ── */
+/* REVEAL */
 .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
 .reveal.in{opacity:1;transform:none}
 
-/* ── RESPONSIVE ── */
+/* RESPONSIVE */
 @media(max-width:768px){
-  nav{padding:0 24px}
-  .nav-links{display:none}
-  .section{padding:80px 24px}
-  #hero{padding:60px 24px 60px}
-  .stats-row{grid-template-columns:1fr}
-  .svc-desc{display:none}
+  nav{padding:0 24px}.nav-links{display:none}
+  .section{padding:80px 24px}#hero{padding:60px 24px 60px}
+  .stats-row{grid-template-columns:1fr}.svc-desc{display:none}
   .about-aside{border-left:none;padding-left:0;border-top:var(--border);padding-top:40px}
-  .contact-wrap{padding:48px 24px}
-  footer{padding:24px}
-  #chat-box{width:calc(100vw - 48px)}
+  .contact-wrap{padding:48px 24px}footer{padding:24px}
+  #chat-box{width:calc(100vw - 48px)}.rf-grid{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -299,16 +273,16 @@ footer span{font-family:var(--mono);font-size:10px;color:var(--dim);letter-spaci
 <nav>
   <a class="nav-logo" href="#">ZRH7</a>
   <ul class="nav-links">
-    <li><a href="#services" data-fr="Services"  data-en="Services">Services</a></li>
-    <li><a href="#works"    data-fr="Créations"  data-en="Works">Créations</a></li>
-    <li><a href="#pricing"  data-fr="Tarifs"     data-en="Pricing">Tarifs</a></li>
-    <li><a href="#about"    data-fr="À propos"   data-en="About">À propos</a></li>
-    <li><a href="#contact"  data-fr="Contact"    data-en="Contact">Contact</a></li>
+    <li><a href="#services" data-fr="Services" data-en="Services">Services</a></li>
+    <li><a href="#works" data-fr="Créations" data-en="Works">Créations</a></li>
+    <li><a href="#pricing" data-fr="Tarifs" data-en="Pricing">Tarifs</a></li>
+    <li><a href="#reviews" data-fr="Avis" data-en="Reviews">Avis</a></li>
+    <li><a href="#about" data-fr="À propos" data-en="About">À propos</a></li>
+    <li><a href="#contact" data-fr="Contact" data-en="Contact">Contact</a></li>
   </ul>
   <div class="controls">
     <button class="ctrl on" id="btn-fr" onclick="setLang('fr')">FR</button>
-    <button class="ctrl"    id="btn-en" onclick="setLang('en')">EN</button>
-    <!-- Secret admin button — hidden visually, double-click logo to trigger -->
+    <button class="ctrl" id="btn-en" onclick="setLang('en')">EN</button>
   </div>
 </nav>
 
@@ -318,94 +292,44 @@ footer span{font-family:var(--mono);font-size:10px;color:var(--dim);letter-spaci
   <div class="hero-tag" data-fr="Roblox Builder Professionnel" data-en="Professional Roblox Builder">Roblox Builder Professionnel</div>
   <h1 class="hero-h1">ZAYR<em>HO7</em></h1>
   <div class="hero-bottom">
-    <p class="hero-desc"
-       data-fr="Je conçois des maps Roblox immersives — du projet simple au monde entier. Précis, ponctuel, soigné."
-       data-en="I design immersive Roblox maps — from simple projects to entire worlds. Precise, on time, polished.">
-      Je conçois des maps Roblox immersives — du projet simple au monde entier. Précis, ponctuel, soigné.
-    </p>
+    <p class="hero-desc" data-fr="Je conçois des maps Roblox immersives — du projet simple au monde entier. Précis, ponctuel, soigné." data-en="I design immersive Roblox maps — from simple projects to entire worlds. Precise, on time, polished.">Je conçois des maps Roblox immersives — du projet simple au monde entier. Précis, ponctuel, soigné.</p>
     <div class="hero-cta-row">
-      <a href="#works"   class="btn btn-fill" data-fr="Voir mes créations" data-en="View my work">Voir mes créations</a>
-      <a href="#contact" class="btn"          data-fr="Me contacter"       data-en="Contact me">Me contacter</a>
+      <a href="#works" class="btn btn-fill" data-fr="Voir mes créations" data-en="View my work">Voir mes créations</a>
+      <a href="#contact" class="btn" data-fr="Me contacter" data-en="Contact me">Me contacter</a>
     </div>
   </div>
 </section>
 
 <!-- STATS -->
 <div class="stats-row">
-  <div class="stat-cell">
-    <div class="stat-num">50+</div>
-    <div class="stat-label" data-fr="Projets livrés" data-en="Projects delivered">Projets livrés</div>
-  </div>
-  <div class="stat-cell">
-    <div class="stat-num">3+</div>
-    <div class="stat-label" data-fr="Années d'expérience" data-en="Years of experience">Années d'expérience</div>
-  </div>
-  <div class="stat-cell">
-    <div class="stat-num">100%</div>
-    <div class="stat-label" data-fr="Clients satisfaits" data-en="Satisfied clients">Clients satisfaits</div>
-  </div>
+  <div class="stat-cell"><div class="stat-num">50+</div><div class="stat-label" data-fr="Projets livrés" data-en="Projects delivered">Projets livrés</div></div>
+  <div class="stat-cell"><div class="stat-num">3+</div><div class="stat-label" data-fr="Années d'expérience" data-en="Years of experience">Années d'expérience</div></div>
+  <div class="stat-cell"><div class="stat-num">100%</div><div class="stat-label" data-fr="Clients satisfaits" data-en="Satisfied clients">Clients satisfaits</div></div>
 </div>
 
 <!-- SERVICES -->
 <section id="services" class="section">
-  <div class="reveal">
-    <p class="s-eyebrow" data-fr="CE QUE JE FAIS" data-en="WHAT I DO">CE QUE JE FAIS</p>
-  </div>
+  <div class="reveal"><p class="s-eyebrow" data-fr="CE QUE JE FAIS" data-en="WHAT I DO">CE QUE JE FAIS</p></div>
   <div class="services-list reveal">
-    <div class="svc-row">
-      <span class="svc-num">01</span>
-      <span class="svc-name" data-fr="Map personnalisée"     data-en="Custom map">Map personnalisée</span>
-      <span class="svc-desc" data-fr="RP, obby, simulateur — chaque détail soigné selon ton thème." data-en="RP, obby, simulator — every detail crafted to match your theme.">RP, obby, simulateur — chaque détail soigné selon ton thème.</span>
-      <span class="svc-arr">→</span>
-    </div>
-    <div class="svc-row">
-      <span class="svc-num">02</span>
-      <span class="svc-name" data-fr="Level design"          data-en="Level design">Level design</span>
-      <span class="svc-desc" data-fr="Zones cohérentes, flux de gameplay fluide, architecture narrative." data-en="Coherent zones, smooth gameplay flow, narrative architecture.">Zones cohérentes, flux de gameplay fluide, architecture narrative.</span>
-      <span class="svc-arr">→</span>
-    </div>
-    <div class="svc-row">
-      <span class="svc-num">03</span>
-      <span class="svc-name" data-fr="Ambiance & lore"       data-en="Atmosphere & lore">Ambiance & lore</span>
-      <span class="svc-desc" data-fr="Éclairages, textures, décors — une identité visuelle forte." data-en="Lighting, textures, scenery — a strong visual identity.">Éclairages, textures, décors — une identité visuelle forte.</span>
-      <span class="svc-arr">→</span>
-    </div>
-    <div class="svc-row">
-      <span class="svc-num">04</span>
-      <span class="svc-name" data-fr="Optimisation"          data-en="Optimization">Optimisation</span>
-      <span class="svc-desc" data-fr="Maps fluides même en surcharge — perf & expérience joueur." data-en="Smooth maps even under load — peak performance & player experience.">Maps fluides même en surcharge — perf & expérience joueur.</span>
-      <span class="svc-arr">→</span>
-    </div>
-    <div class="svc-row">
-      <span class="svc-num">05</span>
-      <span class="svc-name" data-fr="Projet studio complet" data-en="Full studio project">Projet studio complet</span>
-      <span class="svc-desc" data-fr="Monde entier, multi-zones, livraisons par étapes avec contrat." data-en="Full world, multi-zone, staged deliveries with professional contract.">Monde entier, multi-zones, livraisons par étapes avec contrat.</span>
-      <span class="svc-arr">→</span>
-    </div>
+    <div class="svc-row"><span class="svc-num">01</span><span class="svc-name" data-fr="Map personnalisée" data-en="Custom map">Map personnalisée</span><span class="svc-desc" data-fr="RP, obby, simulateur — chaque détail soigné selon ton thème." data-en="RP, obby, simulator — every detail crafted to match your theme.">RP, obby, simulateur — chaque détail soigné selon ton thème.</span><span class="svc-arr">→</span></div>
+    <div class="svc-row"><span class="svc-num">02</span><span class="svc-name" data-fr="Level design" data-en="Level design">Level design</span><span class="svc-desc" data-fr="Zones cohérentes, flux de gameplay fluide, architecture narrative." data-en="Coherent zones, smooth gameplay flow, narrative architecture.">Zones cohérentes, flux de gameplay fluide, architecture narrative.</span><span class="svc-arr">→</span></div>
+    <div class="svc-row"><span class="svc-num">03</span><span class="svc-name" data-fr="Ambiance & lore" data-en="Atmosphere & lore">Ambiance & lore</span><span class="svc-desc" data-fr="Éclairages, textures, décors — une identité visuelle forte." data-en="Lighting, textures, scenery — a strong visual identity.">Éclairages, textures, décors — une identité visuelle forte.</span><span class="svc-arr">→</span></div>
+    <div class="svc-row"><span class="svc-num">04</span><span class="svc-name" data-fr="Optimisation" data-en="Optimization">Optimisation</span><span class="svc-desc" data-fr="Maps fluides même en surcharge — perf & expérience joueur." data-en="Smooth maps even under load — peak performance & player experience.">Maps fluides même en surcharge — perf & expérience joueur.</span><span class="svc-arr">→</span></div>
+    <div class="svc-row"><span class="svc-num">05</span><span class="svc-name" data-fr="Projet studio complet" data-en="Full studio project">Projet studio complet</span><span class="svc-desc" data-fr="Monde entier, multi-zones, livraisons par étapes avec contrat." data-en="Full world, multi-zone, staged deliveries with contract.">Monde entier, multi-zones, livraisons par étapes avec contrat.</span><span class="svc-arr">→</span></div>
   </div>
 </section>
 
-<!-- CREATIONS (public view) -->
+<!-- CREATIONS -->
 <section id="works" class="section">
   <div class="reveal gallery-header">
-    <div>
-      <p class="s-eyebrow" data-fr="MES CRÉATIONS" data-en="MY WORK">MES CRÉATIONS</p>
-      <h2 class="s-title" data-fr="Ce que j'ai construit" data-en="What I've built">Ce que j'ai construit</h2>
-    </div>
+    <div><p class="s-eyebrow" data-fr="MES CRÉATIONS" data-en="MY WORK">MES CRÉATIONS</p><h2 class="s-title" data-fr="Ce que j'ai construit" data-en="What I've built">Ce que j'ai construit</h2></div>
   </div>
-
-  <!-- PUBLIC GALLERY -->
   <div class="gallery-grid reveal" id="public-gallery"></div>
-
-  <!-- ADMIN PANEL -->
   <div id="admin-panel">
     <div class="admin-bar">
-      <div class="admin-bar-left">
-        <div class="admin-dot"></div>
-        <span class="admin-label">MODE ADMIN — VUE PRIVÉE</span>
-      </div>
+      <div class="admin-bar-left"><div class="admin-dot"></div><span class="admin-label">MODE ADMIN — VUE PRIVÉE</span></div>
       <div style="display:flex;gap:8px">
-        <button class="ctrl on" onclick="openNewModal()">+ NOUVEAU</button>
+        <button class="ctrl on" onclick="openCM()">+ NOUVEAU</button>
         <button class="ctrl" onclick="logout()">DÉCONNEXION</button>
       </div>
     </div>
@@ -413,53 +337,39 @@ footer span{font-family:var(--mono);font-size:10px;color:var(--dim);letter-spaci
   </div>
 </section>
 
-<!-- MODAL NOUVELLE CRÉATION -->
-<div id="new-modal">
-  <div class="nm-box">
-    <div class="nm-head">
-      <h3>NOUVELLE CRÉATION</h3>
-      <button class="nm-close" onclick="closeNewModal()">✕</button>
+<!-- CREATION MODAL -->
+<div class="cmodal" id="cm-modal">
+  <div class="cm-box">
+    <div class="cm-head"><h3 id="cm-title-label">NOUVELLE CRÉATION</h3><button class="cm-close" onclick="closeCM()">✕</button></div>
+    <div class="cm-body">
+      <div class="cm-drop" id="cm-drop" onclick="document.getElementById('cm-file').click()">
+        <img id="cm-preview" class="cm-preview"/>
+        <span class="cm-drop-icon" id="cm-icon">↑</span>
+        <p id="cm-drop-p">Glisse ton image ici</p>
+        <small id="cm-drop-s">ou clique — PNG, JPG, WEBP</small>
+      </div>
+      <input type="file" id="cm-file" accept="image/*"/>
+      <div class="cm-field"><label>NOM DU PROJET *</label><input id="cm-t" type="text" placeholder="ex: Map Roleplay Ville"/></div>
+      <div class="cm-field"><label>DESCRIPTION</label><textarea id="cm-d" rows="3" placeholder="ex: Map RP avec 3 quartiers, système jour/nuit..."></textarea></div>
+      <div class="cm-field"><label>TYPE</label><input id="cm-ty" type="text" placeholder="ex: RP / Obby / Simulateur / Level Design"/></div>
     </div>
-    <div class="nm-body">
-      <!-- Drop zone -->
-      <div class="nm-drop" id="nm-drop" onclick="document.getElementById('nm-file').click()">
-        <img id="nm-preview" class="nm-drop-preview"/>
-        <span class="nm-drop-icon">↑</span>
-        <p>Glisse ton image ici</p>
-        <small>ou clique pour choisir — PNG, JPG, WEBP</small>
-      </div>
-      <input type="file" id="nm-file" accept="image/*"/>
-      <!-- Champs -->
-      <div class="nm-field">
-        <label>NOM DU PROJET</label>
-        <input id="nm-title" type="text" placeholder="ex: Map Roleplay Ville"/>
-      </div>
-      <div class="nm-field">
-        <label>DESCRIPTION</label>
-        <textarea id="nm-desc" rows="3" placeholder="ex: Map RP complète avec 3 quartiers distincts, système de nuit/jour..."></textarea>
-      </div>
-      <div class="nm-field">
-        <label>TYPE</label>
-        <input id="nm-type" type="text" placeholder="ex: RP / Obby / Simulateur / Level Design"/>
-      </div>
-    </div>
-    <div class="nm-foot">
-      <button class="ctrl" onclick="closeNewModal()">Annuler</button>
-      <button class="ctrl on" onclick="publishCreation()">✓ PUBLIER</button>
+    <div class="cm-foot">
+      <button class="ctrl" onclick="closeCM()">Annuler</button>
+      <button class="ctrl on" id="cm-publish-btn" onclick="publishCM()">✓ PUBLIER</button>
     </div>
   </div>
 </div>
 
-<!-- ADMIN LOGIN OVERLAY -->
+<!-- ADMIN LOGIN -->
 <div id="admin-lock">
   <div class="lock-box">
-    <h3 data-fr="ACCÈS ADMIN" data-en="ADMIN ACCESS">ACCÈS ADMIN</h3>
+    <h3>ACCÈS ADMIN</h3>
     <input id="pwd-input" type="password" placeholder="••••••••" autocomplete="off"/>
     <div style="display:flex;gap:8px;justify-content:center">
-      <button class="ctrl" onclick="closeLock()" data-fr="Annuler" data-en="Cancel">Annuler</button>
-      <button class="ctrl on" onclick="tryLogin()" data-fr="Entrer" data-en="Enter">Entrer</button>
+      <button class="ctrl" onclick="closeLock()">Annuler</button>
+      <button class="ctrl on" onclick="tryLogin()">Entrer</button>
     </div>
-    <div class="lock-err" id="lock-err" data-fr="Mot de passe incorrect" data-en="Wrong password">Mot de passe incorrect</div>
+    <div class="lock-err" id="lock-err">Mot de passe incorrect</div>
   </div>
 </div>
 
@@ -469,8 +379,8 @@ footer span{font-family:var(--mono);font-size:10px;color:var(--dim);letter-spaci
     <p class="s-eyebrow" data-fr="TARIFS" data-en="PRICING">TARIFS</p>
     <h2 class="s-title" style="margin-bottom:32px" data-fr="Investissement" data-en="Investment">Investissement</h2>
     <div class="pricing-controls">
-      <button class="ctrl on" id="c-eur"   onclick="setCur('eur')"   data-fr="€ EUR"    data-en="€ EUR">€ EUR</button>
-      <button class="ctrl"    id="c-robux" onclick="setCur('robux')" data-fr="R$ Robux" data-en="R$ Robux">R$ Robux</button>
+      <button class="ctrl on" id="c-eur" onclick="setCur('eur')">€ EUR</button>
+      <button class="ctrl" id="c-robux" onclick="setCur('robux')">R$ Robux</button>
     </div>
   </div>
   <div class="pricing-grid reveal">
@@ -480,11 +390,11 @@ footer span{font-family:var(--mono);font-size:10px;color:var(--dim);letter-spaci
       <div class="plan-sub" data-fr="par map / projet simple" data-en="per map / simple project">par map / projet simple</div>
       <div class="plan-sep"></div>
       <ul class="plan-feats">
-        <li class="yes" data-fr="1 map personnalisée"  data-en="1 custom map">1 map personnalisée</li>
-        <li class="yes" data-fr="Thème au choix"       data-en="Theme of your choice">Thème au choix</li>
+        <li class="yes" data-fr="1 map personnalisée" data-en="1 custom map">1 map personnalisée</li>
+        <li class="yes" data-fr="Thème au choix" data-en="Theme of your choice">Thème au choix</li>
         <li class="yes" data-fr="2 révisions incluses" data-en="2 revisions included">2 révisions incluses</li>
-        <li class="no"  data-fr="Livraison 5 jours"    data-en="5-day delivery">Livraison 5 jours</li>
-        <li class="no"  data-fr="Fichiers sources"     data-en="Source files">Fichiers sources</li>
+        <li class="no" data-fr="Livraison 5 jours" data-en="5-day delivery">Livraison 5 jours</li>
+        <li class="no" data-fr="Fichiers sources" data-en="Source files">Fichiers sources</li>
       </ul>
       <button class="plan-btn" onclick="goContact()" data-fr="COMMENCER" data-en="GET STARTED">COMMENCER</button>
     </div>
@@ -496,10 +406,10 @@ footer span{font-family:var(--mono);font-size:10px;color:var(--dim);letter-spaci
       <div class="plan-sep"></div>
       <ul class="plan-feats">
         <li class="yes" data-fr="Map détaillée & optimisée" data-en="Detailed & optimized map">Map détaillée & optimisée</li>
-        <li class="yes" data-fr="Ambiance / lore inclus"    data-en="Atmosphere / lore included">Ambiance / lore inclus</li>
-        <li class="yes" data-fr="4 révisions incluses"      data-en="4 revisions included">4 révisions incluses</li>
-        <li class="yes" data-fr="Livraison 7 jours"         data-en="7-day delivery">Livraison 7 jours</li>
-        <li class="no"  data-fr="Fichiers sources"          data-en="Source files">Fichiers sources</li>
+        <li class="yes" data-fr="Ambiance / lore inclus" data-en="Atmosphere / lore included">Ambiance / lore inclus</li>
+        <li class="yes" data-fr="4 révisions incluses" data-en="4 revisions included">4 révisions incluses</li>
+        <li class="yes" data-fr="Livraison 7 jours" data-en="7-day delivery">Livraison 7 jours</li>
+        <li class="no" data-fr="Fichiers sources" data-en="Source files">Fichiers sources</li>
       </ul>
       <button class="plan-btn hi" onclick="goContact()" data-fr="CHOISIR PRO" data-en="CHOOSE PRO">CHOISIR PRO</button>
     </div>
@@ -509,11 +419,11 @@ footer span{font-family:var(--mono);font-size:10px;color:var(--dim);letter-spaci
       <div class="plan-sub" data-fr="projet complet" data-en="complete project">projet complet</div>
       <div class="plan-sep"></div>
       <ul class="plan-feats">
-        <li class="yes" data-fr="Zone / monde entier"    data-en="Full zone / world">Zone / monde entier</li>
-        <li class="yes" data-fr="Level design narratif"  data-en="Narrative level design">Level design narratif</li>
-        <li class="yes" data-fr="Révisions illimitées"   data-en="Unlimited revisions">Révisions illimitées</li>
+        <li class="yes" data-fr="Zone / monde entier" data-en="Full zone / world">Zone / monde entier</li>
+        <li class="yes" data-fr="Level design narratif" data-en="Narrative level design">Level design narratif</li>
+        <li class="yes" data-fr="Révisions illimitées" data-en="Unlimited revisions">Révisions illimitées</li>
         <li class="yes" data-fr="Support post-livraison" data-en="Post-delivery support">Support post-livraison</li>
-        <li class="yes" data-fr="Fichiers sources"        data-en="Source files">Fichiers sources</li>
+        <li class="yes" data-fr="Fichiers sources" data-en="Source files">Fichiers sources</li>
       </ul>
       <button class="plan-btn" onclick="goContact()" data-fr="CHOISIR ELITE" data-en="CHOOSE ELITE">CHOISIR ELITE</button>
     </div>
@@ -523,14 +433,58 @@ footer span{font-family:var(--mono);font-size:10px;color:var(--dim);letter-spaci
       <div class="plan-sub" data-fr="projet unique / studio" data-en="unique project / studio">projet unique / studio</div>
       <div class="plan-sep"></div>
       <ul class="plan-feats">
-        <li class="yes" data-fr="Brief personnalisé"     data-en="Custom brief">Brief personnalisé</li>
+        <li class="yes" data-fr="Brief personnalisé" data-en="Custom brief">Brief personnalisé</li>
         <li class="yes" data-fr="Équipe & collaboration" data-en="Team & collaboration">Équipe & collaboration</li>
-        <li class="yes" data-fr="Livraisons par étapes"  data-en="Staged deliveries">Livraisons par étapes</li>
-        <li class="yes" data-fr="Contrat professionnel"  data-en="Professional contract">Contrat professionnel</li>
-        <li class="yes" data-fr="NDA possible"           data-en="NDA possible">NDA possible</li>
+        <li class="yes" data-fr="Livraisons par étapes" data-en="Staged deliveries">Livraisons par étapes</li>
+        <li class="yes" data-fr="Contrat professionnel" data-en="Professional contract">Contrat professionnel</li>
+        <li class="yes" data-fr="NDA possible" data-en="NDA possible">NDA possible</li>
       </ul>
       <button class="plan-btn" onclick="goContact()" data-fr="ME CONTACTER" data-en="CONTACT ME">ME CONTACTER</button>
     </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section id="reviews" class="section">
+  <div class="reveal reviews-header">
+    <div>
+      <p class="s-eyebrow" data-fr="TÉMOIGNAGES" data-en="TESTIMONIALS">TÉMOIGNAGES</p>
+      <h2 class="s-title" data-fr="Avis clients" data-en="Client reviews">Avis clients</h2>
+    </div>
+    <div class="reviews-avg">
+      <div class="reviews-avg-num" id="avg-num">—</div>
+      <div>
+        <div class="reviews-avg-stars" id="avg-stars"></div>
+        <div class="reviews-count" id="reviews-count" data-fr="aucun avis" data-en="no reviews yet">aucun avis</div>
+      </div>
+    </div>
+  </div>
+  <div class="reviews-grid reveal" id="reviews-grid"></div>
+  <!-- REVIEW FORM -->
+  <div class="review-form reveal">
+    <div class="rf-title" data-fr="LAISSER UN AVIS" data-en="LEAVE A REVIEW">LAISSER UN AVIS</div>
+    <div class="rf-stars" id="rf-stars">
+      <span class="rf-star" data-v="1">★</span>
+      <span class="rf-star" data-v="2">★</span>
+      <span class="rf-star" data-v="3">★</span>
+      <span class="rf-star" data-v="4">★</span>
+      <span class="rf-star" data-v="5">★</span>
+    </div>
+    <div class="rf-grid">
+      <div class="rf-field"><label data-fr="TON PSEUDO" data-en="YOUR NAME">TON PSEUDO</label><input id="rf-name" type="text" placeholder="ex: Alex_Roblox"/></div>
+      <div class="rf-field">
+        <label data-fr="FORMULE UTILISÉE" data-en="PLAN USED">FORMULE UTILISÉE</label>
+        <select id="rf-plan">
+          <option value="" data-fr="Choisir..." data-en="Choose...">Choisir...</option>
+          <option value="Starter">Starter</option>
+          <option value="Pro">Pro</option>
+          <option value="Elite">Elite</option>
+          <option value="Sur mesure" data-en="Custom">Sur mesure</option>
+        </select>
+      </div>
+    </div>
+    <div class="rf-field" style="margin-bottom:16px"><label data-fr="TON AVIS" data-en="YOUR REVIEW">TON AVIS</label><textarea id="rf-text" rows="3" placeholder="Dis ce que tu as pensé du projet..."></textarea></div>
+    <button class="ctrl on" onclick="submitReview()" data-fr="PUBLIER MON AVIS" data-en="PUBLISH MY REVIEW">PUBLIER MON AVIS</button>
   </div>
 </section>
 
@@ -540,38 +494,16 @@ footer span{font-family:var(--mono);font-size:10px;color:var(--dim);letter-spaci
     <div>
       <p class="s-eyebrow" data-fr="À PROPOS" data-en="ABOUT">À PROPOS</p>
       <h2 class="s-title" style="margin-bottom:32px">Zayrho7</h2>
-      <p class="about-body"
-         data-fr="Builder Roblox avec plus de 3 ans d'expérience sur Roblox Studio. Je me spécialise dans les maps immersives et les environnements de jeu optimisés, pensés pour durer."
-         data-en="Roblox builder with 3+ years on Roblox Studio. I specialize in immersive maps and optimized game environments, built to last.">Builder Roblox avec plus de 3 ans d'expérience sur Roblox Studio. Je me spécialise dans les maps immersives et les environnements de jeu optimisés, pensés pour durer.</p>
-      <p class="about-body" style="margin-top:16px"
-         data-fr="Chaque projet est livré avec soin, dans les délais convenus. Je travaille directement avec mes clients pour capturer exactement ce qu'ils imaginent."
-         data-en="Every project is delivered with care, on schedule. I work directly with clients to capture exactly what they envision.">Chaque projet est livré avec soin, dans les délais convenus. Je travaille directement avec mes clients pour capturer exactement ce qu'ils imaginent.</p>
+      <p class="about-body" data-fr="Builder Roblox avec plus de 3 ans d'expérience sur Roblox Studio. Je me spécialise dans les maps immersives et les environnements de jeu optimisés, pensés pour durer." data-en="Roblox builder with 3+ years on Roblox Studio. I specialize in immersive maps and optimized game environments, built to last.">Builder Roblox avec plus de 3 ans d'expérience sur Roblox Studio. Je me spécialise dans les maps immersives et les environnements de jeu optimisés, pensés pour durer.</p>
+      <p class="about-body" style="margin-top:16px" data-fr="Chaque projet est livré avec soin, dans les délais convenus. Je travaille directement avec mes clients pour capturer exactement ce qu'ils imaginent." data-en="Every project is delivered with care, on schedule. I work directly with clients to capture exactly what they envision.">Chaque projet est livré avec soin, dans les délais convenus. Je travaille directement avec mes clients pour capturer exactement ce qu'ils imaginent.</p>
       <div class="skills-wrap">
-        <span class="skill-chip">Roblox Studio</span>
-        <span class="skill-chip">Level Design</span>
-        <span class="skill-chip">Terrain</span>
-        <span class="skill-chip">Lighting</span>
-        <span class="skill-chip">Optimization</span>
-        <span class="skill-chip">Lore Building</span>
-        <span class="skill-chip">UI/UX</span>
+        <span class="skill-chip">Roblox Studio</span><span class="skill-chip">Level Design</span><span class="skill-chip">Terrain</span><span class="skill-chip">Lighting</span><span class="skill-chip">Optimization</span><span class="skill-chip">Lore Building</span><span class="skill-chip">UI/UX</span>
       </div>
     </div>
     <div class="about-aside">
-      <div class="aside-block">
-        <div class="aside-label" data-fr="STATUT" data-en="STATUS">STATUT</div>
-        <div class="aside-val" style="color:#7aff9a" data-fr="Disponible" data-en="Available">Disponible</div>
-        <div class="aside-note" data-fr="Ouvert aux nouvelles commandes" data-en="Open to new orders">Ouvert aux nouvelles commandes</div>
-      </div>
-      <div class="aside-block">
-        <div class="aside-label" data-fr="DÉLAI MOYEN" data-en="AVG DELIVERY">DÉLAI MOYEN</div>
-        <div class="aside-val" data-fr="5–7 jours" data-en="5–7 days">5–7 jours</div>
-        <div class="aside-note" data-fr="Selon la complexité" data-en="Depending on complexity">Selon la complexité</div>
-      </div>
-      <div class="aside-block">
-        <div class="aside-label">DISCORD</div>
-        <div class="aside-val" style="font-size:18px">zayrho7</div>
-        <div class="aside-note" data-fr="Contact préféré" data-en="Preferred contact">Contact préféré</div>
-      </div>
+      <div class="aside-block"><div class="aside-label" data-fr="STATUT" data-en="STATUS">STATUT</div><div class="aside-val" style="color:#7aff9a" data-fr="Disponible" data-en="Available">Disponible</div><div class="aside-note" data-fr="Ouvert aux nouvelles commandes" data-en="Open to new orders">Ouvert aux nouvelles commandes</div></div>
+      <div class="aside-block"><div class="aside-label" data-fr="DÉLAI MOYEN" data-en="AVG DELIVERY">DÉLAI MOYEN</div><div class="aside-val" data-fr="5–7 jours" data-en="5–7 days">5–7 jours</div><div class="aside-note" data-fr="Selon la complexité" data-en="Depending on complexity">Selon la complexité</div></div>
+      <div class="aside-block"><div class="aside-label">DISCORD</div><div class="aside-val" style="font-size:18px">zayrho7</div><div class="aside-note" data-fr="Contact préféré" data-en="Preferred contact">Contact préféré</div></div>
     </div>
   </div>
 </section>
@@ -580,30 +512,15 @@ footer span{font-family:var(--mono);font-size:10px;color:var(--dim);letter-spaci
 <section id="contact" class="section" style="padding-top:0">
   <div class="contact-wrap reveal">
     <h2 class="contact-title" data-fr="Travaillons<br>ensemble." data-en="Let's build<br>together.">Travaillons<br>ensemble.</h2>
-    <p class="contact-sub"
-       data-fr="Un projet en tête ? Écris-moi directement. Je réponds en moins de 24h."
-       data-en="Have a project in mind? Write to me directly. I reply within 24h.">Un projet en tête ? Écris-moi directement. Je réponds en moins de 24h.</p>
+    <p class="contact-sub" data-fr="Un projet en tête ? Écris-moi directement. Je réponds en moins de 24h." data-en="Have a project in mind? Write to me directly. I reply within 24h.">Un projet en tête ? Écris-moi directement. Je réponds en moins de 24h.</p>
     <div class="contact-links">
-      <a href="https://discord.com" target="_blank" class="contact-card">
-
-        <div><span class="cc-label">DISCORD</span><span class="cc-val">zayrho7</span></div>
-      </a>
-      <a href="https://www.roblox.com" target="_blank" class="contact-card">
-
-        <div><span class="cc-label">ROBLOX</span><span class="cc-val">@Liam_Typzo</span></div>
-      </a>
-      <a href="mailto:contact@LiamGW@outlook.fr" class="contact-card">
- 
-        <div>
-          <span class="cc-label">EMAIL</span>
-          <span class="cc-val" data-fr="Envoyer un mail" data-en="Send an email">Envoyer un mail</span>
-        </div>
-      </a>
+      <a href="https://discord.com" target="_blank" class="contact-card"><span style="font-size:18px">💬</span><div><span class="cc-label">DISCORD</span><span class="cc-val">zayrho7</span></div></a>
+      <a href="https://www.roblox.com" target="_blank" class="contact-card"><span style="font-size:18px">🎮</span><div><span class="cc-label">ROBLOX</span><span class="cc-val">@Zayrho7</span></div></a>
+      <a href="mailto:contact@zayrho7.com" class="contact-card"><span style="font-size:18px">✉️</span><div><span class="cc-label">EMAIL</span><span class="cc-val" data-fr="Envoyer un mail" data-en="Send an email">Envoyer un mail</span></div></a>
     </div>
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <span>ZAYRHO7 — ROBLOX BUILDER</span>
   <span data-fr="© 2025 — Tous droits réservés" data-en="© 2025 — All rights reserved">© 2025 — Tous droits réservés</span>
@@ -615,64 +532,57 @@ footer span{font-family:var(--mono);font-size:10px;color:var(--dim);letter-spaci
     <div class="chat-head">
       <div class="chat-head-info">
         <div class="chat-dot"></div>
-        <div>
-          <div class="chat-head-name">ZRH7 — Assistant</div>
-          <div class="chat-head-sub" data-fr="Posez vos questions" data-en="Ask me anything">Posez vos questions</div>
-        </div>
+        <div><div class="chat-head-name">ZRH7 — Assistant</div><div class="chat-head-sub" data-fr="Posez vos questions" data-en="Ask me anything">Posez vos questions</div></div>
       </div>
       <button class="chat-close" onclick="toggleChat()">✕</button>
     </div>
     <div class="chat-msgs" id="chat-msgs">
-      <div class="msg bot" data-fr="Bonjour ! Je suis l'assistant de Zayrho7. Vous pouvez me poser des questions sur ses services, ses tarifs ou son travail 🎮" data-en="Hello! I'm Zayrho7's assistant. Feel free to ask me about his services, pricing or his work 🎮">Bonjour ! Je suis l'assistant de Zayrho7. Vous pouvez me poser des questions sur ses services, ses tarifs ou son travail 🎮</div>
+      <div class="msg bot" data-fr="Salut ! 👋 Je suis l'assistant de Zayrho7. Pose-moi n'importe quelle question — tarifs, délais, types de maps, contact..." data-en="Hey! 👋 I'm Zayrho7's assistant. Ask me anything — pricing, deadlines, map types, contact...">Salut ! 👋 Je suis l'assistant de Zayrho7. Pose-moi n'importe quelle question — tarifs, délais, types de maps, contact...</div>
     </div>
+    <div class="chat-suggestions" id="chat-sugs"></div>
     <div class="chat-footer">
-      <input class="chat-input" id="chat-input" type="text"
-             placeholder="Votre question..."
-             data-ph-fr="Votre question..."
-             data-ph-en="Your question..."
-             onkeydown="if(event.key==='Enter')sendMsg()"/>
+      <input class="chat-input" id="chat-input" type="text" placeholder="Écris ta question..." onkeydown="if(event.key==='Enter')sendMsg()"/>
       <button class="chat-send" onclick="sendMsg()">→</button>
     </div>
   </div>
-  <button id="chat-bubble" onclick="toggleChat()" title="Assistant">
-    <svg viewBox="0 0 24 24" fill="none" stroke="#0c0c0c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
-    </svg>
+  <button id="chat-bubble" onclick="toggleChat()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="#0c0c0c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
   </button>
 </div>
 
 <script>
-/* ══════════════════════════════════════════
-   CONFIGURATION — MODIFIE CES VALEURS
-   ══════════════════════════════════════════ */
-const ADMIN_PASSWORD = 'zayrho7admin'; // ← change ton mot de passe ici
-const STORAGE_KEY    = 'zrh7_creations_v2';
+/* ═══════════════════════════════════════
+   CONFIG — change ton mot de passe ici
+   ═══════════════════════════════════════ */
+const ADMIN_PASSWORD = 'zayrho7admin';
+const SK_CREATIONS   = 'zrh7_v3_creations';
+const SK_REVIEWS     = 'zrh7_v3_reviews';
 
-/* ══════════════════════════════════════════
+/* ═══════════════════════════════════════
    STATE
-   ══════════════════════════════════════════ */
-let lang       = 'fr';
+   ═══════════════════════════════════════ */
+let lang = 'fr';
 let curCurrency = 'eur';
-let isAdmin    = false;
-let creations  = [];
-let logoClicks = 0;
-let logoTimer  = null;
+let isAdmin = false;
+let logoClicks = 0, logoTimer = null;
+let creations = [];
+let reviews = [];
+let pendingImg = null;
+let editingIdx = null; // null = new, number = editing
 
-/* ══════════════════════════════════════════
-   STORAGE — sessionStorage for admin flag (clears on tab close)
-   creations stored in localStorage (only images, no edit outside admin)
-   ══════════════════════════════════════════ */
-function loadCreations() {
-  try { creations = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'); }
-  catch(e) { creations = []; }
+/* ═══════════════════════════════════════
+   STORAGE
+   ═══════════════════════════════════════ */
+function loadData() {
+  try { creations = JSON.parse(localStorage.getItem(SK_CREATIONS) || '[]'); } catch(e){ creations=[]; }
+  try { reviews   = JSON.parse(localStorage.getItem(SK_REVIEWS)   || '[]'); } catch(e){ reviews=[]; }
 }
-function saveCreations() {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(creations));
-}
+function saveCreations(){ localStorage.setItem(SK_CREATIONS, JSON.stringify(creations)); }
+function saveReviews(){ localStorage.setItem(SK_REVIEWS, JSON.stringify(reviews)); }
 
-/* ══════════════════════════════════════════
+/* ═══════════════════════════════════════
    LANGUAGE
-   ══════════════════════════════════════════ */
+   ═══════════════════════════════════════ */
 function setLang(l) {
   lang = l;
   document.getElementById('btn-fr').classList.toggle('on', l==='fr');
@@ -680,19 +590,15 @@ function setLang(l) {
   document.documentElement.lang = l;
   document.querySelectorAll('[data-fr][data-en]').forEach(el => {
     const v = el.getAttribute('data-'+l);
-    if (v === null) return;
-    if (v.includes('<br>')) el.innerHTML = v; else el.textContent = v;
+    if(v===null) return;
+    if(v.includes('<br>')) el.innerHTML=v; else el.textContent=v;
   });
-  document.querySelectorAll('[data-ph-fr]').forEach(el => {
-    el.placeholder = el.getAttribute('data-ph-'+l) || el.placeholder;
-  });
-  renderPublicGallery();
-  if (isAdmin) renderAdminGrid();
+  renderPublicGallery(); renderReviews();
 }
 
-/* ══════════════════════════════════════════
+/* ═══════════════════════════════════════
    CURRENCY
-   ══════════════════════════════════════════ */
+   ═══════════════════════════════════════ */
 const PRICES = {
   eur:   {s:['€','20'],    p:['€','45'],    e:['€','150']},
   robux: {s:['R$','4 500'],p:['R$','7 500'],e:['R$','25 000']}
@@ -702,691 +608,498 @@ function setCur(c) {
   document.getElementById('c-eur').classList.toggle('on',   c==='eur');
   document.getElementById('c-robux').classList.toggle('on', c==='robux');
   const d = PRICES[c];
-  [['s',d.s],['p',d.p],['e',d.e]].forEach(([k,v]) => {
-    document.getElementById('c-'+k).textContent = v[0];
-    document.getElementById('v-'+k).textContent = v[1];
-    const el = document.getElementById('pa-'+k);
+  [['s',d.s],['p',d.p],['e',d.e]].forEach(([k,v])=>{
+    document.getElementById('c-'+k).textContent=v[0];
+    document.getElementById('v-'+k).textContent=v[1];
+    const el=document.getElementById('pa-'+k);
     el.style.transform='scale(1.07)'; el.style.color='#aaa';
-    setTimeout(()=>{ el.style.transform=''; el.style.color=''; }, 280);
+    setTimeout(()=>{ el.style.transform=''; el.style.color=''; },280);
   });
 }
 
-/* ══════════════════════════════════════════
-   GALLERY — PUBLIC VIEW
-   ══════════════════════════════════════════ */
+/* ═══════════════════════════════════════
+   GALLERY — PUBLIC
+   ═══════════════════════════════════════ */
 function renderPublicGallery() {
   const g = document.getElementById('public-gallery');
   g.innerHTML = '';
-  const visible = creations.filter(c => c.img);
-  if (visible.length === 0) {
-    g.innerHTML = `<div class="gallery-empty"><p>${lang==='fr'?'Bientôt disponible...':'Coming soon...'}</p></div>`;
+  const vis = creations.filter(c=>c.img);
+  if(!vis.length){
+    g.innerHTML=`<div class="gallery-empty"><p>${lang==='fr'?'Bientôt disponible...':'Coming soon...'}</p></div>`;
     return;
   }
-  visible.forEach(item => {
-    const d = document.createElement('div');
-    d.className = 'gitem';
-    d.innerHTML = `
-      <img src="${item.img}" alt="${item.title}" loading="lazy"/>
-      <div class="goverlay">
-        <div class="gov-text">
-          <div class="gov-title">${item.title}</div>
-          ${item.desc ? `<div style="font-size:12px;color:rgba(255,255,255,.55);margin-top:4px;line-height:1.4">${item.desc}</div>` : ''}
-          <div class="gov-tag" style="margin-top:6px">${item.type || 'Roblox Build'}</div>
-        </div>
-      </div>`;
+  vis.forEach(item=>{
+    const d=document.createElement('div'); d.className='gitem';
+    d.innerHTML=`<img src="${item.img}" alt="${item.title}" loading="lazy"/>
+      <div class="goverlay"><div class="gov-text">
+        <div class="gov-title">${item.title}</div>
+        ${item.desc?`<div style="font-size:12px;color:rgba(255,255,255,.5);margin-top:4px;line-height:1.4">${item.desc}</div>`:''}
+        <div class="gov-tag" style="margin-top:6px">${item.type||'Roblox Build'}</div>
+      </div></div>`;
     g.appendChild(d);
   });
 }
 
-/* ══════════════════════════════════════════
-   ADMIN — SECRET ENTRY: double-clic sur logo
-   ══════════════════════════════════════════ */
-document.querySelector('.nav-logo').addEventListener('click', e => {
-  e.preventDefault();
-  logoClicks++;
+/* ═══════════════════════════════════════
+   ADMIN — UNLOCK
+   ═══════════════════════════════════════ */
+document.querySelector('.nav-logo').addEventListener('click', e=>{
+  e.preventDefault(); logoClicks++;
   clearTimeout(logoTimer);
-  if (logoClicks >= 2) {
-    logoClicks = 0;
-    if (isAdmin) { logout(); return; }
-    openLock();
-  } else {
-    logoTimer = setTimeout(() => { logoClicks = 0; }, 600);
-  }
+  if(logoClicks>=2){ logoClicks=0; isAdmin ? logout() : openLock(); }
+  else logoTimer=setTimeout(()=>{ logoClicks=0; },600);
 });
-
-function openLock() {
-  document.getElementById('admin-lock').classList.add('open');
-  document.getElementById('lock-err').style.display = 'none';
-  document.getElementById('pwd-input').value = '';
-  setTimeout(() => document.getElementById('pwd-input').focus(), 100);
-}
-function closeLock() {
-  document.getElementById('admin-lock').classList.remove('open');
-  document.getElementById('pwd-input').value = '';
-}
-function tryLogin() {
-  const v = document.getElementById('pwd-input').value;
-  if (v === ADMIN_PASSWORD) {
-    isAdmin = true;
-    closeLock();
-    document.getElementById('admin-panel').style.display = 'block';
-    renderAdminGrid();
+function openLock(){ document.getElementById('admin-lock').classList.add('open'); document.getElementById('lock-err').style.display='none'; document.getElementById('pwd-input').value=''; setTimeout(()=>document.getElementById('pwd-input').focus(),100); }
+function closeLock(){ document.getElementById('admin-lock').classList.remove('open'); document.getElementById('pwd-input').value=''; }
+function tryLogin(){
+  if(document.getElementById('pwd-input').value===ADMIN_PASSWORD){
+    isAdmin=true; closeLock();
+    document.getElementById('admin-panel').style.display='block';
+    renderAdminCards();
   } else {
-    const err = document.getElementById('lock-err');
-    err.style.display = 'block';
-    document.getElementById('pwd-input').value = '';
+    document.getElementById('lock-err').style.display='block';
+    document.getElementById('pwd-input').value='';
     document.getElementById('pwd-input').focus();
-    setTimeout(() => { err.style.display = 'none'; }, 2500);
+    setTimeout(()=>document.getElementById('lock-err').style.display='none',2500);
   }
 }
-document.getElementById('pwd-input').addEventListener('keydown', e => {
-  if (e.key === 'Enter') tryLogin();
-});
-function logout() {
-  isAdmin = false;
-  document.getElementById('admin-panel').style.display = 'none';
-}
+document.getElementById('pwd-input').addEventListener('keydown',e=>{ if(e.key==='Enter') tryLogin(); });
+function logout(){ isAdmin=false; document.getElementById('admin-panel').style.display='none'; }
 
-/* ══════════════════════════════════════════
-   ADMIN — GRID RENDER
-   ══════════════════════════════════════════ */
-function renderAdminGrid() {
-  const grid = document.getElementById('admin-cards');
-  grid.innerHTML = '';
-  if (creations.length === 0) {
-    grid.innerHTML = `<div style="grid-column:1/-1;padding:60px 0;text-align:center"><p style="font-family:var(--mono);font-size:11px;color:var(--dim2)">Aucune création — clique sur + NOUVEAU pour ajouter</p></div>`;
+/* ═══════════════════════════════════════
+   ADMIN CARDS
+   ═══════════════════════════════════════ */
+function renderAdminCards(){
+  const g=document.getElementById('admin-cards'); g.innerHTML='';
+  if(!creations.length){
+    g.innerHTML=`<div style="grid-column:1/-1;padding:40px 0;text-align:center"><p style="font-family:var(--mono);font-size:11px;color:var(--dim2)">Aucune création — clique sur + NOUVEAU</p></div>`;
     return;
   }
-  creations.forEach((item, i) => {
-    const card = document.createElement('div');
-    card.className = 'admin-card';
-    const imgHtml = item.img
-      ? `<img class="admin-card-img" src="${item.img}" alt="${item.title}"/>`
-      : `<div class="admin-card-img-empty"><span style="font-family:var(--mono);font-size:10px;color:var(--dim2)">PAS D'IMAGE</span></div>`;
-    card.innerHTML = `
-      ${imgHtml}
+  creations.forEach((item,i)=>{
+    const c=document.createElement('div'); c.className='admin-card';
+    const img=item.img?`<img src="${item.img}" alt="${item.title}"/>`:`<div class="admin-card-empty"><span style="font-family:var(--mono);font-size:10px;color:var(--dim2)">PAS D'IMAGE</span></div>`;
+    c.innerHTML=`${img}
       <div class="admin-card-body">
-        <div class="admin-card-title">${item.title || 'Sans titre'}</div>
-        ${item.type ? `<div style="font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:var(--dim);margin-bottom:6px">${item.type}</div>` : ''}
-        ${item.desc ? `<div class="admin-card-desc">${item.desc}</div>` : ''}
+        <div class="admin-card-title">${item.title||'Sans titre'}</div>
+        ${item.type?`<div style="font-family:var(--mono);font-size:9px;color:var(--dim);letter-spacing:.1em;margin-bottom:6px">${item.type}</div>`:''}
+        ${item.desc?`<div class="admin-card-desc">${item.desc}</div>`:''}
       </div>
-      <div class="admin-card-footer">
-        <button class="del-btn" onclick="removeItem(${i})">✕ Supprimer</button>
+      <div class="admin-card-foot">
+        <button class="edit-btn" onclick="openCM(${i})">✎ Modifier</button>
+        <button class="del-btn" onclick="deleteCreation(${i})">✕ Supprimer</button>
       </div>`;
-    grid.appendChild(card);
+    g.appendChild(c);
   });
 }
-
-function removeItem(i) {
-  if (!confirm('Supprimer cette création ?')) return;
-  creations.splice(i, 1);
-  saveCreations();
-  renderPublicGallery();
-  renderAdminGrid();
+function deleteCreation(i){
+  if(!confirm('Supprimer cette création ?')) return;
+  creations.splice(i,1); saveCreations(); renderPublicGallery(); renderAdminCards();
 }
 
-/* ══════════════════════════════════════════
-   MODAL NOUVELLE CRÉATION
-   ══════════════════════════════════════════ */
-let pendingImg = null;
+/* ═══════════════════════════════════════
+   CREATION MODAL — OPEN / CLOSE / SUBMIT
+   ═══════════════════════════════════════ */
+function openCM(idx=null){
+  editingIdx=idx;
+  pendingImg=null;
+  const isEdit=(idx!==null);
+  document.getElementById('cm-title-label').textContent = isEdit ? 'MODIFIER LA CRÉATION' : 'NOUVELLE CRÉATION';
+  document.getElementById('cm-publish-btn').textContent = isEdit ? '✓ ENREGISTRER' : '✓ PUBLIER';
 
-function openNewModal() {
-  pendingImg = null;
-  document.getElementById('nm-title').value = '';
-  document.getElementById('nm-desc').value  = '';
-  document.getElementById('nm-type').value  = '';
-  document.getElementById('nm-preview').style.display = 'none';
-  document.getElementById('nm-drop').classList.remove('has-file');
-  const icon = document.querySelector('.nm-drop-icon');
-  const p    = document.querySelector('.nm-drop p');
-  const sm   = document.querySelector('.nm-drop small');
-  if (icon) icon.style.display = 'block';
-  if (p)    p.style.display    = 'block';
-  if (sm)   sm.style.display   = 'block';
-  document.getElementById('nm-file').value = '';
-  document.getElementById('new-modal').classList.add('open');
+  if(isEdit){
+    const item=creations[idx];
+    document.getElementById('cm-t').value=item.title||'';
+    document.getElementById('cm-d').value=item.desc||'';
+    document.getElementById('cm-ty').value=item.type||'';
+    if(item.img){
+      pendingImg=item.img;
+      const prev=document.getElementById('cm-preview');
+      prev.src=item.img; prev.style.display='block';
+      document.getElementById('cm-drop').classList.add('has-file');
+      document.getElementById('cm-icon').style.display='none';
+      document.getElementById('cm-drop-p').textContent='Image actuelle (clique pour changer)';
+      document.getElementById('cm-drop-s').style.display='none';
+    } else { resetDropZone(); }
+  } else {
+    document.getElementById('cm-t').value='';
+    document.getElementById('cm-d').value='';
+    document.getElementById('cm-ty').value='';
+    resetDropZone();
+  }
+  document.getElementById('cm-file').value='';
+  document.getElementById('cm-modal').classList.add('open');
+}
+function resetDropZone(){
+  const prev=document.getElementById('cm-preview');
+  prev.src=''; prev.style.display='none';
+  document.getElementById('cm-drop').classList.remove('has-file');
+  document.getElementById('cm-icon').style.display='block';
+  document.getElementById('cm-drop-p').textContent='Glisse ton image ici';
+  document.getElementById('cm-drop-s').style.display='block';
+  document.getElementById('cm-drop-s').textContent='ou clique — PNG, JPG, WEBP';
+}
+function closeCM(){ document.getElementById('cm-modal').classList.remove('open'); editingIdx=null; }
+function publishCM(){
+  const title=document.getElementById('cm-t').value.trim();
+  if(!title){ document.getElementById('cm-t').focus(); return; }
+  const obj={ title, desc:document.getElementById('cm-d').value.trim(), type:document.getElementById('cm-ty').value.trim()||'Roblox Build', img:pendingImg };
+  if(editingIdx!==null){ creations[editingIdx]=obj; } else { creations.push(obj); }
+  saveCreations(); renderPublicGallery(); renderAdminCards(); closeCM();
 }
 
-function closeNewModal() {
-  document.getElementById('new-modal').classList.remove('open');
+/* drag & drop */
+const cmDrop=document.getElementById('cm-drop');
+const cmFile=document.getElementById('cm-file');
+cmDrop.addEventListener('dragover',e=>{ e.preventDefault(); cmDrop.classList.add('dragover'); });
+cmDrop.addEventListener('dragleave',()=>cmDrop.classList.remove('dragover'));
+cmDrop.addEventListener('drop',e=>{ e.preventDefault(); cmDrop.classList.remove('dragover'); const f=e.dataTransfer.files[0]; if(f&&f.type.startsWith('image/')) loadCMPreview(f); });
+cmFile.addEventListener('change',function(){ if(this.files[0]) loadCMPreview(this.files[0]); });
+function loadCMPreview(file){
+  const r=new FileReader(); r.onload=e=>{
+    pendingImg=e.target.result;
+    const p=document.getElementById('cm-preview'); p.src=pendingImg; p.style.display='block';
+    cmDrop.classList.add('has-file');
+    document.getElementById('cm-icon').style.display='none';
+    document.getElementById('cm-drop-p').textContent=file.name;
+    document.getElementById('cm-drop-s').style.display='none';
+  }; r.readAsDataURL(file);
 }
+document.getElementById('cm-modal').addEventListener('click',function(e){ if(e.target===this) closeCM(); });
 
-function publishCreation() {
-  const title = document.getElementById('nm-title').value.trim();
-  const desc  = document.getElementById('nm-desc').value.trim();
-  const type  = document.getElementById('nm-type').value.trim();
-  if (!title) { document.getElementById('nm-title').focus(); return; }
-  creations.push({ title, desc, type: type || 'Roblox Build', img: pendingImg });
-  saveCreations();
-  renderPublicGallery();
-  renderAdminGrid();
-  closeNewModal();
-}
+/* ═══════════════════════════════════════
+   REVIEWS
+   ═══════════════════════════════════════ */
+let rfRating = 0;
 
-/* drag & drop + file pick */
-const nmDrop = document.getElementById('nm-drop');
-const nmFile = document.getElementById('nm-file');
-
-nmDrop.addEventListener('dragover',  e => { e.preventDefault(); nmDrop.classList.add('dragover'); });
-nmDrop.addEventListener('dragleave', () => nmDrop.classList.remove('dragover'));
-nmDrop.addEventListener('drop', e => {
-  e.preventDefault();
-  nmDrop.classList.remove('dragover');
-  const f = e.dataTransfer.files[0];
-  if (f && f.type.startsWith('image/')) loadPreview(f);
+// Star picker
+document.querySelectorAll('.rf-star').forEach(s=>{
+  s.addEventListener('click',()=>{
+    rfRating=parseInt(s.dataset.v);
+    document.querySelectorAll('.rf-star').forEach((st,i)=>st.classList.toggle('on',i<rfRating));
+  });
+  s.addEventListener('mouseenter',()=>{
+    const v=parseInt(s.dataset.v);
+    document.querySelectorAll('.rf-star').forEach((st,i)=>st.classList.toggle('on',i<v));
+  });
 });
-nmFile.addEventListener('change', function() {
-  if (this.files[0]) loadPreview(this.files[0]);
+document.getElementById('rf-stars').addEventListener('mouseleave',()=>{
+  document.querySelectorAll('.rf-star').forEach((st,i)=>st.classList.toggle('on',i<rfRating));
 });
 
-function loadPreview(file) {
-  const r = new FileReader();
-  r.onload = e => {
-    pendingImg = e.target.result;
-    const preview = document.getElementById('nm-preview');
-    preview.src = pendingImg;
-    preview.style.display = 'block';
-    nmDrop.classList.add('has-file');
-    const icon = document.querySelector('.nm-drop-icon');
-    const p    = document.querySelector('.nm-drop p');
-    const sm   = document.querySelector('.nm-drop small');
-    if (icon) icon.style.display = 'none';
-    if (p)    p.textContent = file.name;
-    if (sm)   sm.style.display = 'none';
-  };
-  r.readAsDataURL(file);
+function submitReview(){
+  const name=document.getElementById('rf-name').value.trim();
+  const plan=document.getElementById('rf-plan').value;
+  const text=document.getElementById('rf-text').value.trim();
+  if(!name||!rfRating||!text){ alert(lang==='fr'?'Remplis au moins ton pseudo, les étoiles et ton avis !':'Fill in at least your name, stars and review!'); return; }
+  const id=Date.now()+'-'+Math.random().toString(36).slice(2,7);
+  const token=id; // user's "ownership token" stored in sessionStorage
+  reviews.push({ id, token, name, plan, text, rating:rfRating, date:new Date().toLocaleDateString('fr-FR') });
+  saveReviews();
+  // store token so user can delete their own
+  const myTokens=JSON.parse(sessionStorage.getItem('zrh7_my_reviews')||'[]');
+  myTokens.push(id); sessionStorage.setItem('zrh7_my_reviews',JSON.stringify(myTokens));
+  // reset form
+  document.getElementById('rf-name').value='';
+  document.getElementById('rf-plan').value='';
+  document.getElementById('rf-text').value='';
+  rfRating=0;
+  document.querySelectorAll('.rf-star').forEach(s=>s.classList.remove('on'));
+  renderReviews();
 }
 
-document.getElementById('new-modal').addEventListener('click', function(e) {
-  if (e.target === this) closeNewModal();
-});
-
-/* ══════════════════════════════════════════
-   AI CHAT ENGINE
-   ══════════════════════════════════════════ */
-let chatOpen = false;
-let msgCount = 0;
-let lastTopic = null;
-const chatCtx = []; // keeps last 4 exchanges for context
-
-function toggleChat() {
-  chatOpen = !chatOpen;
-  document.getElementById('chat-box').classList.toggle('open', chatOpen);
-  if (chatOpen) setTimeout(() => document.getElementById('chat-input').focus(), 200);
+function deleteReview(id){
+  const myTokens=JSON.parse(sessionStorage.getItem('zrh7_my_reviews')||'[]');
+  if(!myTokens.includes(id)){ alert(lang==='fr'?'Tu ne peux supprimer que ton propre avis.':'You can only delete your own review.'); return; }
+  reviews=reviews.filter(r=>r.id!==id); saveReviews(); renderReviews();
 }
 
-function addMsg(text, role) {
-  const msgs = document.getElementById('chat-msgs');
-  const d = document.createElement('div');
-  d.className = 'msg ' + (role === 'user' ? 'user' : 'bot');
-  // support line breaks
-  d.style.whiteSpace = 'pre-wrap';
-  d.textContent = text;
-  msgs.appendChild(d);
-  msgs.scrollTop = msgs.scrollHeight;
-  return d;
+function starsHTML(rating, size=16, cls='star'){
+  let h=''; for(let i=1;i<=5;i++) h+=`<span class="${cls}${i<=rating?' on':''}" style="font-size:${size}px">★</span>`; return h;
 }
 
-function showTyping() {
-  const msgs = document.getElementById('chat-msgs');
-  const d = document.createElement('div');
-  d.className = 'msg bot typing';
-  d.id = 'typing-indicator';
-  d.innerHTML = '<div class="tdot"></div><div class="tdot"></div><div class="tdot"></div>';
-  msgs.appendChild(d);
-  msgs.scrollTop = msgs.scrollHeight;
+function renderReviews(){
+  const g=document.getElementById('reviews-grid');
+  const myTokens=JSON.parse(sessionStorage.getItem('zrh7_my_reviews')||'[]');
+  g.innerHTML='';
+
+  if(!reviews.length){
+    g.innerHTML=`<div class="reviews-empty" style="grid-column:1/-1"><p>${lang==='fr'?'Pas encore d\'avis — sois le premier !':'No reviews yet — be the first!'}</p></div>`;
+    document.getElementById('avg-num').textContent='—';
+    document.getElementById('avg-stars').innerHTML='';
+    document.getElementById('reviews-count').textContent=lang==='fr'?'aucun avis':'no reviews yet';
+    return;
+  }
+
+  // Average
+  const avg=(reviews.reduce((a,r)=>a+r.rating,0)/reviews.length);
+  document.getElementById('avg-num').textContent=avg.toFixed(1);
+  document.getElementById('avg-stars').innerHTML=starsHTML(Math.round(avg));
+  document.getElementById('reviews-count').textContent=`${reviews.length} avis`;
+
+  // Cards (newest first)
+  [...reviews].reverse().forEach(r=>{
+    const isMine=myTokens.includes(r.id);
+    const card=document.createElement('div'); card.className='review-card';
+    card.innerHTML=`
+      <div class="rc-top">
+        <div>
+          <div class="rc-name">${escHtml(r.name)}</div>
+          ${r.plan?`<div class="rc-plan">${escHtml(r.plan)}</div>`:''}
+        </div>
+        <div style="display:flex;align-items:center;gap:10px">
+          <div class="rc-stars">${starsHTML(r.rating,14,'rc-star')}</div>
+          ${isMine?`<button class="rc-del" onclick="deleteReview('${r.id}')" title="${lang==='fr'?'Supprimer mon avis':'Delete my review'}">✕</button>`:''}
+        </div>
+      </div>
+      <div class="rc-text">${escHtml(r.text)}</div>
+      <div class="rc-date">${r.date||''}</div>`;
+    g.appendChild(card);
+  });
 }
-function hideTyping() {
-  const t = document.getElementById('typing-indicator');
-  if (t) t.remove();
+function escHtml(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+/* ═══════════════════════════════════════
+   AI CHAT — FULL NLP ENGINE
+   ═══════════════════════════════════════ */
+let chatOpen=false, msgCount=0, lastIntent=null;
+
+function toggleChat(){
+  chatOpen=!chatOpen;
+  document.getElementById('chat-box').classList.toggle('open',chatOpen);
+  if(chatOpen) setTimeout(()=>document.getElementById('chat-input').focus(),200);
 }
+function addMsg(text,role){
+  const msgs=document.getElementById('chat-msgs');
+  const d=document.createElement('div'); d.className='msg '+role;
+  d.style.whiteSpace='pre-wrap'; d.textContent=text;
+  msgs.appendChild(d); msgs.scrollTop=msgs.scrollHeight;
+}
+function showTyping(){ const msgs=document.getElementById('chat-msgs'); const d=document.createElement('div'); d.className='msg bot typing'; d.id='typing-indicator'; d.innerHTML='<div class="tdot"></div><div class="tdot"></div><div class="tdot"></div>'; msgs.appendChild(d); msgs.scrollTop=msgs.scrollHeight; }
+function hideTyping(){ const t=document.getElementById('typing-indicator'); if(t) t.remove(); }
 
-/* ── NORMALISE ── */
-const norm = s => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/['']/g,"'");
+// ── NLP CORE ──
+const N = s => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[''´`]/g,"'");
+const pick = a => a[Math.floor(Math.random()*a.length)];
 
-/* ── KNOWLEDGE BASE ── */
-const KB = {
-  greet: {
-    keys: ['bonjour','salut','hello','hi','hey','coucou','bonsoir','yo','wesh','bah','bien le','good morning','good evening','good afternoon','howdy','sup','what\'s up','whats up'],
-    fr: [
-      'Salut ! 👋 Bienvenue sur le portfolio de Zayrho7. Je suis son assistant — pose-moi n\'importe quelle question sur ses services, tarifs ou délais !',
-      'Hey ! Content de te voir ici 😄 Tu cherches à faire construire une map Roblox ? Je suis là pour t\'aider !',
-      'Bonjour ! Je suis l\'assistant de Zayrho7. Dis-moi ce dont tu as besoin et je t\'aide à trouver la bonne formule !',
-      'Yo ! T\'es au bon endroit si tu cherches un Roblox Builder sérieux. Comment je peux t\'aider ?',
-      'Salut ! Tu veux en savoir plus sur Zayrho7 ? Tarifs, délais, types de maps... demande-moi tout !'
-    ],
-    en: [
-      'Hey! 👋 Welcome to Zayrho7\'s portfolio. I\'m his assistant — ask me anything about his services, pricing or deadlines!',
-      'Hello! Great to have you here 😄 Looking to get a Roblox map built? I\'m here to help!',
-      'Hi there! I\'m Zayrho7\'s assistant. Tell me what you need and I\'ll help you find the right plan!',
-      'Hey! You\'re in the right place if you\'re looking for a serious Roblox Builder. How can I help?'
-    ]
+// Intent scoring: each intent has weighted patterns
+const INTENTS = [
+  { id:'greet',   score:0, patterns:[['salut','bonjour','hello','hi','hey','coucou','bonsoir','yo','wesh','bah']] },
+  { id:'price',   score:0, patterns:[['prix','tarif','coute','coût','combien','cout','budget','formule','plan','offre','package','option','payer','payment','how much','cost','pricing']] },
+  { id:'starter', score:0, patterns:[['starter','20','simple','basique','basic','debutant','debut','petit projet','premier']] },
+  { id:'pro',     score:0, patterns:[['pro','populaire','popular','45','milieu','intermediaire']] },
+  { id:'elite',   score:0, patterns:[['elite','150','complet','full','monde entier','premium','illimite','max']] },
+  { id:'custom',  score:0, patterns:[['mesure','custom','devis','studio','entreprise','equipe','gros projet','contrat','nda']] },
+  { id:'robux',   score:0, patterns:[['robux','r$','rb','rbx','roblox money']] },
+  { id:'delay',   score:0, patterns:[['delai','livraison','temps','quand','rapide','vite','long','durée','jours','semaine','deadline','delivery','fast','urgent']] },
+  { id:'contact', score:0, patterns:[['contact','discord','commander','commande','joindre','parler','ecrire','dm','message','reach','order','hire','start','lancer']] },
+  { id:'revision',score:0, patterns:[['revision','modifier','modification','corriger','retouche','feedback','ajustement']] },
+  { id:'maptype', score:0, patterns:[['map','type','genre','quoi','sorte','build','categorie']] },
+  { id:'rp',      score:0, patterns:[['rp','roleplay','role play','ville','quartier','interieur','maison','rue','city']] },
+  { id:'obby',    score:0, patterns:[['obby','obstacle','parcours','platformer','jump','saut','course']] },
+  { id:'simul',   score:0, patterns:[['simulateur','simulator','tycoon','farming','pet','idle','click']] },
+  { id:'optim',   score:0, patterns:[['optim','performance','lag','fps','serveur','fluide','smooth','freeze','lourd']] },
+  { id:'atmo',    score:0, patterns:[['ambiance','atmosphere','lore','lumiere','lighting','texture','visuel','beau','esthetique','joli']] },
+  { id:'exp',     score:0, patterns:[['experience','depuis','ans','annee','projets','clients','portfolio','skill','competence']] },
+  { id:'avail',   score:0, patterns:[['disponible','dispo','libre','occupe','pris','place','slot']] },
+  { id:'source',  score:0, patterns:[['source','fichier','rbxl','file']] },
+  { id:'pay',     score:0, patterns:[['paiement','payer','virement','paypal','methode','comment payer','how to pay']] },
+  { id:'who',     score:0, patterns:[['qui est','zayrho','builder','createur','auteur','cest qui','presenta']] },
+  { id:'thanks',  score:0, patterns:[['merci','thanks','parfait','super','cool','nickel','top','genial','ok','okay','great','amazing','bonne journee']] },
+  { id:'help',    score:0, patterns:[['aide','help','sais pas','quoi choisir','conseil','recommande','guide','which plan']] },
+  { id:'cheap',   score:0, patterns:[['cher','trop cher','expensive','pas les moyens','discount','reduction','negocier','negociation']] },
+];
+
+const ANSWERS = {
+  greet:{
+    fr:['Salut ! 👋 Bienvenue sur le portfolio de Zayrho7. Tu peux me demander tout ce que tu veux — tarifs, délais, types de maps, contact !',
+        'Hey ! Content de te voir ici 😄 Une question sur les services de Zayrho7 ? Je suis là !',
+        'Bonjour ! Tu cherches un Roblox Builder sérieux ? Je vais t\'aider à trouver ce qu\'il te faut 🎮'],
+    en:["Hey! 👋 Welcome to Zayrho7's portfolio. Ask me anything — pricing, deadlines, map types, contact!",
+        "Hello! Looking for a serious Roblox Builder? I'm here to help you find what you need 🎮"]
   },
-
-  prices_all: {
-    keys: ['prix','tarif','cout','coute','combien','formule','offre','plan','package','option','budget','investissement','payer','payment','price','pricing','how much','cost','expensive','cheap','afford'],
-    fr: [
-      'Voici les 4 formules de Zayrho7 👇\n\n🔹 Starter — 20€ / 4 500 R$\n   1 map personnalisée, thème au choix, 2 révisions\n\n🔸 Pro — 45€ / 7 500 R$ ⭐ populaire\n   Map détaillée & optimisée, ambiance/lore, 4 révisions, livraison 7j\n\n🔶 Elite — 150€ / 25 000 R$\n   Monde entier, level design narratif, révisions illimitées, fichiers sources\n\n🔷 Sur mesure — Prix à discuter\n   Projet studio, contrat pro, NDA possible\n\nTu veux qu\'on rentre dans les détails d\'une formule ?',
-      'Les tarifs de Zayrho7 sont clairs et fixes 💰\n\n• Starter : 20€ ou 4 500 Robux — idéal pour débuter\n• Pro : 45€ ou 7 500 Robux — le plus choisi ⭐\n• Elite : 150€ ou 25 000 Robux — le full package\n• Sur mesure : devis personnalisé pour les gros projets\n\nTu peux aussi switcher entre € et R$ en haut de la page !'
-    ],
-    en: [
-      'Here are Zayrho7\'s 4 plans 👇\n\n🔹 Starter — €20 / 4,500 R$\n   1 custom map, theme of choice, 2 revisions\n\n🔸 Pro — €45 / 7,500 R$ ⭐ most popular\n   Detailed & optimized map, atmosphere/lore, 4 revisions, 7-day delivery\n\n🔶 Elite — €150 / 25,000 R$\n   Full world, narrative level design, unlimited revisions, source files\n\n🔷 Custom — Price on request\n   Studio project, professional contract, NDA possible\n\nWant details on any specific plan?',
-      'Zayrho7\'s pricing is clear and fixed 💰\n\n• Starter: €20 or 4,500 Robux — perfect for simple projects\n• Pro: €45 or 7,500 Robux — most popular ⭐\n• Elite: €150 or 25,000 Robux — the full package\n• Custom: personalized quote for large projects\n\nYou can also switch between € and R$ at the top of the page!'
-    ]
+  price:{
+    fr:['Zayrho7 propose 4 formules 💰\n\n🔹 Starter — 20€ / 4 500 R$\n   1 map, thème au choix, 2 révisions\n\n🔸 Pro — 45€ / 7 500 R$ ⭐ populaire\n   Map détaillée, ambiance/lore, 4 révisions, livraison 7j\n\n🔶 Elite — 150€ / 25 000 R$\n   Monde entier, révisions illimitées, fichiers sources\n\n🔷 Sur mesure — à discuter\n   Studio, contrat pro, NDA\n\nTu veux les détails d\'une formule en particulier ?',
+       'Les tarifs de Zayrho7 sont clairs :\n• Starter : 20€ ou 4 500 Robux\n• Pro : 45€ ou 7 500 Robux ⭐\n• Elite : 150€ ou 25 000 Robux\n• Sur mesure : devis personnalisé\n\nSwitche entre € et R$ en haut de la page tarifs !'],
+    en:["Zayrho7 offers 4 plans 💰\n\n🔹 Starter — €20 / 4,500 R$\n   1 map, theme of choice, 2 revisions\n\n🔸 Pro — €45 / 7,500 R$ ⭐ popular\n   Detailed map, lore, 4 revisions, 7-day delivery\n\n🔶 Elite — €150 / 25,000 R$\n   Full world, unlimited revisions, source files\n\n🔷 Custom — on request\n   Studio, pro contract, NDA\n\nWant details on a specific plan?"]
   },
-
-  starter: {
-    keys: ['starter','debutant','petit projet','simple','basic','basique','premier','first'],
-    fr: [
-      'Le plan Starter à 20€ (4 500 R$) c\'est parfait pour démarrer 🙂\n\nCe qu\'il inclut :\n✅ 1 map personnalisée\n✅ Thème au choix\n✅ 2 révisions incluses\n\nC\'est idéal pour un obby simple, une petite map RP ou un premier projet Roblox. Intéressé ?',
-      'Starter = 20€ ou 4 500 Robux. Simple, propre, efficace ✔️\n\nTu as 1 map sur mesure avec le thème que tu veux et 2 aller-retours de modifications. Pour les petits budgets ou les projets simples, c\'est la formule parfaite !'
-    ],
-    en: [
-      'The Starter plan at €20 (4,500 R$) is perfect to get started 🙂\n\nWhat\'s included:\n✅ 1 custom map\n✅ Theme of your choice\n✅ 2 revisions included\n\nGreat for a simple obby, small RP map or first Roblox project. Interested?',
-      'Starter = €20 or 4,500 Robux. Simple, clean, effective ✔️\n\nYou get 1 custom map with the theme you want and 2 rounds of modifications. For smaller budgets or simple projects, this is the perfect plan!'
-    ]
+  starter:{
+    fr:['Le plan Starter à 20€ (4 500 R$) c\'est parfait pour débuter 🙂\n\n✅ 1 map personnalisée\n✅ Thème au choix\n✅ 2 révisions incluses\n\nIdéal pour un obby simple, une petite map RP ou un premier projet Roblox !',
+        'Starter = 20€ ou 4 500 Robux. Simple et efficace ✔️\n\n1 map sur mesure avec ton thème + 2 révisions. Le bon point de départ pour les petits budgets ou projets simples.'],
+    en:["Starter plan at €20 (4,500 R$) is perfect to get started 🙂\n\n✅ 1 custom map\n✅ Theme of your choice\n✅ 2 revisions\n\nGreat for a simple obby, small RP map or first Roblox project!"]
   },
-
-  pro: {
-    keys: ['pro','populaire','popular','milieu','medium','intermediaire','intermédiaire','moyen'],
-    fr: [
-      'Le plan Pro à 45€ (7 500 R$), c\'est le plus choisi et pour une bonne raison ⭐\n\nCe qu\'il inclut :\n✅ Map détaillée & optimisée\n✅ Ambiance & lore inclus\n✅ 4 révisions\n✅ Livraison en 7 jours\n\nParfait pour des maps RP élaborées, des simulateurs ou des projets avec une vraie identité visuelle. C\'est le sweet spot qualité/prix !',
-      'Le Pro c\'est 45€ / 7 500 R$ et c\'est honnêtement le meilleur rapport qualité-prix 💎\n\nAvec l\'ambiance et le lore inclus, ta map aura une vraie identité. Tu as 4 révisions pour peaufiner chaque détail et la livraison se fait en 7 jours max.'
-    ],
-    en: [
-      'The Pro plan at €45 (7,500 R$) is the most popular for a good reason ⭐\n\nWhat\'s included:\n✅ Detailed & optimized map\n✅ Atmosphere & lore included\n✅ 4 revisions\n✅ 7-day delivery\n\nPerfect for elaborate RP maps, simulators or projects with a real visual identity. It\'s the best value for money!',
-      'Pro is €45 / 7,500 R$ and honestly the best quality-price ratio 💎\n\nWith atmosphere and lore included, your map will have a real identity. You get 4 revisions to perfect every detail and delivery within 7 days max.'
-    ]
+  pro:{
+    fr:['Le plan Pro à 45€ (7 500 R$), le plus choisi et pour une bonne raison ⭐\n\n✅ Map détaillée & optimisée\n✅ Ambiance & lore inclus\n✅ 4 révisions\n✅ Livraison 7 jours\n\nParfait pour des maps RP élaborées, des simulateurs ou tout projet avec une vraie identité visuelle !',
+        'Pro = 45€ / 7 500 R$ — le meilleur rapport qualité-prix 💎\n\nAvec l\'ambiance et le lore inclus, ta map a une vraie identité. 4 révisions pour peaufiner, livré en 7 jours.'],
+    en:["Pro plan at €45 (7,500 R$), most popular for good reason ⭐\n\n✅ Detailed & optimized map\n✅ Atmosphere & lore included\n✅ 4 revisions\n✅ 7-day delivery\n\nPerfect for elaborate RP maps, simulators or any project with real visual identity!"]
   },
-
-  elite: {
-    keys: ['elite','complet','full','monde entier','full world','gros projet','big project','illimite','illimité','unlimited','max','premium'],
-    fr: [
-      'Le plan Elite à 150€ (25 000 R$), c\'est le package complet 🔥\n\nCe qu\'il inclut :\n✅ Zone / monde entier\n✅ Level design narratif\n✅ Révisions illimitées\n✅ Support post-livraison\n✅ Fichiers sources inclus\n\nPour les projets ambitieux — un vrai monde Roblox avec une histoire, une cohérence visuelle et un suivi après livraison. Le top niveau !',
-      'Elite = 150€ ou 25 000 Robux. Le niveau maximum 👑\n\nTu veux un monde entier bien construit avec un level design pensé pour le gameplay ? C\'est ce plan qu\'il te faut. Révisions illimitées, fichiers sources, support après livraison — tout est inclus.'
-    ],
-    en: [
-      'The Elite plan at €150 (25,000 R$) is the complete package 🔥\n\nWhat\'s included:\n✅ Full zone / entire world\n✅ Narrative level design\n✅ Unlimited revisions\n✅ Post-delivery support\n✅ Source files included\n\nFor ambitious projects — a real Roblox world with a story, visual consistency and after-delivery support. Top level!',
-      'Elite = €150 or 25,000 Robux. Maximum level 👑\n\nWant a fully built world with gameplay-driven level design? This is the plan. Unlimited revisions, source files, post-delivery support — all included.'
-    ]
+  elite:{
+    fr:['Le plan Elite à 150€ (25 000 R$), le package complet 🔥\n\n✅ Zone / monde entier\n✅ Level design narratif\n✅ Révisions illimitées ♾️\n✅ Support post-livraison\n✅ Fichiers sources inclus\n\nPour les projets ambitieux — un vrai monde Roblox avec une histoire et un suivi après livraison !'],
+    en:["Elite plan at €150 (25,000 R$), the complete package 🔥\n\n✅ Full zone / entire world\n✅ Narrative level design\n✅ Unlimited revisions ♾️\n✅ Post-delivery support\n✅ Source files included\n\nFor ambitious projects — a real Roblox world with story and after-delivery follow-up!"]
   },
-
-  custom: {
-    keys: ['sur mesure','custom','personnalise','personnalisé','studio','entreprise','company','gros','studio','label','team','equipe','équipe','devis','quote'],
-    fr: [
-      'Le plan Sur Mesure c\'est pour les projets d\'envergure — studios, équipes, projets complexes 🏢\n\nCe que ça inclut :\n✅ Brief personnalisé\n✅ Collaboration en équipe\n✅ Livraisons par étapes\n✅ Contrat professionnel\n✅ NDA possible\n\nLe prix se discute selon la portée du projet. Contacte Zayrho7 directement sur Discord : zayrho7',
-      'Pour les gros projets ou les studios, la formule Sur Mesure est faite pour toi. Prix à définir ensemble, contrat pro, NDA possible — tout est négociable. Envoie un message sur Discord (zayrho7) pour démarrer la discussion !'
-    ],
-    en: [
-      'The Custom plan is for large-scale projects — studios, teams, complex builds 🏢\n\nWhat\'s included:\n✅ Personalized brief\n✅ Team collaboration\n✅ Staged deliveries\n✅ Professional contract\n✅ NDA possible\n\nPrice is discussed based on scope. Contact Zayrho7 directly on Discord: zayrho7',
-      'For large projects or studios, the Custom plan is made for you. Price defined together, pro contract, NDA possible — everything is negotiable. Send a message on Discord (zayrho7) to start the discussion!'
-    ]
+  custom:{
+    fr:['Le plan Sur Mesure pour les projets d\'envergure 🏢\n\n✅ Brief personnalisé\n✅ Collaboration en équipe\n✅ Livraisons par étapes\n✅ Contrat professionnel\n✅ NDA possible\n\nPrix à discuter selon la portée. Contacte Zayrho7 sur Discord : zayrho7'],
+    en:["Custom plan for large-scale projects 🏢\n\n✅ Personalized brief\n✅ Team collaboration\n✅ Staged deliveries\n✅ Pro contract\n✅ NDA possible\n\nPrice discussed based on scope. Contact Zayrho7 on Discord: zayrho7"]
   },
-
-  robux: {
-    keys: ['robux','r$','roblox money','monnaie roblox','rb','rbx'],
-    fr: [
-      'Oui, Zayrho7 accepte les Robux 🎮\n\nLes prix en R$ :\n• Starter : 4 500 R$\n• Pro : 7 500 R$\n• Elite : 25 000 R$\n• Sur mesure : à discuter\n\nTu peux switcher entre € et R$ directement sur la page tarifs !',
-      'Paiement en Robux accepté ! Les tarifs en R$ :\n\n4 500 → Starter | 7 500 → Pro ⭐ | 25 000 → Elite\n\nContacte Zayrho7 sur Discord (zayrho7) pour organiser le paiement.'
-    ],
-    en: [
-      'Yes, Zayrho7 accepts Robux 🎮\n\nPrices in R$:\n• Starter: 4,500 R$\n• Pro: 7,500 R$\n• Elite: 25,000 R$\n• Custom: on request\n\nYou can switch between € and R$ directly on the pricing page!',
-      'Robux payment accepted! Prices in R$:\n\n4,500 → Starter | 7,500 → Pro ⭐ | 25,000 → Elite\n\nContact Zayrho7 on Discord (zayrho7) to arrange payment.'
-    ]
+  robux:{
+    fr:['Oui, Zayrho7 accepte les Robux 🎮\n\n• Starter : 4 500 R$\n• Pro : 7 500 R$\n• Elite : 25 000 R$\n• Sur mesure : à discuter\n\nContacte-le sur Discord (zayrho7) pour organiser le paiement !'],
+    en:['Yes, Zayrho7 accepts Robux 🎮\n\n• Starter: 4,500 R$\n• Pro: 7,500 R$\n• Elite: 25,000 R$\n• Custom: on request\n\nContact him on Discord (zayrho7) to arrange payment!']
   },
-
-  delay: {
-    keys: ['délai','delai','livraison','livrer','rapide','vite','quand','long','duree','durée','jour','semaine','time','deadline','delivery','fast','quick','soon','urgence','urgent'],
-    fr: [
-      'Zayrho7 livre en moyenne en 5 à 7 jours ⏱️\n\nCela dépend de la complexité :\n• Starter : souvent 2-4 jours\n• Pro : 5-7 jours\n• Elite : 7-14 jours selon l\'envergure\n• Sur mesure : à définir ensemble\n\nIl te donne toujours une estimation précise avant de commencer. Pas de mauvaises surprises !',
-      'Les délais sont clairs 📅\n\nStarter → 2 à 4 jours\nPro → 5 à 7 jours\nElite → 7 à 14 jours\nSur mesure → selon le brief\n\nSi tu as une date limite précise, dis-le à Zayrho7 sur Discord, il fera son maximum pour la respecter !',
-      'En moyenne 5 à 7 jours. Pour les projets urgents, Zayrho7 peut s\'adapter — parles-en directement sur Discord (zayrho7). Il ne prend un projet que s\'il est sûr de le livrer dans les temps ✅'
-    ],
-    en: [
-      'Zayrho7 delivers in 5 to 7 days on average ⏱️\n\nDepends on complexity:\n• Starter: often 2-4 days\n• Pro: 5-7 days\n• Elite: 7-14 days depending on scope\n• Custom: to be defined together\n\nHe always gives you a precise estimate before starting. No bad surprises!',
-      'Clear timelines 📅\n\nStarter → 2 to 4 days\nPro → 5 to 7 days\nElite → 7 to 14 days\nCustom → based on brief\n\nIf you have a specific deadline, tell Zayrho7 on Discord, he\'ll do his best to meet it!',
-      'Average 5 to 7 days. For urgent projects, Zayrho7 can adapt — discuss it directly on Discord (zayrho7). He only takes a project if he\'s confident he can deliver on time ✅'
-    ]
+  delay:{
+    fr:['Les délais de Zayrho7 ⏱️\n\n• Starter → 2 à 4 jours\n• Pro → 5 à 7 jours\n• Elite → 7 à 14 jours\n• Sur mesure → à définir\n\nIl donne toujours une estimation précise avant de commencer. Si t\'as une deadline, dis-le lui sur Discord !',
+        'En moyenne 5 à 7 jours 📅 Pour les urgences, parles-en directement sur Discord (zayrho7). Il ne prend un projet que s\'il est sûr de tenir les délais ✅'],
+    en:["Zayrho7's deadlines ⏱️\n\n• Starter → 2 to 4 days\n• Pro → 5 to 7 days\n• Elite → 7 to 14 days\n• Custom → to define\n\nAlways gives a precise estimate upfront. Have a deadline? Tell him on Discord!"]
   },
-
-  contact: {
-    keys: ['contact','discord','contacter','commander','commande','dm','message','joindre','parler','ecrire','écrire','reach','order','hire','book','start','commencer','lancer','demarrer','démarrer'],
-    fr: [
-      'Pour contacter Zayrho7, le plus simple c\'est Discord 💬\n\n👉 zayrho7\n\nIl répond en moins de 24h. Tu peux aussi envoyer un mail ou aller sur son profil Roblox — les liens sont en bas du portfolio !',
-      'La meilleure façon de démarrer un projet, c\'est d\'envoyer un message sur Discord : zayrho7 📩\n\nExplique ton projet (type de map, thème, budget) et il te répondra avec une estimation et ses disponibilités. Simple et rapide !',
-      'Discord : zayrho7 🎮\n\nC\'est son contact préféré. Il répond généralement dans la journée. Prépare une petite description de ton projet pour gagner du temps — type de map, ambiance souhaitée, délai si tu en as un !'
-    ],
-    en: [
-      'To contact Zayrho7, the easiest way is Discord 💬\n\n👉 zayrho7\n\nHe replies within 24h. You can also email him or visit his Roblox profile — links are at the bottom of the portfolio!',
-      'The best way to start a project is to send a message on Discord: zayrho7 📩\n\nExplain your project (map type, theme, budget) and he\'ll reply with an estimate and his availability. Simple and quick!',
-      'Discord: zayrho7 🎮\n\nThat\'s his preferred contact. He usually replies the same day. Prepare a short description of your project to save time — map type, desired atmosphere, deadline if you have one!'
-    ]
+  contact:{
+    fr:['Pour contacter Zayrho7, le plus simple c\'est Discord 💬\n\n👉 zayrho7\n\nIl répond en moins de 24h. Tu peux aussi scroller jusqu\'en bas pour voir tous ses contacts !',
+        'Discord : zayrho7 🎮 Son contact préféré. Prépare une petite description de ton projet — type de map, ambiance souhaitée, budget — pour gagner du temps !'],
+    en:["Contact Zayrho7 on Discord 💬\n\n👉 zayrho7\n\nHe replies within 24h. You can also scroll to the bottom to see all contacts!"]
   },
-
-  revisions: {
-    keys: ['revision','révision','modifier','modification','changer','change','corriger','correction','retouche','ajustement','feedback','retour'],
-    fr: [
-      'Les révisions incluses selon le plan ✏️\n\n• Starter : 2 révisions\n• Pro : 4 révisions\n• Elite : révisions illimitées ♾️\n• Sur mesure : à définir\n\nChaque révision = un aller-retour où tu donnes tes retours et Zayrho7 effectue les modifications demandées. Des révisions supplémentaires peuvent être ajoutées.',
-      'C\'est important les révisions ! Voici le détail :\n\n2 révisions avec le Starter, 4 avec le Pro, illimitées avec l\'Elite 🔁\n\nPour les plans Starter et Pro, des révisions supplémentaires peuvent être négociées en supplément. Contacte Zayrho7 sur Discord pour en discuter !'
-    ],
-    en: [
-      'Included revisions by plan ✏️\n\n• Starter: 2 revisions\n• Pro: 4 revisions\n• Elite: unlimited revisions ♾️\n• Custom: to be defined\n\nEach revision = one round where you give feedback and Zayrho7 makes the requested changes. Extra revisions can be added.',
-      'Revisions matter! Here\'s the breakdown:\n\n2 revisions with Starter, 4 with Pro, unlimited with Elite 🔁\n\nFor Starter and Pro plans, extra revisions can be negotiated for an additional fee. Contact Zayrho7 on Discord to discuss!'
-    ]
+  revision:{
+    fr:['Les révisions incluses ✏️\n\n• Starter : 2 révisions\n• Pro : 4 révisions\n• Elite : illimitées ♾️\n• Sur mesure : à définir\n\nChaque révision = un aller-retour de modifications selon tes retours. Des révisions supplémentaires sont possibles en supplément.'],
+    en:['Included revisions ✏️\n\n• Starter: 2\n• Pro: 4\n• Elite: unlimited ♾️\n• Custom: to define\n\nEach revision = one round of changes based on your feedback. Extra revisions can be added.']
   },
-
-  maptype: {
-    keys: ['map','type','genre','sorte','categorie','catégorie','quoi','what','kind','quel type','quel genre'],
-    fr: [
-      'Zayrho7 crée tous types de maps Roblox 🗺️\n\n🏙️ Maps RP — villes, quartiers, intérieurs\n🏃 Obby — parcours originaux, thèmes variés\n🎮 Simulateur — environnements immersifs\n⚔️ Aventure / Action — donjons, arènes, mondes\n🌍 Monde ouvert — exploration, lore profond\n🏆 Compétitif — maps PvP, courses\n\nTu as un type de projet en tête ? Dis-le moi et je t\'oriente vers la bonne formule !',
-      'Il peut tout faire : RP, obby, simulateur, aventure, monde ouvert, maps PvP... 🎯\n\nChaque projet est unique et construit sur mesure. Dis-moi ce que tu veux créer et je t\'aide à choisir le bon plan !'
-    ],
-    en: [
-      'Zayrho7 creates all types of Roblox maps 🗺️\n\n🏙️ RP Maps — cities, districts, interiors\n🏃 Obby — original courses, varied themes\n🎮 Simulator — immersive environments\n⚔️ Adventure / Action — dungeons, arenas, worlds\n🌍 Open world — exploration, deep lore\n🏆 Competitive — PvP maps, races\n\nHave a project type in mind? Tell me and I\'ll point you to the right plan!',
-      'He can do it all: RP, obby, simulator, adventure, open world, PvP maps... 🎯\n\nEvery project is unique and custom-built. Tell me what you want to create and I\'ll help you pick the right plan!'
-    ]
+  maptype:{
+    fr:['Zayrho7 crée tous types de maps Roblox 🗺️\n\n🏙️ Maps RP — villes, intérieurs, ambiances\n🏃 Obby — parcours originaux thématiques\n🎮 Simulateur / Tycoon — environnements immersifs\n⚔️ Aventure / Action — donjons, arènes\n🌍 Monde ouvert — exploration, lore profond\n🏆 PvP / Compétitif — maps de combat\n\nTu as un projet en tête ? Dis-moi le type et je t\'oriente !'],
+    en:['Zayrho7 creates all Roblox map types 🗺️\n\n🏙️ RP Maps — cities, interiors, atmospheres\n🏃 Obby — themed obstacle courses\n🎮 Simulator/Tycoon — immersive environments\n⚔️ Adventure/Action — dungeons, arenas\n🌍 Open world — exploration, deep lore\n🏆 PvP/Competitive — combat maps\n\nHave a project in mind? Tell me the type and I\'ll guide you!']
   },
-
-  rp: {
-    keys: ['rp','roleplay','role play','ville','city','quarter','quartier','interieur','intérieur','maison','house','building','immeuble','rue','street'],
-    fr: [
-      'Les maps RP c\'est l\'une des spécialités de Zayrho7 🏙️\n\nVilles détaillées, quartiers distincts, intérieurs réalistes, ambiance jour/nuit... Il crée des environnements qui donnent vraiment envie d\'y jouer et de roleplay.\n\nPour un projet RP, le plan Pro (45€) ou Elite (150€) est recommandé selon la taille.',
-      'Pour un jeu RP, Zayrho7 est vraiment dans son élément 💪 Environnements cohérents, lore visuel, ambiances soignées — chaque zone a son identité propre. Le plan Pro est idéal pour ça !'
-    ],
-    en: [
-      'RP maps are one of Zayrho7\'s specialties 🏙️\n\nDetailed cities, distinct districts, realistic interiors, day/night atmosphere... He creates environments that make you actually want to play and roleplay.\n\nFor an RP project, the Pro (€45) or Elite (€150) plan is recommended depending on size.',
-      'For an RP game, Zayrho7 is really in his element 💪 Coherent environments, visual lore, polished atmospheres — each area has its own identity. The Pro plan is ideal for this!'
-    ]
+  rp:{
+    fr:['Les maps RP c\'est l\'une des spécialités de Zayrho7 🏙️\n\nVilles détaillées, quartiers distincts, intérieurs réalistes, ambiance jour/nuit... Des environnements qui donnent vraiment envie de jouer et de roleplay.\n\nPlan recommandé : Pro (45€) ou Elite (150€) selon la taille.'],
+    en:["RP maps are one of Zayrho7's specialties 🏙️\n\nDetailed cities, distinct districts, realistic interiors, day/night atmosphere... Environments that make you want to play and roleplay.\n\nRecommended: Pro (€45) or Elite (€150) depending on size."]
   },
-
-  obby: {
-    keys: ['obby','obstacle','parcours','course','platformer','jump','saut','plateforme'],
-    fr: [
-      'Pour un obby, Zayrho7 crée des parcours originaux avec de vrais thèmes visuels 🏃\n\nScience-fiction, naturel, industriel, fantasy... Le niveau de difficulté et l\'esthétique sont définis avec toi. Le plan Starter (20€) convient pour un obby basique, Pro pour quelque chose de plus élaboré !',
-      'Obby ? Pas de souci 😄 Zayrho7 maîtrise les parcours à obstacles originaux. Il travaille avec toi sur le thème, la difficulté, la progression... Starter pour petit budget, Pro pour plus de détails !'
-    ],
-    en: [
-      'For an obby, Zayrho7 creates original courses with real visual themes 🏃\n\nSci-fi, natural, industrial, fantasy... Difficulty level and aesthetic are defined with you. Starter plan (€20) works for a basic obby, Pro for something more elaborate!',
-      'Obby? No problem 😄 Zayrho7 masters original obstacle courses. He works with you on theme, difficulty, progression... Starter for tight budget, Pro for more detail!'
-    ]
+  obby:{
+    fr:['Pour un obby, Zayrho7 crée des parcours originaux avec de vrais thèmes visuels 🏃\n\nSci-fi, fantasy, industriel, naturel... Difficulté et esthétique définies avec toi. Starter pour basique, Pro pour plus élaboré !'],
+    en:["For an obby, Zayrho7 creates original courses with real visual themes 🏃\n\nSci-fi, fantasy, industrial, nature... Difficulty and aesthetic defined with you. Starter for basic, Pro for more elaborate!"]
   },
-
-  simulator: {
-    keys: ['simulateur','simulator','simul','farming','tycoon','mining','pet','clicke','click','idle'],
-    fr: [
-      'Pour un simulateur, l\'environnement visuel est super important — c\'est ce qui fidélise les joueurs 🎮\n\nZayrho7 construit des mondes optimisés pour les simulateurs : zones de spawn, biomes, zones de jeu claires... Le plan Pro ou Elite selon la taille du monde !',
-      'Simulateurs, tycoons, farming games... Zayrho7 sait créer des environnements qui servent vraiment le gameplay. Bien construit, bien optimisé, bien rendu. Pro ou Elite recommandé 👍'
-    ],
-    en: [
-      'For a simulator, the visual environment is super important — it\'s what keeps players coming back 🎮\n\nZayrho7 builds worlds optimized for simulators: spawn zones, biomes, clear play areas... Pro or Elite plan depending on world size!',
-      'Simulators, tycoons, farming games... Zayrho7 knows how to create environments that truly serve the gameplay. Well built, well optimized, well rendered. Pro or Elite recommended 👍'
-    ]
+  simul:{
+    fr:['Pour un simulateur, l\'environnement visuel est crucial — c\'est ce qui fidélise les joueurs 🎮\n\nZayrho7 construit des mondes optimisés : zones de spawn, biomes, zones de jeu claires. Pro ou Elite selon l\'envergure.'],
+    en:["For a simulator, the visual environment is crucial — it keeps players engaged 🎮\n\nZayrho7 builds optimized worlds: spawn zones, biomes, clear play areas. Pro or Elite depending on scope."]
   },
-
-  optimization: {
-    keys: ['optimis','optim','performance','lag','lagger','fps','serveur','server','lourd','heavy','fluide','smooth','freeze'],
-    fr: [
-      'L\'optimisation c\'est une priorité pour Zayrho7 ⚡\n\nSes maps sont pensées pour être fluides même avec beaucoup de joueurs simultanés : gestion des instances, LOD, assets optimisés, découpage intelligent des zones.\n\nLes plans Pro, Elite et Sur mesure incluent une optimisation poussée. Le Starter reste propre aussi !',
-      'Pas de lag avec Zayrho7 😤 Il optimise chaque build pour que les performances soient au top, peu importe le nombre de joueurs. Une map belle ET fluide, c\'est possible !'
-    ],
-    en: [
-      'Optimization is a priority for Zayrho7 ⚡\n\nHis maps are designed to run smoothly even with many simultaneous players: instance management, LOD, optimized assets, smart zone partitioning.\n\nPro, Elite and Custom plans include thorough optimization. Starter stays clean too!',
-      'No lag with Zayrho7 😤 He optimizes every build so performance is top-notch, regardless of player count. A beautiful AND smooth map — it\'s possible!'
-    ]
+  optim:{
+    fr:['L\'optimisation est une priorité pour Zayrho7 ⚡\n\nMaps fluides même avec beaucoup de joueurs : gestion des instances, LOD, assets optimisés. Plans Pro, Elite et Sur mesure incluent une optimisation poussée.'],
+    en:["Optimization is a priority for Zayrho7 ⚡\n\nSmooth maps even with many players: instance management, LOD, optimized assets. Pro, Elite and Custom plans include thorough optimization."]
   },
-
-  atmosphere: {
-    keys: ['ambiance','atmosphere','lore','décor','decor','lumiere','lumière','lighting','eclairage','éclairage','texture','visuel','visuelle','aesthetique','esthétique','esthetique','beau','belle','joli','jolies'],
-    fr: [
-      'L\'ambiance et le lore, c\'est ce qui rend une map mémorable ✨\n\nZayrho7 travaille l\'éclairage, les textures, les petits détails qui donnent une vraie personnalité à chaque zone. Le plan Pro inclut déjà l\'ambiance et le lore — l\'Elite pousse ça encore plus loin.',
-      'Une map sans ambiance, c\'est une map oubliable 😅 Zayrho7 crée des identités visuelles fortes : chaque zone a sa palette, son éclairage, ses assets cohérents. Inclus dès le plan Pro !'
-    ],
-    en: [
-      'Atmosphere and lore are what make a map memorable ✨\n\nZayrho7 works on lighting, textures, the little details that give each zone a real personality. The Pro plan already includes atmosphere and lore — Elite takes it even further.',
-      'A map without atmosphere is a forgettable map 😅 Zayrho7 creates strong visual identities: each zone has its palette, lighting, coherent assets. Included from Pro plan!'
-    ]
+  atmo:{
+    fr:['L\'ambiance et le lore, c\'est ce qui rend une map mémorable ✨\n\nZayrho7 travaille éclairages, textures, petits détails qui donnent une vraie personnalité à chaque zone. Inclus dès le plan Pro !'],
+    en:["Atmosphere and lore make a map memorable ✨\n\nZayrho7 works on lighting, textures, small details that give each zone a real personality. Included from Pro plan!"]
   },
-
-  experience: {
-    keys: ['experience','expérience','depuis','longtemps','ans','annees','années','projets','clients','portfolio','travaux','skill','competence','compétence'],
-    fr: [
-      'Zayrho7 a plus de 3 ans d\'expérience sur Roblox Studio 🎖️\n\nEn chiffres :\n• 50+ projets livrés\n• 100% de clients satisfaits\n• FR + EN\n• Disponible sur Discord\n\nSes créations sont visibles dans la section dédiée du portfolio. Des maps de tous styles, toutes tailles !',
-      '3 ans de build intensif sur Roblox Studio, 50+ projets, 0 client déçu 💪 Zayrho7 a un vrai niveau et ça se voit dans ses créations. Tu peux juger par toi-même dans la galerie !'
-    ],
-    en: [
-      'Zayrho7 has over 3 years of experience on Roblox Studio 🎖️\n\nBy the numbers:\n• 50+ projects delivered\n• 100% satisfied clients\n• FR + EN\n• Available on Discord\n\nHis work is visible in the dedicated section of the portfolio. Maps of all styles, all sizes!',
-      '3 years of intensive building on Roblox Studio, 50+ projects, 0 disappointed clients 💪 Zayrho7 has real skill and it shows in his creations. Judge for yourself in the gallery!'
-    ]
+  exp:{
+    fr:['Zayrho7 a plus de 3 ans d\'expérience sur Roblox Studio 🎖️\n\n• 50+ projets livrés\n• 100% clients satisfaits\n• FR + EN\n• Disponible sur Discord\n\nVois ses créations dans la galerie du portfolio !'],
+    en:["Zayrho7 has 3+ years on Roblox Studio 🎖️\n\n• 50+ projects delivered\n• 100% satisfied clients\n• FR + EN\n• Available on Discord\n\nCheck his work in the portfolio gallery!"]
   },
-
-  available: {
-    keys: ['disponible','dispo','libre','occupé','occupe','pris','place','ouvert','open','slot','commande en cours'],
-    fr: [
-      'Zayrho7 est actuellement disponible pour de nouvelles commandes ✅\n\nTu peux le contacter directement sur Discord (zayrho7) pour discuter de ton projet. Il répond généralement dans la journée !',
-      'Bonne nouvelle : il est dispo ! ✅ Pas de liste d\'attente pour l\'instant. Contacte-le sur Discord (zayrho7) avant que ça change 😄'
-    ],
-    en: [
-      'Zayrho7 is currently available for new orders ✅\n\nYou can contact him directly on Discord (zayrho7) to discuss your project. He usually replies the same day!',
-      'Good news: he\'s available! ✅ No waiting list for now. Contact him on Discord (zayrho7) before that changes 😄'
-    ]
+  avail:{
+    fr:['Zayrho7 est actuellement disponible pour de nouvelles commandes ✅\n\nContacte-le sur Discord (zayrho7). Il répond généralement dans la journée !'],
+    en:["Zayrho7 is currently available for new orders ✅\n\nContact him on Discord (zayrho7). He usually replies the same day!"]
   },
-
-  sourcefiles: {
-    keys: ['source','fichier','rbxl','studio','file','fichiers sources','source file'],
-    fr: [
-      'Les fichiers sources (.rbxl) :\n\n✅ Inclus dans Elite et Sur mesure\n❌ Non inclus dans Starter et Pro (mais peuvent être ajoutés en supplément)\n\nSi c\'est important pour toi, mentionne-le à Zayrho7 dès le départ sur Discord !',
-      'Les .rbxl sont inclus dans Elite et Sur mesure 📁 Pour Starter et Pro, c\'est possible moyennant un petit supplément. Parles-en directement sur Discord (zayrho7) !'
-    ],
-    en: [
-      'Source files (.rbxl):\n\n✅ Included in Elite and Custom\n❌ Not included in Starter and Pro (but can be added for extra)\n\nIf this matters to you, mention it to Zayrho7 from the start on Discord!',
-      '.rbxl files included in Elite and Custom 📁 For Starter and Pro, possible for a small extra fee. Talk about it directly on Discord (zayrho7)!'
-    ]
+  source:{
+    fr:['Fichiers sources (.rbxl) :\n\n✅ Inclus dans Elite et Sur mesure\n❌ Non inclus dans Starter et Pro (ajout possible en supplément)\n\nMentionne-le dès le départ à Zayrho7 sur Discord !'],
+    en:["Source files (.rbxl):\n\n✅ Included in Elite and Custom\n❌ Not in Starter and Pro (can be added for extra)\n\nMention it from the start to Zayrho7 on Discord!"]
   },
-
-  nda: {
-    keys: ['nda','confidentiel','confidentialite','confidentialité','secret','anonyme','privé','prive'],
-    fr: [
-      'Oui, Zayrho7 peut signer un NDA (accord de non-divulgation) 🔒\n\nC\'est disponible dans le plan Sur Mesure, ou peut être arrangé pour tout autre plan sur demande. Contacte-le sur Discord (zayrho7) pour en discuter.',
-      'NDA possible, pas de problème 🔐 Zayrho7 travaille de façon professionnelle et respecte la confidentialité de ses clients. Mentionnes-le dès le premier message sur Discord !'
-    ],
-    en: [
-      'Yes, Zayrho7 can sign an NDA (non-disclosure agreement) 🔒\n\nAvailable in the Custom plan, or can be arranged for any plan on request. Contact him on Discord (zayrho7) to discuss.',
-      'NDA possible, no problem 🔐 Zayrho7 works professionally and respects client confidentiality. Mention it in your first message on Discord!'
-    ]
+  pay:{
+    fr:['Paiement accepté 💶\n\n• Euros (virement, PayPal...)\n• Robux directement in-game\n\nLes modalités se règlent sur Discord avant de commencer. Généralement un acompte puis solde à la livraison.'],
+    en:["Accepted payments 💶\n\n• Euros (bank transfer, PayPal...)\n• Robux in-game\n\nDetails sorted on Discord before starting. Usually deposit then balance on delivery."]
   },
-
-  payment: {
-    keys: ['paiement','payer','payment','pay','virement','paypal','crypto','moyen','methode','méthode','comment payer','how to pay'],
-    fr: [
-      'Pour le paiement, Zayrho7 accepte :\n\n💶 Euros (virement, PayPal, etc.)\n🎮 Robux directement in-game\n\nLes détails se règlent sur Discord avant de commencer. En général, un acompte est demandé puis le solde à la livraison.',
-      'Zayrho7 accepte les euros et les Robux 💰 Les modalités de paiement précises (acompte, virement, PayPal...) se discutent sur Discord avant de démarrer le projet. Contacte-le : zayrho7 !'
-    ],
-    en: [
-      'For payment, Zayrho7 accepts:\n\n💶 Euros (bank transfer, PayPal, etc.)\n🎮 Robux directly in-game\n\nDetails are sorted on Discord before starting. Generally, a deposit is required then the balance on delivery.',
-      'Zayrho7 accepts euros and Robux 💰 Specific payment terms (deposit, bank transfer, PayPal...) are discussed on Discord before starting the project. Contact him: zayrho7!'
-    ]
+  who:{
+    fr:['Zayrho7 est un Roblox Builder professionnel passionné 🎮\n\n• 3+ ans sur Roblox Studio\n• Spécialisé level design & maps immersives\n• 50+ projets, 100% satisfaits\n• Parle FR et EN\n• Discord : zayrho7\n\nIl crée des maps pour tous types de projets Roblox — du simple obby au monde entier !'],
+    en:["Zayrho7 is a passionate professional Roblox Builder 🎮\n\n• 3+ years on Roblox Studio\n• Specialized in level design & immersive maps\n• 50+ projects, 100% satisfied\n• Speaks FR and EN\n• Discord: zayrho7\n\nHe builds maps for all Roblox project types — simple obbies to full worlds!"]
   },
-
-  who: {
-    keys: ['qui est','who is','zayrho','zayrho7','builder','créateur','createur','auteur','tu es','t\'es','you are','cest qui','c\'est qui','presenta','présentat'],
-    fr: [
-      'Zayrho7, c\'est un Roblox Builder professionnel passionné 🎮\n\n• 3+ ans d\'expérience sur Roblox Studio\n• Spécialisé en level design et maps immersives\n• 50+ projets livrés, 100% de clients satisfaits\n• Parle français et anglais\n• Disponible sur Discord : zayrho7\n\nIl crée des maps sur mesure pour tous types de projets Roblox — du simple obby au monde entier !',
-      'Zayrho7 est un builder sérieux et passionné qui fait du Roblox Studio son métier depuis plus de 3 ans 💪 Qualité, respect des délais, communication claire — c\'est sa façon de travailler. Tu peux voir ses créations dans la galerie du portfolio !'
-    ],
-    en: [
-      'Zayrho7 is a passionate professional Roblox Builder 🎮\n\n• 3+ years of experience on Roblox Studio\n• Specialized in level design and immersive maps\n• 50+ projects delivered, 100% satisfied clients\n• Speaks French and English\n• Available on Discord: zayrho7\n\nHe creates custom maps for all types of Roblox projects — from simple obbies to full worlds!',
-      'Zayrho7 is a serious and passionate builder who has made Roblox Studio his profession for 3+ years 💪 Quality, respecting deadlines, clear communication — that\'s how he works. You can see his creations in the portfolio gallery!'
-    ]
+  thanks:{
+    fr:['Avec plaisir ! 😊 Si tu as d\'autres questions n\'hésite pas. Pour démarrer un projet → Discord : zayrho7 !',
+        'Pas de souci ! 🙌 Pour toute commande, Discord c\'est zayrho7. Bonne continuation !',
+        'Cool ! 😄 N\'oublie pas : Discord zayrho7 pour lancer un projet. À bientôt !'],
+    en:["You're welcome! 😊 Feel free to ask more. To start a project → Discord: zayrho7!",
+        "No problem! 🙌 Discord is zayrho7 for orders. Have a great day!"]
   },
-
-  thanks: {
-    keys: ['merci','thanks','thank you','thank','parfait','super','cool','nickel','top','genial','génial','ok','okay','great','perfect','amazing','nice','bien','bonne journee','bonne journée','good day','bonne soiree','bonne soirée'],
-    fr: [
-      'Avec plaisir ! 😊 Si t\'as d\'autres questions n\'hésite pas. Et si tu veux lancer un projet, contacte Zayrho7 sur Discord : zayrho7 !',
-      'Pas de souci ! 🙌 Pour toute commande ou question, Discord c\'est zayrho7. Bonne continuation !',
-      'Cool ! 😄 Si tu décides de te lancer, passe un message sur Discord (zayrho7). Bonne journée !',
-      'Avec plaisir 🤝 N\'oublie pas — Discord : zayrho7 pour démarrer un projet. À bientôt !'
-    ],
-    en: [
-      'You\'re welcome! 😊 Feel free to ask if you have more questions. And if you want to start a project, contact Zayrho7 on Discord: zayrho7!',
-      'No problem! 🙌 For any order or question, Discord is zayrho7. Have a great day!',
-      'Cool! 😄 If you decide to go for it, send a message on Discord (zayrho7). Have a good one!',
-      'My pleasure 🤝 Don\'t forget — Discord: zayrho7 to start a project. See you!'
-    ]
+  help:{
+    fr:['Je vais t\'aider à choisir 🤔\n\nDis-moi :\n1️⃣ Quel type de map tu veux (RP, obby, simu, autre ?)\n2️⃣ L\'envergure du projet (petite, grande ?)\n3️⃣ Ton budget approximatif\n\nAvec ça je te recommande la bonne formule !'],
+    en:["I'll help you choose 🤔\n\nTell me:\n1️⃣ What map type you want (RP, obby, simulator, other?)\n2️⃣ Project scale (small, large?)\n3️⃣ Approximate budget\n\nWith that I'll recommend the right plan!"]
   },
-
-  help: {
-    keys: ['aide','help','sais pas','je sais pas','quoi choisir','quel plan','conseil','recommande','recommandation','which plan','what plan','suggest','advise','guide'],
-    fr: [
-      'Je vais t\'aider à choisir ! 🤔\n\nDis-moi :\n1️⃣ Quel type de map tu veux (RP, obby, simulateur, autre ?)\n2️⃣ Quelle est l\'envergure du projet (petite, moyenne, grande ?)\n3️⃣ Ton budget approximatif\n\nAvec ces infos je pourrai te recommander la bonne formule !',
-      'Pas de souci, je t\'aide à choisir 😊\n\nQuel genre de map tu veux créer ? RP, obby, simulateur, aventure, monde ouvert ? Et tu as un budget en tête ou tu veux d\'abord voir les options ?'
-    ],
-    en: [
-      'I\'ll help you choose! 🤔\n\nTell me:\n1️⃣ What type of map you want (RP, obby, simulator, other?)\n2️⃣ What\'s the scale of the project (small, medium, large?)\n3️⃣ Your approximate budget\n\nWith that info I can recommend the right plan!',
-      'No worries, I\'ll help you choose 😊\n\nWhat kind of map do you want to create? RP, obby, simulator, adventure, open world? And do you have a budget in mind or do you want to see the options first?'
-    ]
-  },
-
-  negative: {
-    keys: ['cher','trop cher','expensive','too expensive','pas les moyens','afford','discount','reduction','réduction','reduc','negocier','négocier','negociation'],
-    fr: [
-      'Je comprends que le budget c\'est important 💰 Le plan Starter à 20€ (ou 4 500 R$) est la formule la plus accessible. Pour des projets avec un petit budget, c\'est vraiment le bon point de départ !\n\nPour les gros projets, la formule Sur Mesure permet de définir un budget ensemble avec Zayrho7 sur Discord.',
-      'Si le budget est serré, commence par le Starter à 20€ — c\'est la meilleure option pour avoir une vraie map de qualité sans se ruiner 🙌 Et si tu veux négocier pour un gros projet, passe sur Discord (zayrho7) directement !'
-    ],
-    en: [
-      'I understand budget matters 💰 The Starter plan at €20 (or 4,500 R$) is the most accessible option. For projects with a tight budget, it\'s really the right starting point!\n\nFor larger projects, the Custom plan lets you define a budget together with Zayrho7 on Discord.',
-      'If budget is tight, start with Starter at €20 — it\'s the best option to get a quality map without breaking the bank 🙌 And if you want to negotiate for a big project, go directly on Discord (zayrho7)!'
-    ]
+  cheap:{
+    fr:['Je comprends 💰 Le plan Starter à 20€ (4 500 R$) est le plus accessible — une vraie map de qualité sans se ruiner.\n\nPour les gros projets avec budget serré, la formule Sur Mesure permet de tout discuter avec Zayrho7 sur Discord (zayrho7) !'],
+    en:["Understood 💰 The Starter at €20 (4,500 R$) is most accessible — a quality map without breaking the bank.\n\nFor larger projects with tight budgets, the Custom plan lets you discuss everything with Zayrho7 on Discord!"]
   }
 };
 
-/* ── INTENT MATCHER — score-based ── */
-function detectIntent(msg) {
-  const m = norm(msg);
-  const words = m.split(/\s+/);
-  let best = null, bestScore = 0;
-  for (const [intent, data] of Object.entries(KB)) {
-    let score = 0;
-    for (const key of data.keys) {
-      if (m.includes(key)) {
-        score += key.split(' ').length * 2; // multi-word keys score higher
-      }
-    }
-    // context boost: if last topic was pricing and user says "elite" bump that
-    if (lastTopic === 'prices_all' && (intent === 'starter' || intent === 'pro' || intent === 'elite' || intent === 'custom')) {
-      score += 1;
-    }
-    if (score > bestScore) { bestScore = score; best = intent; }
-  }
-  return bestScore > 0 ? best : null;
+// Suggestions shown in chat
+const SUGGESTIONS_FR = ['C\'est combien ?','Quel est le délai ?','Comment contacter ?','Tu fais quoi comme maps ?'];
+const SUGGESTIONS_EN = ['How much does it cost?','What\'s the deadline?','How to contact?','What maps do you make?'];
+
+function renderSuggestions(){
+  const box=document.getElementById('chat-sugs'); box.innerHTML='';
+  const sugs=lang==='fr'?SUGGESTIONS_FR:SUGGESTIONS_EN;
+  sugs.forEach(s=>{ const b=document.createElement('button'); b.className='chat-sug'; b.textContent=s; b.onclick=()=>{ document.getElementById('chat-input').value=s; sendMsg(); }; box.appendChild(b); });
 }
 
-function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+function detectIntent(msg){
+  const m=N(msg);
+  const scores={};
+  INTENTS.forEach(intent=>{
+    let score=0;
+    intent.patterns[0].forEach(p=>{
+      if(m.includes(p)) score+=p.split(' ').length; // multi-word = higher weight
+    });
+    if(score>0) scores[intent.id]=score;
+  });
+  if(!Object.keys(scores).length) return null;
+  return Object.entries(scores).sort((a,b)=>b[1]-a[1])[0][0];
+}
 
-function buildResponse(msg) {
-  const l = lang === 'fr' ? 'fr' : 'en';
-  const intent = detectIntent(msg);
-
-  if (intent) {
-    lastTopic = intent;
-    return pick(KB[intent][l]);
+function getReply(msg){
+  const l=lang==='fr'?'fr':'en';
+  const intent=detectIntent(msg);
+  if(intent && ANSWERS[intent]){
+    lastIntent=intent;
+    const pool=ANSWERS[intent][l]||ANSWERS[intent]['fr'];
+    return pick(pool);
   }
-
-  // Contextual follow-ups
-  const m = norm(msg);
-
-  // "oui / non / ok"
-  if (/^(oui|ouais|yes|yep|yeah|no|non|nope|pas vraiment|not really)$/.test(m.trim())) {
-    if (lastTopic) {
-      const follow = {
-        fr: `D\'accord ! Tu veux que je t\'en dise plus sur les ${lastTopic === 'prices_all' ? 'formules' : 'services'} ou tu as une question spécifique ? 😊`,
-        en: `Alright! Do you want me to tell you more about the ${lastTopic === 'prices_all' ? 'plans' : 'services'} or do you have a specific question? 😊`
-      };
-      return follow[l];
-    }
+  // contextual follow-up for very short messages
+  const m=N(msg).trim();
+  if(m.length<5 && lastIntent){
+    const pool=ANSWERS[lastIntent][l]||ANSWERS[lastIntent]['fr'];
+    return pick(pool);
   }
-
-  // Short messages
-  if (msg.trim().length < 4) {
-    return l === 'fr'
-      ? 'Tu peux me poser une question sur les tarifs, les délais, les services ou comment contacter Zayrho7 ! 😊'
-      : 'You can ask me about pricing, deadlines, services or how to contact Zayrho7! 😊';
-  }
-
-  // Fallback pool — varied
-  const fallbacks = {
-    fr: [
-      'Je ne suis pas sûr de bien comprendre 😅 Essaie de me demander quelque chose comme "c\'est combien ?", "quel délai ?", "il fait quoi comme map ?" ou "comment le contacter ?"',
-      'Hmm, cette question dépasse mes connaissances 🤔 Pour une réponse précise, contacte Zayrho7 directement sur Discord : zayrho7. Il répond vite !',
-      'Je peux t\'aider sur les tarifs, les délais, les types de maps ou les infos de contact. Pour tout le reste, Discord (zayrho7) est ton meilleur ami ! 😄',
-      'Je ne suis pas sûr d\'avoir la bonne réponse pour ça. Essaie de reformuler ou demande directement à Zayrho7 sur Discord (zayrho7) !'
-    ],
-    en: [
-      'I\'m not sure I understand 😅 Try asking something like "how much does it cost?", "what\'s the deadline?", "what maps does he make?" or "how to contact him?"',
-      'Hmm, this question is beyond my knowledge 🤔 For a precise answer, contact Zayrho7 directly on Discord: zayrho7. He replies quickly!',
-      'I can help with pricing, deadlines, map types or contact info. For everything else, Discord (zayrho7) is your best bet! 😄',
-      'I\'m not sure I have the right answer for that. Try rephrasing or ask Zayrho7 directly on Discord (zayrho7)!'
-    ]
+  // fallback
+  const fallbacks={
+    fr:['Je ne suis pas sûr de comprendre 😅 Essaie de me demander : "c\'est combien ?", "quel délai ?", "il fait quoi ?" ou "comment le contacter ?"',
+        'Hmm, cette question dépasse mes connaissances 🤔 Pour une réponse précise, contacte Zayrho7 sur Discord : zayrho7',
+        'Je peux t\'aider sur les tarifs, délais, types de maps ou les contacts. Pour tout le reste → Discord (zayrho7) 😄'],
+    en:["I'm not sure I understand 😅 Try: 'how much?', 'what's the deadline?', 'what maps?' or 'how to contact?'",
+        "Hmm, this is beyond my knowledge. For a precise answer, contact Zayrho7 on Discord: zayrho7",
+        "I can help with pricing, deadlines, map types or contacts. For everything else → Discord (zayrho7) 😄"]
   };
   return pick(fallbacks[l]);
 }
 
-function sendMsg() {
-  const input = document.getElementById('chat-input');
-  const text = input.value.trim();
-  if (!text) return;
-  input.value = '';
-  msgCount++;
-
-  addMsg(text, 'user');
-  chatCtx.push({ role: 'user', msg: text });
-  if (chatCtx.length > 8) chatCtx.shift();
-
-  showTyping();
-
-  // Simulate realistic typing delay based on response length
-  const response = buildResponse(text);
-  const delay = Math.min(400 + response.length * 8, 2200);
-  setTimeout(() => {
-    hideTyping();
-    addMsg(response, 'bot');
-    chatCtx.push({ role: 'bot', msg: response });
-
-    // Occasional follow-up suggestion after a few messages
-    if (msgCount % 4 === 0) {
-      setTimeout(() => {
-        const suggestions = {
-          fr: ['💡 Tu peux aussi me demander : "quel plan me conseilles-tu ?" ou "comment payer en Robux ?"'],
-          en: ['💡 You can also ask me: "which plan do you recommend?" or "how to pay in Robux?"']
-        };
-        const l = lang === 'fr' ? 'fr' : 'en';
-        addMsg(pick(suggestions[l]), 'bot');
-      }, 1200);
-    }
-  }, delay);
+function sendMsg(){
+  const input=document.getElementById('chat-input');
+  const text=input.value.trim(); if(!text) return;
+  input.value=''; msgCount++;
+  document.getElementById('chat-sugs').innerHTML=''; // hide suggestions while typing
+  addMsg(text,'user'); showTyping();
+  const reply=getReply(text);
+  const delay=Math.min(500+reply.length*7,2000);
+  setTimeout(()=>{
+    hideTyping(); addMsg(reply,'bot');
+    if(msgCount%3===0) setTimeout(renderSuggestions,600);
+  },delay);
 }
 
-/* ══════════════════════════════════════════
+/* ═══════════════════════════════════════
    MISC
-   ══════════════════════════════════════════ */
-function goContact() { document.getElementById('contact').scrollIntoView({behavior:'smooth'}); }
-
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-  a.addEventListener('click', e => {
-    e.preventDefault();
-    const t = document.querySelector(a.getAttribute('href'));
-    if (t) t.scrollIntoView({behavior:'smooth'});
-  });
+   ═══════════════════════════════════════ */
+function goContact(){ document.getElementById('contact').scrollIntoView({behavior:'smooth'}); }
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{ e.preventDefault(); const t=document.querySelector(a.getAttribute('href')); if(t) t.scrollIntoView({behavior:'smooth'}); });
 });
+const obs=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('in'); }),{threshold:.08});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 
-const obs = new IntersectionObserver(es => es.forEach(e => {
-  if (e.isIntersecting) e.target.classList.add('in');
-}), {threshold:.08});
-document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
-
-/* ── INIT ── */
-loadCreations();
+/* ═══════════════════════════════════════
+   INIT
+   ═══════════════════════════════════════ */
+loadData();
 renderPublicGallery();
+renderReviews();
+renderSuggestions();
 </script>
 </body>
 </html>
