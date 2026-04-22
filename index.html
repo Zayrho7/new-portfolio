@@ -10,6 +10,7 @@
 :root{
   --bg:#0c0c0c;--bg1:#111;--bg2:#161616;--bg3:#1c1c1c;
   --white:#f0ece4;--dim:#666;--dim2:#3a3a3a;--accent:#d4c5a9;--hi:#fff;
+  --discord:#5865F2;--discord-dark:#4752c4;
   --sans:'Space Grotesk',sans-serif;--mono:'Space Mono',monospace;
   --border:1px solid rgba(255,255,255,0.07);
 }
@@ -17,6 +18,161 @@ html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--white);font-family:var(--sans);overflow-x:hidden;line-height:1.6}
 ::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--dim2)}
 
+/* ════════════════════════════
+   AUTH GATE — PAGE DE CONNEXION
+════════════════════════════ */
+#auth-gate{
+  position:fixed;inset:0;z-index:1000;
+  background:#0c0c0c;
+  display:flex;align-items:center;justify-content:center;
+  padding:24px;
+  transition:opacity .5s ease,transform .5s ease;
+}
+#auth-gate.hidden{opacity:0;pointer-events:none;transform:translateY(-20px)}
+
+.auth-bg{
+  position:absolute;inset:0;
+  background-image:
+    repeating-linear-gradient(90deg,rgba(88,101,242,0.04) 0,rgba(88,101,242,0.04) 1px,transparent 1px,transparent calc(100%/12)),
+    repeating-linear-gradient(0deg,rgba(88,101,242,0.02) 0,rgba(88,101,242,0.02) 1px,transparent 1px,transparent 80px);
+  pointer-events:none;
+}
+.auth-glow{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-60%);
+  width:600px;height:600px;
+  background:radial-gradient(circle,rgba(88,101,242,0.12) 0%,transparent 70%);
+  pointer-events:none;
+}
+
+.auth-box{
+  position:relative;z-index:1;
+  background:var(--bg2);
+  border:var(--border);
+  border-radius:8px;
+  padding:52px 48px;
+  width:100%;max-width:440px;
+  text-align:center;
+  animation:authIn .6s cubic-bezier(.22,1,.36,1);
+}
+@keyframes authIn{from{opacity:0;transform:translateY(32px) scale(.97)}to{opacity:1;transform:none}}
+
+.auth-logo{
+  font-family:var(--mono);font-size:13px;letter-spacing:.15em;
+  color:var(--dim);margin-bottom:36px;
+  display:flex;align-items:center;justify-content:center;gap:10px;
+}
+.auth-logo::before,.auth-logo::after{content:'';flex:1;height:1px;background:var(--dim2);max-width:40px}
+
+.auth-icon{
+  width:72px;height:72px;border-radius:50%;
+  background:linear-gradient(135deg,var(--discord),#7289da);
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 28px;
+  box-shadow:0 8px 32px rgba(88,101,242,.3);
+}
+.auth-icon svg{width:36px;height:36px;fill:#fff}
+
+.auth-title{
+  font-size:28px;font-weight:700;letter-spacing:-.03em;
+  color:var(--hi);margin-bottom:12px;line-height:1.2;
+}
+.auth-sub{
+  font-size:14px;color:var(--dim);line-height:1.7;
+  font-weight:300;margin-bottom:36px;
+}
+
+.auth-discord-btn{
+  width:100%;
+  background:var(--discord);
+  color:#fff;
+  border:none;
+  border-radius:6px;
+  padding:16px 24px;
+  font-family:var(--sans);font-size:15px;font-weight:600;
+  cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap:12px;
+  transition:background .2s,transform .15s,box-shadow .2s;
+  letter-spacing:-.01em;
+  box-shadow:0 4px 16px rgba(88,101,242,.3);
+  margin-bottom:16px;
+}
+.auth-discord-btn:hover{background:var(--discord-dark);transform:translateY(-1px);box-shadow:0 8px 24px rgba(88,101,242,.4)}
+.auth-discord-btn:active{transform:translateY(0)}
+.auth-discord-btn svg{width:22px;height:22px;fill:#fff;flex-shrink:0}
+
+.auth-skip{
+  font-family:var(--mono);font-size:10px;letter-spacing:.1em;
+  color:var(--dim2);cursor:pointer;
+  background:transparent;border:none;
+  transition:color .2s;padding:4px;
+}
+.auth-skip:hover{color:var(--dim)}
+
+.auth-privacy{
+  margin-top:28px;padding-top:20px;border-top:var(--border);
+  font-family:var(--mono);font-size:9px;color:var(--dim2);
+  letter-spacing:.08em;line-height:1.6;
+}
+
+/* Discord input modal */
+#discord-input-modal{
+  display:none;position:fixed;inset:0;z-index:1100;
+  background:rgba(0,0,0,.85);backdrop-filter:blur(12px);
+  align-items:center;justify-content:center;padding:24px;
+}
+#discord-input-modal.open{display:flex}
+.dim-box{
+  background:var(--bg2);border:var(--border);border-radius:8px;
+  padding:40px;width:100%;max-width:400px;text-align:center;
+  animation:authIn .4s cubic-bezier(.22,1,.36,1);
+}
+.dim-title{font-family:var(--mono);font-size:11px;letter-spacing:.15em;color:var(--dim);margin-bottom:8px}
+.dim-sub{font-size:22px;font-weight:700;letter-spacing:-.03em;color:var(--hi);margin-bottom:24px}
+.dim-field{margin-bottom:16px;text-align:left}
+.dim-field label{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--dim);margin-bottom:6px}
+.dim-field input{
+  width:100%;background:var(--bg3);border:var(--border);
+  color:var(--white);font-family:var(--sans);font-size:15px;
+  padding:12px 16px;border-radius:4px;outline:none;
+}
+.dim-field input:focus{border-color:rgba(88,101,242,.5);box-shadow:0 0 0 3px rgba(88,101,242,.1)}
+.dim-hint{font-family:var(--mono);font-size:9px;color:var(--dim2);letter-spacing:.08em;margin-top:6px}
+.dim-error{color:#e05555;font-family:var(--mono);font-size:10px;margin-top:8px;display:none}
+.dim-actions{display:flex;gap:10px;justify-content:center;margin-top:24px}
+.dim-btn{
+  font-family:var(--mono);font-size:11px;letter-spacing:.1em;
+  padding:12px 24px;border-radius:4px;cursor:pointer;transition:all .2s;
+}
+.dim-btn-discord{
+  background:var(--discord);color:#fff;border:none;
+  display:flex;align-items:center;gap:8px;
+}
+.dim-btn-discord:hover{background:var(--discord-dark)}
+.dim-btn-cancel{background:transparent;border:var(--border);color:var(--dim)}
+.dim-btn-cancel:hover{color:var(--white);border-color:rgba(255,255,255,.2)}
+
+/* ════════════════════════════
+   USER BADGE IN NAV
+════════════════════════════ */
+.user-badge{
+  display:flex;align-items:center;gap:8px;
+  padding:5px 12px;border:var(--border);border-radius:20px;
+  background:var(--bg2);cursor:pointer;transition:all .2s;
+}
+.user-badge:hover{border-color:rgba(255,255,255,.2)}
+.user-avatar{
+  width:22px;height:22px;border-radius:50%;
+  background:linear-gradient(135deg,var(--discord),#7289da);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--mono);font-size:9px;color:#fff;font-weight:700;
+  flex-shrink:0;
+}
+.user-name{font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--white)}
+.user-logout{font-family:var(--mono);font-size:9px;color:var(--dim);letter-spacing:.06em;margin-left:4px}
+
+/* ════════════════════════════
+   NAV
+════════════════════════════ */
 nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:0 60px;height:60px;border-bottom:var(--border);background:rgba(12,12,12,0.95);backdrop-filter:blur(20px)}
 .nav-logo{font-family:var(--mono);font-size:13px;letter-spacing:.1em;color:var(--white);text-decoration:none;font-weight:700}
 .nav-links{display:flex;gap:36px;list-style:none}
@@ -36,6 +192,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .fb-badge.connecting .fb-dot{animation:fbp .6s infinite}
 @keyframes fbp{0%,100%{opacity:1}50%{opacity:.2}}
 
+/* ════════════════════════════
+   HERO
+════════════════════════════ */
 #hero{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:60px 60px 80px;position:relative;overflow:hidden}
 .hero-lines{position:absolute;inset:0;background-image:repeating-linear-gradient(90deg,rgba(255,255,255,0.02) 0,rgba(255,255,255,0.02) 1px,transparent 1px,transparent calc(100%/12));pointer-events:none}
 .hero-tag{font-family:var(--mono);font-size:11px;letter-spacing:.15em;color:var(--dim);margin-bottom:32px;display:flex;align-items:center;gap:12px}
@@ -55,6 +214,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .stat-num{font-size:clamp(36px,5vw,64px);font-weight:700;letter-spacing:-.04em;color:var(--hi);line-height:1}
 .stat-label{font-size:13px;color:var(--dim);margin-top:8px}
 
+/* ════════════════════════════
+   SECTIONS
+════════════════════════════ */
 .section{padding:120px 60px;max-width:1400px;margin:0 auto}
 .s-eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--dim);display:flex;align-items:center;gap:10px;margin-bottom:48px}
 .s-eyebrow::after{content:'';flex:1;height:1px;background:var(--dim2);max-width:60px}
@@ -69,6 +231,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .svc-arr{font-size:20px;color:var(--dim);transition:transform .2s,color .2s}
 .svc-row:hover .svc-arr{transform:translateX(6px);color:var(--white)}
 
+/* ════════════════════════════
+   GALLERY
+════════════════════════════ */
 .gallery-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:48px;flex-wrap:wrap;gap:16px}
 .gallery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:2px}
 .gitem{position:relative;aspect-ratio:16/10;overflow:hidden;cursor:pointer}
@@ -83,6 +248,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .gallery-empty{grid-column:1/-1;padding:80px 0;text-align:center}
 .gallery-empty p{font-family:var(--mono);font-size:12px;color:var(--dim2)}
 
+/* ════════════════════════════
+   ADMIN PANEL
+════════════════════════════ */
 #admin-panel{display:none;margin-top:40px}
 .admin-bar{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;background:var(--bg2);border:var(--border);border-radius:4px;margin-bottom:24px;flex-wrap:wrap;gap:12px}
 .admin-bar-left{display:flex;align-items:center;gap:12px}
@@ -101,6 +269,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .del-btn{font-family:var(--mono);font-size:10px;padding:6px 14px;border:1px solid rgba(220,60,60,.3);background:transparent;color:#e05555;cursor:pointer;border-radius:3px;transition:all .2s}
 .del-btn:hover{background:rgba(220,60,60,.15);border-color:#e05555}
 
+/* ════════════════════════════
+   CREATION MODAL
+════════════════════════════ */
 .cmodal{display:none;position:fixed;inset:0;z-index:700;background:rgba(0,0,0,.92);backdrop-filter:blur(12px);align-items:center;justify-content:center;padding:24px}
 .cmodal.open{display:flex}
 .cm-box{background:var(--bg2);border:var(--border);border-radius:6px;width:100%;max-width:520px;overflow:hidden;max-height:90vh;overflow-y:auto}
@@ -123,6 +294,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .cm-foot{padding:18px 28px;border-top:var(--border);display:flex;gap:10px;justify-content:flex-end;position:sticky;bottom:0;background:var(--bg2)}
 #cm-file{display:none}
 
+/* ════════════════════════════
+   ADMIN LOCK
+════════════════════════════ */
 #admin-lock{display:none;position:fixed;inset:0;z-index:600;background:rgba(0,0,0,.92);backdrop-filter:blur(12px);align-items:center;justify-content:center}
 #admin-lock.open{display:flex}
 .lock-box{background:var(--bg2);border:var(--border);border-radius:4px;padding:40px;width:100%;max-width:360px;text-align:center}
@@ -131,6 +305,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .lock-box input:focus{border-color:rgba(255,255,255,.2)}
 .lock-err{font-family:var(--mono);font-size:11px;color:#e05555;margin-top:8px;display:none}
 
+/* ════════════════════════════
+   PRICING
+════════════════════════════ */
 .pricing-controls{display:flex;gap:6px;margin-bottom:48px}
 .pricing-grid{display:grid;grid-template-columns:repeat(4,1fr);border:var(--border);background:rgba(255,255,255,0.04);gap:1px}
 @media(max-width:1000px){.pricing-grid{grid-template-columns:repeat(2,1fr)}}
@@ -154,6 +331,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .plan-btn.hi{background:var(--white);color:var(--bg)}
 .plan-btn.hi:hover{background:var(--accent);border-color:var(--accent)}
 
+/* ════════════════════════════
+   REVIEWS
+════════════════════════════ */
 #reviews{background:var(--bg1)}
 .reviews-header{display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-bottom:48px}
 .reviews-avg{display:flex;align-items:baseline;gap:12px}
@@ -163,11 +343,14 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .star.on{color:#f5c842}
 .reviews-count{font-family:var(--mono);font-size:11px;color:var(--dim);letter-spacing:.1em;margin-top:4px}
 .reviews-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px;margin-bottom:40px}
-.review-card{background:var(--bg2);border:var(--border);border-radius:4px;padding:24px;animation:fadeIn .4s ease}
+
+/* Review card */
+.review-card{background:var(--bg2);border:var(--border);border-radius:4px;padding:24px;animation:fadeIn .4s ease;position:relative}
 @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 .rc-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:12px}
 .rc-name{font-size:14px;font-weight:600;color:var(--white)}
 .rc-plan{font-family:var(--mono);font-size:9px;letter-spacing:.12em;color:var(--dim);margin-top:3px}
+.rc-discord-tag{font-family:var(--mono);font-size:9px;color:var(--discord);letter-spacing:.06em;margin-top:2px}
 .rc-stars{display:flex;gap:2px}
 .rc-star{font-size:14px;color:var(--dim2)}
 .rc-star.on{color:#f5c842}
@@ -175,8 +358,26 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .rc-date{font-family:var(--mono);font-size:10px;color:var(--dim2);margin-top:10px}
 .rc-del{background:transparent;border:none;color:var(--dim2);cursor:pointer;font-size:12px;font-family:var(--mono);transition:color .2s;white-space:nowrap}
 .rc-del:hover{color:#e05555}
+
+/* Review form — needs login */
 .review-form{background:var(--bg2);border:var(--border);border-radius:4px;padding:28px}
 .rf-title{font-family:var(--mono);font-size:11px;letter-spacing:.15em;color:var(--dim);margin-bottom:20px}
+.rf-login-prompt{
+  text-align:center;padding:40px 20px;
+}
+.rf-login-prompt p{font-size:15px;color:var(--dim);margin-bottom:20px;font-weight:300}
+.rf-discord-btn{
+  display:inline-flex;align-items:center;gap:10px;
+  background:var(--discord);color:#fff;
+  border:none;border-radius:6px;
+  padding:12px 24px;font-family:var(--sans);font-size:14px;font-weight:600;
+  cursor:pointer;transition:background .2s;
+}
+.rf-discord-btn:hover{background:var(--discord-dark)}
+.rf-discord-btn svg{width:18px;height:18px;fill:#fff}
+
+.rf-connected{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--dim);margin-bottom:20px;display:flex;align-items:center;gap:8px}
+.rf-connected-dot{width:6px;height:6px;border-radius:50%;background:#7aff9a;flex-shrink:0}
 .rf-stars{display:flex;gap:6px;margin-bottom:20px}
 .rf-star{font-size:28px;color:var(--dim2);transition:color .15s;cursor:pointer;line-height:1}
 .rf-star.on{color:#f5c842}
@@ -185,9 +386,21 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .rf-field input,.rf-field select,.rf-field textarea{width:100%;background:var(--bg3);border:var(--border);color:var(--white);font-family:var(--sans);font-size:14px;padding:10px 14px;border-radius:3px;outline:none;resize:none}
 .rf-field input:focus,.rf-field select:focus,.rf-field textarea:focus{border-color:rgba(255,255,255,.2)}
 .rf-field select option{background:var(--bg3)}
+.rf-field input[readonly]{color:var(--dim);cursor:default}
 .reviews-empty{padding:40px;text-align:center}
 .reviews-empty p{font-family:var(--mono);font-size:12px;color:var(--dim2)}
 
+/* Moderation badge */
+.rc-moderated{
+  background:rgba(220,60,60,.1);border:1px solid rgba(220,60,60,.2);
+  border-radius:3px;padding:8px 12px;
+  font-family:var(--mono);font-size:10px;color:#e05555;
+  letter-spacing:.08em;
+}
+
+/* ════════════════════════════
+   ABOUT
+════════════════════════════ */
 .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
 @media(max-width:768px){.about-grid{grid-template-columns:1fr}}
 .about-body{font-size:16px;color:var(--dim);line-height:1.8;font-weight:300}
@@ -199,6 +412,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .aside-val{font-size:22px;font-weight:600;letter-spacing:-.02em;color:var(--hi)}
 .aside-note{font-size:13px;color:var(--dim);margin-top:4px}
 
+/* ════════════════════════════
+   CONTACT
+════════════════════════════ */
 .contact-wrap{border:var(--border);padding:80px 60px;text-align:center}
 .contact-title{font-size:clamp(36px,6vw,80px);font-weight:700;letter-spacing:-.04em;line-height:1;margin-bottom:24px}
 .contact-sub{font-size:16px;color:var(--dim);max-width:460px;margin:0 auto 48px;font-weight:300}
@@ -208,6 +424,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .cc-label{font-family:var(--mono);font-size:10px;color:var(--dim);letter-spacing:.1em;display:block}
 .cc-val{font-size:14px;font-weight:500;display:block;margin-top:2px}
 
+/* ════════════════════════════
+   AI CHAT
+════════════════════════════ */
 #ai-chat{position:fixed;bottom:24px;right:24px;z-index:300;display:flex;flex-direction:column;align-items:flex-end;gap:12px}
 #chat-bubble{width:52px;height:52px;border-radius:50%;background:var(--white);display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 4px 24px rgba(0,0,0,.4);transition:transform .2s;flex-shrink:0;border:none}
 #chat-bubble:hover{transform:scale(1.08)}
@@ -241,6 +460,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .chat-send{background:var(--white);color:var(--bg);border:none;cursor:pointer;border-radius:4px;padding:9px 14px;font-family:var(--mono);font-size:10px;transition:background .2s;flex-shrink:0}
 .chat-send:hover{background:var(--accent)}
 
+/* ════════════════════════════
+   FOOTER & UTILS
+════════════════════════════ */
 footer{border-top:var(--border);padding:28px 60px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
 footer span{font-family:var(--mono);font-size:10px;color:var(--dim);letter-spacing:.08em}
 
@@ -250,6 +472,10 @@ footer span{font-family:var(--mono);font-size:10px;color:var(--dim);letter-spaci
 .toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--bg2);border:var(--border);border-radius:4px;padding:10px 20px;font-family:var(--mono);font-size:11px;color:var(--white);letter-spacing:.08em;opacity:0;transition:all .3s;z-index:9999;pointer-events:none;white-space:nowrap}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
+/* Moderation warning overlay for admin */
+.review-card.flagged{border-color:rgba(245,200,66,.3);background:rgba(245,200,66,.03)}
+.flag-badge{font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:#f5c842;background:rgba(245,200,66,.1);border:1px solid rgba(245,200,66,.2);border-radius:2px;padding:2px 8px;display:inline-block;margin-bottom:8px}
+
 @media(max-width:768px){
   nav{padding:0 24px}.nav-links{display:none}
   .section{padding:80px 24px}#hero{padding:60px 24px 60px}
@@ -257,13 +483,64 @@ footer span{font-family:var(--mono);font-size:10px;color:var(--dim);letter-spaci
   .about-aside{border-left:none;padding-left:0;border-top:var(--border);padding-top:40px}
   .contact-wrap{padding:48px 24px}footer{padding:24px}
   #chat-box{width:calc(100vw - 48px)}.rf-grid{grid-template-columns:1fr}
+  .auth-box{padding:36px 24px}
 }
 </style>
 </head>
 <body>
 
+<!-- ═══════════════════════════════════
+     AUTH GATE — PAGE DE CONNEXION
+═══════════════════════════════════ -->
+<div id="auth-gate">
+  <div class="auth-bg"></div>
+  <div class="auth-glow"></div>
+  <div class="auth-box">
+    <div class="auth-logo">ZRH7</div>
+    <div class="auth-icon">
+      <!-- Discord logo -->
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
+    </div>
+    <h1 class="auth-title">Bienvenue sur<br>Zayrho7</h1>
+    <p class="auth-sub">Connecte-toi avec Discord pour laisser des avis et interagir avec le portfolio.</p>
+    <button class="auth-discord-btn" id="auth-discord-btn">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
+      Continuer avec Discord
+    </button>
+    <button class="auth-skip" id="auth-skip-btn">Continuer sans compte →</button>
+    <div class="auth-privacy">
+      Seul ton pseudo Discord est utilisé · Aucun accès à ton compte<br>
+      Tes données restent sur ce site uniquement
+    </div>
+  </div>
+</div>
+
+<!-- Discord pseudo input modal -->
+<div id="discord-input-modal">
+  <div class="dim-box">
+    <div class="dim-title">CONNEXION DISCORD</div>
+    <div class="dim-sub">Entre ton pseudo Discord</div>
+    <div class="dim-field">
+      <label>TON PSEUDO DISCORD</label>
+      <input type="text" id="discord-pseudo-input" placeholder="ex: zayrho7" autocomplete="off" maxlength="32"/>
+      <div class="dim-hint">Ton pseudo sera visible sur tes avis</div>
+      <div class="dim-error" id="discord-input-error">Pseudo invalide (2–32 caractères)</div>
+    </div>
+    <div class="dim-actions">
+      <button class="dim-btn dim-btn-cancel" id="discord-modal-cancel">Annuler</button>
+      <button class="dim-btn dim-btn-discord" id="discord-modal-confirm">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width:16px;height:16px;fill:#fff"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
+        Se connecter
+      </button>
+    </div>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
 
+<!-- ═══════════════════════════════════
+     MAIN SITE
+═══════════════════════════════════ -->
 <nav>
   <a class="nav-logo" href="#" id="nav-logo">ZRH7</a>
   <ul class="nav-links">
@@ -278,6 +555,16 @@ footer span{font-family:var(--mono);font-size:10px;color:var(--dim);letter-spaci
     <span class="fb-badge connecting" id="fb-badge">
       <span class="fb-dot"></span><span id="fb-txt">CONNEXION</span>
     </span>
+    <!-- User badge (shown when logged in) -->
+    <div class="user-badge" id="nav-user-badge" style="display:none" onclick="handleLogout()">
+      <div class="user-avatar" id="nav-avatar"></div>
+      <span class="user-name" id="nav-username"></span>
+      <span class="user-logout">✕</span>
+    </div>
+    <button class="ctrl" id="nav-login-btn" onclick="openDiscordLogin()" style="display:none">
+      <svg viewBox="0 0 24 24" style="width:10px;height:10px;fill:currentColor;margin-right:4px;display:inline-block;vertical-align:middle" xmlns="http://www.w3.org/2000/svg"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
+      DISCORD
+    </button>
     <button class="ctrl on" id="btn-fr" onclick="setLang('fr')">FR</button>
     <button class="ctrl" id="btn-en" onclick="setLang('en')">EN</button>
   </div>
@@ -454,26 +741,44 @@ footer span{font-family:var(--mono);font-size:10px;color:var(--dim);letter-spaci
     </div>
   </div>
   <div class="reviews-grid reveal" id="reviews-grid"></div>
-  <div class="review-form reveal">
+  <div class="review-form reveal" id="review-form-wrap">
     <div class="rf-title" data-fr="LAISSER UN AVIS" data-en="LEAVE A REVIEW">LAISSER UN AVIS</div>
-    <div class="rf-stars" id="rf-stars">
-      <span class="rf-star" data-v="1">★</span><span class="rf-star" data-v="2">★</span>
-      <span class="rf-star" data-v="3">★</span><span class="rf-star" data-v="4">★</span>
-      <span class="rf-star" data-v="5">★</span>
+    <!-- Shown when not logged in -->
+    <div id="rf-not-logged" class="rf-login-prompt">
+      <p data-fr="Connecte-toi avec Discord pour laisser un avis." data-en="Connect with Discord to leave a review.">Connecte-toi avec Discord pour laisser un avis.</p>
+      <button class="rf-discord-btn" onclick="openDiscordLogin()">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
+        Se connecter avec Discord
+      </button>
     </div>
-    <div class="rf-grid">
-      <div class="rf-field"><label data-fr="TON PSEUDO" data-en="YOUR NAME">TON PSEUDO</label><input id="rf-name" type="text" placeholder="ex: Alex_Roblox"/></div>
-      <div class="rf-field">
-        <label data-fr="FORMULE UTILISÉE" data-en="PLAN USED">FORMULE UTILISÉE</label>
-        <select id="rf-plan">
-          <option value="">Choisir...</option>
-          <option value="Starter">Starter</option><option value="Pro">Pro</option>
-          <option value="Elite">Elite</option><option value="Sur mesure">Sur mesure</option>
-        </select>
+    <!-- Shown when logged in -->
+    <div id="rf-logged" style="display:none">
+      <div class="rf-connected">
+        <div class="rf-connected-dot"></div>
+        <span>Connecté en tant que <strong id="rf-username-display"></strong></span>
       </div>
+      <div class="rf-stars" id="rf-stars">
+        <span class="rf-star" data-v="1">★</span><span class="rf-star" data-v="2">★</span>
+        <span class="rf-star" data-v="3">★</span><span class="rf-star" data-v="4">★</span>
+        <span class="rf-star" data-v="5">★</span>
+      </div>
+      <div class="rf-grid">
+        <div class="rf-field">
+          <label>TON PSEUDO DISCORD</label>
+          <input id="rf-name" type="text" readonly/>
+        </div>
+        <div class="rf-field">
+          <label data-fr="FORMULE UTILISÉE" data-en="PLAN USED">FORMULE UTILISÉE</label>
+          <select id="rf-plan">
+            <option value="">Choisir...</option>
+            <option value="Starter">Starter</option><option value="Pro">Pro</option>
+            <option value="Elite">Elite</option><option value="Sur mesure">Sur mesure</option>
+          </select>
+        </div>
+      </div>
+      <div class="rf-field" style="margin-bottom:16px"><label data-fr="TON AVIS" data-en="YOUR REVIEW">TON AVIS</label><textarea id="rf-text" rows="3" placeholder="Dis ce que tu as pensé du projet..."></textarea></div>
+      <button class="ctrl on" id="submit-review-btn" onclick="submitReview()">PUBLIER MON AVIS</button>
     </div>
-    <div class="rf-field" style="margin-bottom:16px"><label data-fr="TON AVIS" data-en="YOUR REVIEW">TON AVIS</label><textarea id="rf-text" rows="3" placeholder="Dis ce que tu as pensé du projet..."></textarea></div>
-    <button class="ctrl on" id="submit-review-btn" onclick="submitReview()">PUBLIER MON AVIS</button>
   </div>
 </section>
 
@@ -501,16 +806,16 @@ footer span{font-family:var(--mono);font-size:10px;color:var(--dim);letter-spaci
     <h2 class="contact-title" data-fr="Travaillons<br>ensemble." data-en="Let's build<br>together.">Travaillons<br>ensemble.</h2>
     <p class="contact-sub" data-fr="Un projet en tête ? Écris-moi directement. Je réponds en moins de 24h." data-en="Have a project in mind? Write to me directly. I reply within 24h.">Un projet en tête ? Écris-moi directement. Je réponds en moins de 24h.</p>
     <div class="contact-links">
-      <a href="https://discord.com/channels/@me" target="_blank" class="contact-card"><span style="font-size:18px"></span><div><span class="cc-label">DISCORD</span><span class="cc-val">zayrho7</span></div></a>
-      <a href="https://www.roblox.com/fr/users/8008700451/profile" target="_blank" class="contact-card"><span style="font-size:18px"></span><div><span class="cc-label">ROBLOX</span><span class="cc-val">@Liam_Typzo</span></div></a>
-      <a href="mailto:contact@zayrho7.com" class="contact-card"><span style="font-size:18px"></span><div><span class="cc-label">EMAIL</span><span class="cc-val" data-fr="Envoyer un mail" data-en="Send an email">Envoyer un mail</span></div></a>
+      <a href="https://discord.com/channels/@me" target="_blank" class="contact-card"><span style="font-size:18px">💬</span><div><span class="cc-label">DISCORD</span><span class="cc-val">zayrho7</span></div></a>
+      <a href="https://www.roblox.com/fr/users/8008700451/profile" target="_blank" class="contact-card"><span style="font-size:18px">🎮</span><div><span class="cc-label">ROBLOX</span><span class="cc-val">@Liam_Typzo</span></div></a>
+      <a href="mailto:contact@zayrho7.com" class="contact-card"><span style="font-size:18px">✉️</span><div><span class="cc-label">EMAIL</span><span class="cc-val" data-fr="Envoyer un mail" data-en="Send an email">Envoyer un mail</span></div></a>
     </div>
   </div>
 </section>
 
 <footer>
   <span>ZAYRHO7 — ROBLOX BUILDER</span>
-  <span data-fr="© 2026 — Tous droits réservés" data-en="© 2025 — All rights reserved">© 2026 — Tous droits réservés</span>
+  <span data-fr="© 2026 — Tous droits réservés" data-en="© 2026 — All rights reserved">© 2026 — Tous droits réservés</span>
 </footer>
 
 <div id="ai-chat">
@@ -538,7 +843,7 @@ footer span{font-family:var(--mono);font-size:10px;color:var(--dim);letter-spaci
 
 <!-- Firebase SDK via ESM -->
 <script type="module">
-import { initializeApp }                           from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { initializeApp }                                from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getDatabase, ref, set, push, remove, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
 /* ══════════════════════════════
@@ -558,6 +863,35 @@ const creationsRef = ref(db, 'creations');
 const reviewsRef   = ref(db, 'reviews');
 
 /* ══════════════════════════════
+   MODERATION — liste de mots
+══════════════════════════════ */
+const BAD_WORDS = [
+  // FR
+  'merde','connard','connasse','putain','salope','enculé','encule','pute',
+  'fdp','fils de pute','ta gueule','nique','niquer','ntm','bâtard','batard',
+  'cul','bite','couille','chiotte','con','conne','abruti','abruties',
+  'imbécile','imbecile','idiot','idiote','crétin','cretin','débile','debile',
+  'raciste','nazi','fasciste','terroriste','viol','violer',
+  // EN
+  'fuck','shit','bitch','asshole','cunt','dick','cock','pussy','nigger',
+  'faggot','retard','whore','slut','rape','kill yourself','kys',
+  'moron','idiot','stupid','dumbass','bastard','hell','damn',
+];
+
+function moderateText(text) {
+  const t = text.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+  for (const w of BAD_WORDS) {
+    const wn = w.normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+    // Check as whole word or substring for short words
+    const pattern = new RegExp('\\b' + wn.replace(/[.*+?^${}()|[\]\\]/g,'\\$&') + '\\b', 'i');
+    if (pattern.test(t)) return { flagged: true, word: w };
+    // Also check without word boundary for compound words
+    if (wn.length >= 4 && t.includes(wn)) return { flagged: true, word: w };
+  }
+  return { flagged: false };
+}
+
+/* ══════════════════════════════
    STATE
 ══════════════════════════════ */
 const ADMIN_PWD = 'zayrho7admin';
@@ -571,6 +905,9 @@ let chatOpen    = false, msgCount = 0, lastIntent = null;
 let creationsMap = {};
 let reviewsMap   = {};
 
+// Current logged-in Discord user
+let currentUser = null; // { pseudo: 'zayrho7', uid: 'xxx' }
+
 /* ══════════════════════════════
    UI HELPERS
 ══════════════════════════════ */
@@ -580,18 +917,164 @@ function fbBadge(state) {
   el.className = 'fb-badge ' + state;
   txt.textContent = {connecting:'CONNEXION', live:'LIVE', error:'OFFLINE'}[state] || state;
 }
-function toast(msg) {
+function toast(msg, type='') {
   const t = document.getElementById('toast');
-  t.textContent = msg; t.classList.add('show');
-  clearTimeout(t._t); t._t = setTimeout(() => t.classList.remove('show'), 2800);
+  t.textContent = msg;
+  t.style.borderColor = type === 'warn' ? 'rgba(220,60,60,.3)' : '';
+  t.style.color = type === 'warn' ? '#e05555' : '';
+  t.classList.add('show');
+  clearTimeout(t._t); t._t = setTimeout(() => t.classList.remove('show'), 3200);
 }
 function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 function stars(n, sz=16, cls='star'){ let h=''; for(let i=1;i<=5;i++) h+=`<span class="${cls}${i<=n?' on':''}" style="font-size:${sz}px">★</span>`; return h; }
+function genUid() { return Math.random().toString(36).slice(2) + Date.now().toString(36); }
+function getInitial(name) { return name ? name.charAt(0).toUpperCase() : '?'; }
+
+/* ══════════════════════════════
+   AUTH GATE LOGIC
+══════════════════════════════ */
+function initAuth() {
+  // Check if user already logged in via localStorage
+  const saved = localStorage.getItem('zrh7_discord_user');
+  if (saved) {
+    try {
+      currentUser = JSON.parse(saved);
+      // User already logged in — skip gate
+      hideGate(false);
+      updateNavUser();
+      updateReviewForm();
+      return;
+    } catch(e) { localStorage.removeItem('zrh7_discord_user'); }
+  }
+  // First visit — show gate
+  document.getElementById('auth-gate').style.display = 'flex';
+}
+
+function hideGate(animate=true) {
+  const gate = document.getElementById('auth-gate');
+  if (animate) {
+    gate.classList.add('hidden');
+    setTimeout(() => { gate.style.display = 'none'; }, 500);
+  } else {
+    gate.style.display = 'none';
+  }
+}
+
+// "Continue with Discord" button
+document.getElementById('auth-discord-btn').addEventListener('click', () => {
+  openDiscordLogin();
+});
+
+// "Continue without account"
+document.getElementById('auth-skip-btn').addEventListener('click', () => {
+  hideGate();
+  // Show login button in nav for guests
+  document.getElementById('nav-login-btn').style.display = '';
+  updateReviewForm();
+});
+
+// Open Discord pseudo input modal
+window.openDiscordLogin = () => {
+  // Close auth gate first if visible
+  const gate = document.getElementById('auth-gate');
+  if (gate.style.display !== 'none') hideGate();
+  
+  document.getElementById('discord-input-modal').classList.add('open');
+  document.getElementById('discord-input-error').style.display = 'none';
+  document.getElementById('discord-pseudo-input').value = '';
+  setTimeout(() => document.getElementById('discord-pseudo-input').focus(), 150);
+};
+
+document.getElementById('discord-modal-cancel').addEventListener('click', () => {
+  document.getElementById('discord-input-modal').classList.remove('open');
+  // If no user & gate was hidden, show nav login btn
+  if (!currentUser) document.getElementById('nav-login-btn').style.display = '';
+});
+
+document.getElementById('discord-pseudo-input').addEventListener('keydown', e => {
+  if (e.key === 'Enter') confirmDiscordLogin();
+});
+
+document.getElementById('discord-modal-confirm').addEventListener('click', confirmDiscordLogin);
+
+function confirmDiscordLogin() {
+  const val = document.getElementById('discord-pseudo-input').value.trim();
+  const errEl = document.getElementById('discord-input-error');
+  
+  if (!val || val.length < 2 || val.length > 32) {
+    errEl.style.display = 'block';
+    errEl.textContent = 'Pseudo invalide (2–32 caractères)';
+    return;
+  }
+  // Basic validation — no special chars that could cause issues
+  if (!/^[a-zA-Z0-9_.\- ]+$/.test(val)) {
+    errEl.style.display = 'block';
+    errEl.textContent = 'Caractères non autorisés (lettres, chiffres, _ . - uniquement)';
+    return;
+  }
+  
+  errEl.style.display = 'none';
+  
+  // Create user object
+  currentUser = {
+    pseudo: val,
+    uid: genUid(),
+    loginTs: Date.now()
+  };
+  
+  // Save to localStorage (persistent — won't ask again)
+  localStorage.setItem('zrh7_discord_user', JSON.stringify(currentUser));
+  
+  document.getElementById('discord-input-modal').classList.remove('open');
+  updateNavUser();
+  updateReviewForm();
+  toast(`✓ Connecté en tant que ${val} !`);
+  
+  // Re-render reviews to show delete buttons
+  renderReviews();
+}
+
+function updateNavUser() {
+  const badge = document.getElementById('nav-user-badge');
+  const loginBtn = document.getElementById('nav-login-btn');
+  if (currentUser) {
+    document.getElementById('nav-avatar').textContent = getInitial(currentUser.pseudo);
+    document.getElementById('nav-username').textContent = currentUser.pseudo;
+    badge.style.display = 'flex';
+    loginBtn.style.display = 'none';
+  } else {
+    badge.style.display = 'none';
+    loginBtn.style.display = '';
+  }
+}
+
+function updateReviewForm() {
+  const notLogged = document.getElementById('rf-not-logged');
+  const logged = document.getElementById('rf-logged');
+  if (currentUser) {
+    notLogged.style.display = 'none';
+    logged.style.display = 'block';
+    document.getElementById('rf-name').value = currentUser.pseudo;
+    document.getElementById('rf-username-display').textContent = currentUser.pseudo;
+  } else {
+    notLogged.style.display = 'block';
+    logged.style.display = 'none';
+  }
+}
+
+window.handleLogout = () => {
+  if (!confirm('Se déconnecter ?')) return;
+  currentUser = null;
+  localStorage.removeItem('zrh7_discord_user');
+  updateNavUser();
+  updateReviewForm();
+  document.getElementById('nav-login-btn').style.display = '';
+  renderReviews();
+  toast('Déconnecté');
+};
 
 /* ══════════════════════════════
    FIREBASE REALTIME LISTENERS
-   → mise à jour instantanée
-     pour TOUS les visiteurs
 ══════════════════════════════ */
 onValue(creationsRef, snap => {
   creationsMap = snap.val() || {};
@@ -626,7 +1109,7 @@ window.setLang = l => {
     if (v===null) return;
     if (v.includes('<br>')) el.innerHTML=v; else el.textContent=v;
   });
-  renderGallery(); renderReviews();
+  renderGallery(); renderReviews(); updateReviewForm();
 };
 
 /* ══════════════════════════════
@@ -693,7 +1176,7 @@ window.tryLogin = () => {
   if (document.getElementById('pwd-input').value === ADMIN_PWD) {
     isAdmin = true; closeLock();
     document.getElementById('admin-panel').style.display = 'block';
-    renderAdminCards(); toast('✓ Mode admin activé');
+    renderAdminCards(); renderReviews(); toast('✓ Mode admin activé');
   } else {
     document.getElementById('lock-err').style.display = 'block';
     document.getElementById('pwd-input').value = '';
@@ -702,7 +1185,7 @@ window.tryLogin = () => {
   }
 };
 document.getElementById('pwd-input').addEventListener('keydown', e=>{ if(e.key==='Enter') tryLogin(); });
-window.logout = () => { isAdmin=false; document.getElementById('admin-panel').style.display='none'; };
+window.logout = () => { isAdmin=false; document.getElementById('admin-panel').style.display='none'; renderReviews(); };
 
 /* ══════════════════════════════
    ADMIN CARDS
@@ -813,33 +1296,72 @@ document.querySelectorAll('.rf-star').forEach(s=>{
 document.getElementById('rf-stars').addEventListener('mouseleave',()=>{ document.querySelectorAll('.rf-star').forEach((x,i)=>x.classList.toggle('on',i<rfRating)); });
 
 window.submitReview = async () => {
-  const name=document.getElementById('rf-name').value.trim();
-  const plan=document.getElementById('rf-plan').value;
-  const text=document.getElementById('rf-text').value.trim();
-  if (!name||!rfRating||!text){ alert('Remplis ton pseudo, les étoiles et ton avis !'); return; }
-  const btn=document.getElementById('submit-review-btn');
+  if (!currentUser) { openDiscordLogin(); return; }
+  
+  const name  = currentUser.pseudo;
+  const uid   = currentUser.uid;
+  const plan  = document.getElementById('rf-plan').value;
+  const text  = document.getElementById('rf-text').value.trim();
+  
+  if (!rfRating) { toast('Choisis une note en étoiles !', 'warn'); return; }
+  if (!text) { document.getElementById('rf-text').focus(); return; }
+  if (text.length < 5) { toast('Avis trop court (5 caractères min)', 'warn'); return; }
+  
+  // Moderation check
+  const mod = moderateText(text);
+  if (mod.flagged) {
+    toast('⚠ Ton avis contient un mot interdit. Merci de reformuler.', 'warn');
+    return;
+  }
+  // Also check name
+  const nameMod = moderateText(name);
+  if (nameMod.flagged) {
+    toast('⚠ Pseudo invalide — déconnecte-toi et reconnecte-toi avec un pseudo correct.', 'warn');
+    return;
+  }
+  
+  const btn = document.getElementById('submit-review-btn');
   btn.textContent='⏳ Envoi...'; btn.disabled=true;
-  const newRef = await push(reviewsRef, { name, plan, text, rating:rfRating, date:new Date().toLocaleDateString('fr-FR'), ts:Date.now() });
-  // Sauvegarder la clé pour pouvoir supprimer son propre avis
-  const mine = JSON.parse(sessionStorage.getItem('zrh7_mine')||'[]');
-  mine.push(newRef.key); sessionStorage.setItem('zrh7_mine', JSON.stringify(mine));
-  document.getElementById('rf-name').value=''; document.getElementById('rf-plan').value=''; document.getElementById('rf-text').value='';
-  rfRating=0; document.querySelectorAll('.rf-star').forEach(s=>s.classList.remove('on'));
+  
+  await push(reviewsRef, {
+    name,
+    uid,  // Store uid to identify owner
+    plan,
+    text,
+    rating: rfRating,
+    date: new Date().toLocaleDateString('fr-FR'),
+    ts: Date.now()
+  });
+  
+  document.getElementById('rf-plan').value='';
+  document.getElementById('rf-text').value='';
+  rfRating=0;
+  document.querySelectorAll('.rf-star').forEach(s=>s.classList.remove('on'));
   btn.textContent='PUBLIER MON AVIS'; btn.disabled=false;
-  toast('✓ Avis publié — visible par tous en temps réel !');
+  toast('✓ Avis publié — merci !');
 };
 
 window.deleteReview = async key => {
-  const mine = JSON.parse(sessionStorage.getItem('zrh7_mine')||'[]');
-  if (!mine.includes(key) && !isAdmin){ alert('Tu ne peux supprimer que ton propre avis.'); return; }
+  const review = reviewsMap[key];
+  if (!review) return;
+  
+  // Check ownership: must be owner (by uid) OR admin
+  const isOwner = currentUser && review.uid === currentUser.uid;
+  
+  if (!isOwner && !isAdmin) {
+    toast('Tu ne peux supprimer que tes propres avis.', 'warn');
+    return;
+  }
+  
+  if (!confirm('Supprimer cet avis ?')) return;
   await remove(ref(db,'reviews/'+key));
   toast('✓ Avis supprimé');
 };
 
 function renderReviews() {
   const g = document.getElementById('reviews-grid'); g.innerHTML='';
-  const mine = JSON.parse(sessionStorage.getItem('zrh7_mine')||'[]');
   const items = reviewsList();
+  
   if (!items.length) {
     g.innerHTML=`<div class="reviews-empty" style="grid-column:1/-1"><p>${lang==='fr'?'Pas encore d\'avis — sois le premier !':'No reviews yet — be the first!'}</p></div>`;
     document.getElementById('avg-num').textContent='—';
@@ -847,17 +1369,38 @@ function renderReviews() {
     document.getElementById('reviews-count').textContent=lang==='fr'?'aucun avis':'no reviews yet';
     return;
   }
+  
   const avg = items.reduce((a,r)=>a+r.rating,0)/items.length;
   document.getElementById('avg-num').textContent=avg.toFixed(1);
   document.getElementById('avg-stars').innerHTML=stars(Math.round(avg));
   document.getElementById('reviews-count').textContent=`${items.length} avis`;
+  
   items.forEach(r=>{
-    const canDel = mine.includes(r._key)||isAdmin;
-    const card = document.createElement('div'); card.className='review-card';
-    card.innerHTML=`<div class="rc-top"><div><div class="rc-name">${esc(r.name)}</div>${r.plan?`<div class="rc-plan">${esc(r.plan)}</div>`:''}</div>
-      <div style="display:flex;align-items:center;gap:10px"><div class="rc-stars">${stars(r.rating,14,'rc-star')}</div>
-      ${canDel?`<button class="rc-del">✕</button>`:''}</div></div>
-      <div class="rc-text">${esc(r.text)}</div><div class="rc-date">${r.date||''}</div>`;
+    // Check if current user owns this review (by uid match)
+    const isOwner = currentUser && r.uid && r.uid === currentUser.uid;
+    const canDel  = isOwner || isAdmin;
+    
+    // Check moderation flag on the review text
+    const mod = moderateText(r.text || '');
+    const card = document.createElement('div');
+    card.className = 'review-card' + (mod.flagged ? ' flagged' : '');
+    
+    card.innerHTML=`
+      ${isAdmin && mod.flagged ? `<div class="flag-badge">⚠ CONTENU SIGNALÉ</div>` : ''}
+      <div class="rc-top">
+        <div>
+          <div class="rc-name">${esc(r.name)}</div>
+          <div class="rc-discord-tag">via Discord</div>
+          ${r.plan?`<div class="rc-plan">${esc(r.plan)}</div>`:''}
+        </div>
+        <div style="display:flex;align-items:center;gap:10px">
+          <div class="rc-stars">${stars(r.rating,14,'rc-star')}</div>
+          ${canDel?`<button class="rc-del" title="${isAdmin&&!isOwner?'Supprimer (admin)':'Supprimer mon avis'}">✕</button>`:''}
+        </div>
+      </div>
+      <div class="rc-text">${mod.flagged && !isAdmin ? '<span style="color:var(--dim2);font-style:italic;font-size:12px">[Contenu masqué — modération]</span>' : esc(r.text)}</div>
+      <div class="rc-date">${r.date||''}</div>`;
+    
     if (canDel) card.querySelector('.rc-del').onclick = ()=>deleteReview(r._key);
     g.appendChild(card);
   });
@@ -939,6 +1482,11 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{ a.addEventListener('click
 const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in');}),{threshold:.08});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 renderSugs();
+
+/* ══════════════════════════════
+   INIT
+══════════════════════════════ */
+initAuth();
 </script>
 </body>
 </html>
