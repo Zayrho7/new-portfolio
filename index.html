@@ -17,7 +17,6 @@ html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--white);font-family:var(--sans);overflow-x:hidden;line-height:1.6}
 ::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--dim2)}
 
-/* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:0 60px;height:60px;border-bottom:var(--border);background:rgba(12,12,12,0.95);backdrop-filter:blur(20px)}
 .nav-logo{font-family:var(--mono);font-size:13px;letter-spacing:.1em;color:var(--white);text-decoration:none;font-weight:700}
 .nav-links{display:flex;gap:36px;list-style:none}
@@ -28,7 +27,15 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .ctrl.on{background:var(--white);color:var(--bg);border-color:var(--white)}
 .ctrl:hover:not(.on){color:var(--white);border-color:rgba(255,255,255,0.2)}
 
-/* HERO */
+.fb-badge{display:inline-flex;align-items:center;gap:5px;font-family:var(--mono);font-size:9px;letter-spacing:.1em;padding:4px 10px;border-radius:2px;border:var(--border);transition:all .4s}
+.fb-badge.connecting{color:#f5c842;border-color:rgba(245,200,66,.3)}
+.fb-badge.live{color:#7aff9a;border-color:rgba(122,255,154,.3)}
+.fb-badge.error{color:#e05555;border-color:rgba(220,80,80,.3)}
+.fb-dot{width:5px;height:5px;border-radius:50%;background:currentColor}
+.fb-badge.live .fb-dot{animation:fbp 2s infinite}
+.fb-badge.connecting .fb-dot{animation:fbp .6s infinite}
+@keyframes fbp{0%,100%{opacity:1}50%{opacity:.2}}
+
 #hero{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:60px 60px 80px;position:relative;overflow:hidden}
 .hero-lines{position:absolute;inset:0;background-image:repeating-linear-gradient(90deg,rgba(255,255,255,0.02) 0,rgba(255,255,255,0.02) 1px,transparent 1px,transparent calc(100%/12));pointer-events:none}
 .hero-tag{font-family:var(--mono);font-size:11px;letter-spacing:.15em;color:var(--dim);margin-bottom:32px;display:flex;align-items:center;gap:12px}
@@ -43,19 +50,16 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .btn-fill{background:var(--white);color:var(--bg);border-color:var(--white)}
 .btn-fill:hover{background:var(--accent);border-color:var(--accent)}
 
-/* STATS */
 .stats-row{display:grid;grid-template-columns:repeat(3,1fr);border-top:var(--border);border-left:var(--border)}
 .stat-cell{padding:48px 40px;border-right:var(--border);border-bottom:var(--border)}
 .stat-num{font-size:clamp(36px,5vw,64px);font-weight:700;letter-spacing:-.04em;color:var(--hi);line-height:1}
 .stat-label{font-size:13px;color:var(--dim);margin-top:8px}
 
-/* SECTION */
 .section{padding:120px 60px;max-width:1400px;margin:0 auto}
 .s-eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--dim);display:flex;align-items:center;gap:10px;margin-bottom:48px}
 .s-eyebrow::after{content:'';flex:1;height:1px;background:var(--dim2);max-width:60px}
 .s-title{font-size:clamp(32px,4vw,52px);font-weight:600;letter-spacing:-.03em;line-height:1.1;margin-bottom:16px}
 
-/* SERVICES */
 .services-list{border-top:var(--border)}
 .svc-row{display:flex;align-items:center;justify-content:space-between;padding:32px 0;border-bottom:var(--border);gap:24px;transition:padding .25s;cursor:default}
 .svc-row:hover{padding:32px 16px}
@@ -65,7 +69,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .svc-arr{font-size:20px;color:var(--dim);transition:transform .2s,color .2s}
 .svc-row:hover .svc-arr{transform:translateX(6px);color:var(--white)}
 
-/* GALLERY */
 .gallery-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:48px;flex-wrap:wrap;gap:16px}
 .gallery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:2px}
 .gitem{position:relative;aspect-ratio:16/10;overflow:hidden;cursor:pointer}
@@ -80,14 +83,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .gallery-empty{grid-column:1/-1;padding:80px 0;text-align:center}
 .gallery-empty p{font-family:var(--mono);font-size:12px;color:var(--dim2)}
 
-/* SYNC STATUS */
-.sync-badge{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:9px;letter-spacing:.12em;color:var(--dim);padding:4px 10px;border:var(--border);border-radius:2px;margin-left:12px;vertical-align:middle;transition:all .3s}
-.sync-badge.syncing{color:#f5c842;border-color:rgba(245,200,66,.3)}
-.sync-badge.synced{color:#7aff9a;border-color:rgba(122,255,154,.3)}
-.sync-badge.error{color:#e05555;border-color:rgba(220,80,80,.3)}
-.sync-dot{width:5px;height:5px;border-radius:50%;background:currentColor}
-
-/* ADMIN PANEL */
 #admin-panel{display:none;margin-top:40px}
 .admin-bar{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;background:var(--bg2);border:var(--border);border-radius:4px;margin-bottom:24px;flex-wrap:wrap;gap:12px}
 .admin-bar-left{display:flex;align-items:center;gap:12px}
@@ -106,7 +101,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .del-btn{font-family:var(--mono);font-size:10px;padding:6px 14px;border:1px solid rgba(220,60,60,.3);background:transparent;color:#e05555;cursor:pointer;border-radius:3px;transition:all .2s}
 .del-btn:hover{background:rgba(220,60,60,.15);border-color:#e05555}
 
-/* CREATION MODAL */
 .cmodal{display:none;position:fixed;inset:0;z-index:700;background:rgba(0,0,0,.92);backdrop-filter:blur(12px);align-items:center;justify-content:center;padding:24px}
 .cmodal.open{display:flex}
 .cm-box{background:var(--bg2);border:var(--border);border-radius:6px;width:100%;max-width:520px;overflow:hidden;max-height:90vh;overflow-y:auto}
@@ -115,7 +109,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .cm-close{background:transparent;border:none;color:var(--dim);cursor:pointer;font-size:18px;line-height:1;transition:color .2s}
 .cm-close:hover{color:var(--white)}
 .cm-body{padding:28px}
-.cm-drop{border:1px dashed var(--dim2);border-radius:4px;padding:36px 20px;text-align:center;cursor:pointer;transition:all .25s;margin-bottom:20px;position:relative}
+.cm-drop{border:1px dashed var(--dim2);border-radius:4px;padding:36px 20px;text-align:center;cursor:pointer;transition:all .25s;margin-bottom:20px}
 .cm-drop.dragover{border-color:var(--white);background:var(--bg3)}
 .cm-drop.has-file{border-color:rgba(122,255,154,.4);background:rgba(122,255,154,.04)}
 .cm-drop-icon{font-size:24px;margin-bottom:8px;display:block;pointer-events:none}
@@ -124,12 +118,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .cm-preview{width:100%;border-radius:3px;margin-bottom:10px;max-height:150px;object-fit:cover;display:none}
 .cm-field{margin-bottom:14px}
 .cm-field label{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--dim);margin-bottom:6px}
-.cm-field input,.cm-field textarea,.cm-field select{width:100%;background:var(--bg3);border:var(--border);color:var(--white);font-family:var(--sans);font-size:14px;padding:10px 14px;border-radius:3px;outline:none;resize:none}
+.cm-field input,.cm-field textarea{width:100%;background:var(--bg3);border:var(--border);color:var(--white);font-family:var(--sans);font-size:14px;padding:10px 14px;border-radius:3px;outline:none;resize:none}
 .cm-field input:focus,.cm-field textarea:focus{border-color:rgba(255,255,255,.2)}
 .cm-foot{padding:18px 28px;border-top:var(--border);display:flex;gap:10px;justify-content:flex-end;position:sticky;bottom:0;background:var(--bg2)}
 #cm-file{display:none}
 
-/* ADMIN LOGIN */
 #admin-lock{display:none;position:fixed;inset:0;z-index:600;background:rgba(0,0,0,.92);backdrop-filter:blur(12px);align-items:center;justify-content:center}
 #admin-lock.open{display:flex}
 .lock-box{background:var(--bg2);border:var(--border);border-radius:4px;padding:40px;width:100%;max-width:360px;text-align:center}
@@ -138,7 +131,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .lock-box input:focus{border-color:rgba(255,255,255,.2)}
 .lock-err{font-family:var(--mono);font-size:11px;color:#e05555;margin-top:8px;display:none}
 
-/* PRICING */
 .pricing-controls{display:flex;gap:6px;margin-bottom:48px}
 .pricing-grid{display:grid;grid-template-columns:repeat(4,1fr);border:var(--border);background:rgba(255,255,255,0.04);gap:1px}
 @media(max-width:1000px){.pricing-grid{grid-template-columns:repeat(2,1fr)}}
@@ -162,7 +154,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .plan-btn.hi{background:var(--white);color:var(--bg)}
 .plan-btn.hi:hover{background:var(--accent);border-color:var(--accent)}
 
-/* REVIEWS */
 #reviews{background:var(--bg1)}
 .reviews-header{display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-bottom:48px}
 .reviews-avg{display:flex;align-items:baseline;gap:12px}
@@ -172,7 +163,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .star.on{color:#f5c842}
 .reviews-count{font-family:var(--mono);font-size:11px;color:var(--dim);letter-spacing:.1em;margin-top:4px}
 .reviews-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px;margin-bottom:40px}
-.review-card{background:var(--bg2);border:var(--border);border-radius:4px;padding:24px}
+.review-card{background:var(--bg2);border:var(--border);border-radius:4px;padding:24px;animation:fadeIn .4s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 .rc-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:12px}
 .rc-name{font-size:14px;font-weight:600;color:var(--white)}
 .rc-plan{font-family:var(--mono);font-size:9px;letter-spacing:.12em;color:var(--dim);margin-top:3px}
@@ -181,13 +173,13 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .rc-star.on{color:#f5c842}
 .rc-text{font-size:14px;color:var(--dim);line-height:1.6}
 .rc-date{font-family:var(--mono);font-size:10px;color:var(--dim2);margin-top:10px}
-.rc-del{background:transparent;border:none;color:var(--dim2);cursor:pointer;font-size:12px;font-family:var(--mono);transition:color .2s;white-space:nowrap;flex-shrink:0}
+.rc-del{background:transparent;border:none;color:var(--dim2);cursor:pointer;font-size:12px;font-family:var(--mono);transition:color .2s;white-space:nowrap}
 .rc-del:hover{color:#e05555}
 .review-form{background:var(--bg2);border:var(--border);border-radius:4px;padding:28px}
 .rf-title{font-family:var(--mono);font-size:11px;letter-spacing:.15em;color:var(--dim);margin-bottom:20px}
-.rf-stars{display:flex;gap:6px;margin-bottom:20px;cursor:pointer}
+.rf-stars{display:flex;gap:6px;margin-bottom:20px}
 .rf-star{font-size:28px;color:var(--dim2);transition:color .15s;cursor:pointer;line-height:1}
-.rf-star.on,.rf-star:hover{color:#f5c842}
+.rf-star.on{color:#f5c842}
 .rf-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
 .rf-field label{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--dim);margin-bottom:6px}
 .rf-field input,.rf-field select,.rf-field textarea{width:100%;background:var(--bg3);border:var(--border);color:var(--white);font-family:var(--sans);font-size:14px;padding:10px 14px;border-radius:3px;outline:none;resize:none}
@@ -196,7 +188,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .reviews-empty{padding:40px;text-align:center}
 .reviews-empty p{font-family:var(--mono);font-size:12px;color:var(--dim2)}
 
-/* ABOUT */
 .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
 @media(max-width:768px){.about-grid{grid-template-columns:1fr}}
 .about-body{font-size:16px;color:var(--dim);line-height:1.8;font-weight:300}
@@ -208,7 +199,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .aside-val{font-size:22px;font-weight:600;letter-spacing:-.02em;color:var(--hi)}
 .aside-note{font-size:13px;color:var(--dim);margin-top:4px}
 
-/* CONTACT */
 .contact-wrap{border:var(--border);padding:80px 60px;text-align:center}
 .contact-title{font-size:clamp(36px,6vw,80px);font-weight:700;letter-spacing:-.04em;line-height:1;margin-bottom:24px}
 .contact-sub{font-size:16px;color:var(--dim);max-width:460px;margin:0 auto 48px;font-weight:300}
@@ -218,7 +208,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .cc-label{font-family:var(--mono);font-size:10px;color:var(--dim);letter-spacing:.1em;display:block}
 .cc-val{font-size:14px;font-weight:500;display:block;margin-top:2px}
 
-/* AI CHAT */
 #ai-chat{position:fixed;bottom:24px;right:24px;z-index:300;display:flex;flex-direction:column;align-items:flex-end;gap:12px}
 #chat-bubble{width:52px;height:52px;border-radius:50%;background:var(--white);display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 4px 24px rgba(0,0,0,.4);transition:transform .2s;flex-shrink:0;border:none}
 #chat-bubble:hover{transform:scale(1.08)}
@@ -231,11 +220,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
 .chat-head-name{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--white)}
 .chat-head-sub{font-size:11px;color:var(--dim);margin-top:1px}
-.chat-close{background:transparent;border:none;color:var(--dim);cursor:pointer;font-size:16px;transition:color .2s;font-family:var(--sans)}
+.chat-close{background:transparent;border:none;color:var(--dim);cursor:pointer;font-size:16px;transition:color .2s}
 .chat-close:hover{color:var(--white)}
 .chat-msgs{height:300px;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px;scroll-behavior:smooth}
 .chat-msgs::-webkit-scrollbar{width:2px}
-.chat-msgs::-webkit-scrollbar-thumb{background:var(--dim2)}
 .msg{max-width:88%;font-size:13px;line-height:1.6;padding:10px 14px;border-radius:12px;white-space:pre-wrap;word-break:break-word}
 .msg.bot{background:var(--bg3);color:var(--white);align-self:flex-start;border-bottom-left-radius:3px}
 .msg.user{background:var(--white);color:var(--bg);align-self:flex-end;border-bottom-right-radius:3px;font-weight:500}
@@ -253,15 +241,15 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .chat-send{background:var(--white);color:var(--bg);border:none;cursor:pointer;border-radius:4px;padding:9px 14px;font-family:var(--mono);font-size:10px;transition:background .2s;flex-shrink:0}
 .chat-send:hover{background:var(--accent)}
 
-/* FOOTER */
 footer{border-top:var(--border);padding:28px 60px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
 footer span{font-family:var(--mono);font-size:10px;color:var(--dim);letter-spacing:.08em}
 
-/* REVEAL */
 .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
 .reveal.in{opacity:1;transform:none}
 
-/* RESPONSIVE */
+.toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--bg2);border:var(--border);border-radius:4px;padding:10px 20px;font-family:var(--mono);font-size:11px;color:var(--white);letter-spacing:.08em;opacity:0;transition:all .3s;z-index:9999;pointer-events:none;white-space:nowrap}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
 @media(max-width:768px){
   nav{padding:0 24px}.nav-links{display:none}
   .section{padding:80px 24px}#hero{padding:60px 24px 60px}
@@ -270,18 +258,12 @@ footer span{font-family:var(--mono);font-size:10px;color:var(--dim);letter-spaci
   .contact-wrap{padding:48px 24px}footer{padding:24px}
   #chat-box{width:calc(100vw - 48px)}.rf-grid{grid-template-columns:1fr}
 }
-
-/* TOAST */
-.toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--bg2);border:var(--border);border-radius:4px;padding:10px 20px;font-family:var(--mono);font-size:11px;color:var(--white);letter-spacing:.08em;opacity:0;transition:all .3s;z-index:9999;pointer-events:none;white-space:nowrap}
-.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 </style>
 </head>
 <body>
 
-<!-- TOAST -->
 <div class="toast" id="toast"></div>
 
-<!-- NAV -->
 <nav>
   <a class="nav-logo" href="#" id="nav-logo">ZRH7</a>
   <ul class="nav-links">
@@ -293,12 +275,14 @@ footer span{font-family:var(--mono);font-size:10px;color:var(--dim);letter-spaci
     <li><a href="#contact" data-fr="Contact" data-en="Contact">Contact</a></li>
   </ul>
   <div class="controls">
+    <span class="fb-badge connecting" id="fb-badge">
+      <span class="fb-dot"></span><span id="fb-txt">CONNEXION</span>
+    </span>
     <button class="ctrl on" id="btn-fr" onclick="setLang('fr')">FR</button>
     <button class="ctrl" id="btn-en" onclick="setLang('en')">EN</button>
   </div>
 </nav>
 
-<!-- HERO -->
 <section id="hero">
   <div class="hero-lines"></div>
   <div class="hero-tag" data-fr="Roblox Builder Professionnel" data-en="Professional Roblox Builder">Roblox Builder Professionnel</div>
@@ -312,14 +296,12 @@ footer span{font-family:var(--mono);font-size:10px;color:var(--dim);letter-spaci
   </div>
 </section>
 
-<!-- STATS -->
 <div class="stats-row">
   <div class="stat-cell"><div class="stat-num">50+</div><div class="stat-label" data-fr="Projets livrés" data-en="Projects delivered">Projets livrés</div></div>
   <div class="stat-cell"><div class="stat-num">3+</div><div class="stat-label" data-fr="Années d'expérience" data-en="Years of experience">Années d'expérience</div></div>
   <div class="stat-cell"><div class="stat-num">100%</div><div class="stat-label" data-fr="Clients satisfaits" data-en="Satisfied clients">Clients satisfaits</div></div>
 </div>
 
-<!-- SERVICES -->
 <section id="services" class="section">
   <div class="reveal"><p class="s-eyebrow" data-fr="CE QUE JE FAIS" data-en="WHAT I DO">CE QUE JE FAIS</p></div>
   <div class="services-list reveal">
@@ -331,19 +313,19 @@ footer span{font-family:var(--mono);font-size:10px;color:var(--dim);letter-spaci
   </div>
 </section>
 
-<!-- CREATIONS -->
 <section id="works" class="section">
   <div class="reveal gallery-header">
     <div>
       <p class="s-eyebrow" data-fr="MES CRÉATIONS" data-en="MY WORK">MES CRÉATIONS</p>
       <h2 class="s-title" data-fr="Ce que j'ai construit" data-en="What I've built">Ce que j'ai construit</h2>
     </div>
-    <span class="sync-badge" id="sync-gallery"><span class="sync-dot"></span><span id="sync-gallery-txt">SYNC</span></span>
   </div>
-  <div class="gallery-grid reveal" id="public-gallery"></div>
+  <div class="gallery-grid reveal" id="public-gallery">
+    <div class="gallery-empty"><p>Chargement...</p></div>
+  </div>
   <div id="admin-panel">
     <div class="admin-bar">
-      <div class="admin-bar-left"><div class="admin-dot"></div><span class="admin-label">MODE ADMIN — VUE PRIVÉE</span></div>
+      <div class="admin-bar-left"><div class="admin-dot"></div><span class="admin-label">MODE ADMIN — FIREBASE LIVE 🔥</span></div>
       <div style="display:flex;gap:8px">
         <button class="ctrl on" onclick="openCM()">+ NOUVEAU</button>
         <button class="ctrl" onclick="logout()">DÉCONNEXION</button>
@@ -353,7 +335,6 @@ footer span{font-family:var(--mono);font-size:10px;color:var(--dim);letter-spaci
   </div>
 </section>
 
-<!-- CREATION MODAL -->
 <div class="cmodal" id="cm-modal">
   <div class="cm-box">
     <div class="cm-head"><h3 id="cm-title-label">NOUVELLE CRÉATION</h3><button class="cm-close" onclick="closeCM()">✕</button></div>
@@ -376,7 +357,6 @@ footer span{font-family:var(--mono);font-size:10px;color:var(--dim);letter-spaci
   </div>
 </div>
 
-<!-- ADMIN LOGIN -->
 <div id="admin-lock">
   <div class="lock-box">
     <h3>ACCÈS ADMIN</h3>
@@ -389,7 +369,6 @@ footer span{font-family:var(--mono);font-size:10px;color:var(--dim);letter-spaci
   </div>
 </div>
 
-<!-- PRICING -->
 <section id="pricing" class="section">
   <div class="reveal">
     <p class="s-eyebrow" data-fr="TARIFS" data-en="PRICING">TARIFS</p>
@@ -460,32 +439,26 @@ footer span{font-family:var(--mono);font-size:10px;color:var(--dim);letter-spaci
   </div>
 </section>
 
-<!-- REVIEWS -->
 <section id="reviews" class="section">
   <div class="reveal reviews-header">
     <div>
       <p class="s-eyebrow" data-fr="TÉMOIGNAGES" data-en="TESTIMONIALS">TÉMOIGNAGES</p>
-      <h2 class="s-title" data-fr="Avis clients" data-en="Client reviews">Avis clients
-        <span class="sync-badge" id="sync-reviews"><span class="sync-dot"></span><span id="sync-reviews-txt">SYNC</span></span>
-      </h2>
+      <h2 class="s-title" data-fr="Avis clients" data-en="Client reviews">Avis clients</h2>
     </div>
     <div class="reviews-avg">
       <div class="reviews-avg-num" id="avg-num">—</div>
       <div>
         <div class="reviews-avg-stars" id="avg-stars"></div>
-        <div class="reviews-count" id="reviews-count" data-fr="aucun avis" data-en="no reviews yet">aucun avis</div>
+        <div class="reviews-count" id="reviews-count">aucun avis</div>
       </div>
     </div>
   </div>
   <div class="reviews-grid reveal" id="reviews-grid"></div>
-  <!-- REVIEW FORM -->
   <div class="review-form reveal">
     <div class="rf-title" data-fr="LAISSER UN AVIS" data-en="LEAVE A REVIEW">LAISSER UN AVIS</div>
     <div class="rf-stars" id="rf-stars">
-      <span class="rf-star" data-v="1">★</span>
-      <span class="rf-star" data-v="2">★</span>
-      <span class="rf-star" data-v="3">★</span>
-      <span class="rf-star" data-v="4">★</span>
+      <span class="rf-star" data-v="1">★</span><span class="rf-star" data-v="2">★</span>
+      <span class="rf-star" data-v="3">★</span><span class="rf-star" data-v="4">★</span>
       <span class="rf-star" data-v="5">★</span>
     </div>
     <div class="rf-grid">
@@ -493,20 +466,17 @@ footer span{font-family:var(--mono);font-size:10px;color:var(--dim);letter-spaci
       <div class="rf-field">
         <label data-fr="FORMULE UTILISÉE" data-en="PLAN USED">FORMULE UTILISÉE</label>
         <select id="rf-plan">
-          <option value="" data-fr="Choisir..." data-en="Choose...">Choisir...</option>
-          <option value="Starter">Starter</option>
-          <option value="Pro">Pro</option>
-          <option value="Elite">Elite</option>
-          <option value="Sur mesure" data-en="Custom">Sur mesure</option>
+          <option value="">Choisir...</option>
+          <option value="Starter">Starter</option><option value="Pro">Pro</option>
+          <option value="Elite">Elite</option><option value="Sur mesure">Sur mesure</option>
         </select>
       </div>
     </div>
     <div class="rf-field" style="margin-bottom:16px"><label data-fr="TON AVIS" data-en="YOUR REVIEW">TON AVIS</label><textarea id="rf-text" rows="3" placeholder="Dis ce que tu as pensé du projet..."></textarea></div>
-    <button class="ctrl on" onclick="submitReview()" data-fr="PUBLIER MON AVIS" data-en="PUBLISH MY REVIEW">PUBLIER MON AVIS</button>
+    <button class="ctrl on" id="submit-review-btn" onclick="submitReview()">PUBLIER MON AVIS</button>
   </div>
 </section>
 
-<!-- ABOUT -->
 <section id="about" class="section">
   <div class="about-grid reveal">
     <div>
@@ -526,7 +496,6 @@ footer span{font-family:var(--mono);font-size:10px;color:var(--dim);letter-spaci
   </div>
 </section>
 
-<!-- CONTACT -->
 <section id="contact" class="section" style="padding-top:0">
   <div class="contact-wrap reveal">
     <h2 class="contact-title" data-fr="Travaillons<br>ensemble." data-en="Let's build<br>together.">Travaillons<br>ensemble.</h2>
@@ -544,18 +513,17 @@ footer span{font-family:var(--mono);font-size:10px;color:var(--dim);letter-spaci
   <span data-fr="© 2025 — Tous droits réservés" data-en="© 2025 — All rights reserved">© 2025 — Tous droits réservés</span>
 </footer>
 
-<!-- AI CHAT -->
 <div id="ai-chat">
   <div id="chat-box">
     <div class="chat-head">
       <div class="chat-head-info">
         <div class="chat-dot"></div>
-        <div><div class="chat-head-name">ZRH7 — Assistant</div><div class="chat-head-sub" data-fr="Posez vos questions" data-en="Ask me anything">Posez vos questions</div></div>
+        <div><div class="chat-head-name">ZRH7 — Assistant</div><div class="chat-head-sub">Posez vos questions</div></div>
       </div>
       <button class="chat-close" onclick="toggleChat()">✕</button>
     </div>
     <div class="chat-msgs" id="chat-msgs">
-      <div class="msg bot" data-fr="Salut ! 👋 Je suis l'assistant de Zayrho7. Pose-moi n'importe quelle question — tarifs, délais, types de maps, contact..." data-en="Hey! 👋 I'm Zayrho7's assistant. Ask me anything — pricing, deadlines, map types, contact...">Salut ! 👋 Je suis l'assistant de Zayrho7. Pose-moi n'importe quelle question — tarifs, délais, types de maps, contact...</div>
+      <div class="msg bot">Salut ! 👋 Je suis l'assistant de Zayrho7. Pose-moi n'importe quelle question — tarifs, délais, types de maps, contact...</div>
     </div>
     <div class="chat-suggestions" id="chat-sugs"></div>
     <div class="chat-footer">
@@ -568,292 +536,262 @@ footer span{font-family:var(--mono);font-size:10px;color:var(--dim);letter-spaci
   </button>
 </div>
 
-<script>
-/* ═══════════════════════════════════════
-   CONFIG
-   ═══════════════════════════════════════ */
-const ADMIN_PASSWORD = 'zayrho7admin';
-// Clés de stockage partagé (shared = true → visible par tous)
-const SK_CREATIONS = 'zrh7_creations';
-const SK_REVIEWS   = 'zrh7_reviews';
+<!-- Firebase SDK via ESM -->
+<script type="module">
+import { initializeApp }                           from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getDatabase, ref, set, push, remove, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
-/* ═══════════════════════════════════════
+/* ══════════════════════════════
+   FIREBASE CONFIG
+══════════════════════════════ */
+const app = initializeApp({
+  apiKey:            "AIzaSyAsUif-nNAZAWis6HD6CWsvNgrSuEsFpbs",
+  authDomain:        "portfoliozy.firebaseapp.com",
+  databaseURL:       "https://portfoliozy-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId:         "portfoliozy",
+  storageBucket:     "portfoliozy.firebasestorage.app",
+  messagingSenderId: "359252982024",
+  appId:             "1:359252982024:web:423cd036655ea9916b54bd"
+});
+const db = getDatabase(app);
+const creationsRef = ref(db, 'creations');
+const reviewsRef   = ref(db, 'reviews');
+
+/* ══════════════════════════════
    STATE
-   ═══════════════════════════════════════ */
-let lang = 'fr';
-let curCurrency = 'eur';
-let isAdmin = false;
-let logoClicks = 0, logoTimer = null;
-let creations = [];
-let reviews = [];
-let pendingImg = null;
-let editingIdx = null;
+══════════════════════════════ */
+const ADMIN_PWD = 'zayrho7admin';
+let lang        = 'fr';
+let isAdmin     = false;
+let logoClicks  = 0, logoTimer = null;
+let pendingImg  = null;
+let editingKey  = null;
+let rfRating    = 0;
+let chatOpen    = false, msgCount = 0, lastIntent = null;
+let creationsMap = {};
+let reviewsMap   = {};
 
-/* ═══════════════════════════════════════
-   TOAST
-   ═══════════════════════════════════════ */
-function showToast(msg, duration=2500) {
+/* ══════════════════════════════
+   UI HELPERS
+══════════════════════════════ */
+function fbBadge(state) {
+  const el  = document.getElementById('fb-badge');
+  const txt = document.getElementById('fb-txt');
+  el.className = 'fb-badge ' + state;
+  txt.textContent = {connecting:'CONNEXION', live:'LIVE 🔥', error:'OFFLINE'}[state] || state;
+}
+function toast(msg) {
   const t = document.getElementById('toast');
   t.textContent = msg; t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), duration);
+  clearTimeout(t._t); t._t = setTimeout(() => t.classList.remove('show'), 2800);
 }
+function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function stars(n, sz=16, cls='star'){ let h=''; for(let i=1;i<=5;i++) h+=`<span class="${cls}${i<=n?' on':''}" style="font-size:${sz}px">★</span>`; return h; }
 
-/* ═══════════════════════════════════════
-   SYNC STATUS BADGE
-   ═══════════════════════════════════════ */
-function setSyncStatus(id, state) {
-  // state: 'syncing' | 'synced' | 'error'
-  const badge = document.getElementById(id);
-  const txt   = document.getElementById(id + '-txt');
-  if (!badge || !txt) return;
-  badge.className = 'sync-badge ' + state;
-  const labels = { syncing: 'SYNC...', synced: 'EN LIGNE', error: 'LOCAL' };
-  txt.textContent = labels[state] || state;
-}
-
-/* ═══════════════════════════════════════
-   SHARED STORAGE  (window.storage)
-   Toutes les données sont partagées entre
-   tous les visiteurs grâce à shared=true.
-   ═══════════════════════════════════════ */
-async function loadSharedData() {
-  setSyncStatus('sync-gallery', 'syncing');
-  setSyncStatus('sync-reviews', 'syncing');
-  try {
-    const [cRes, rRes] = await Promise.all([
-      window.storage.get(SK_CREATIONS, true),
-      window.storage.get(SK_REVIEWS,   true)
-    ]);
-    creations = cRes ? JSON.parse(cRes.value) : [];
-    reviews   = rRes ? JSON.parse(rRes.value) : [];
-    setSyncStatus('sync-gallery', 'synced');
-    setSyncStatus('sync-reviews', 'synced');
-  } catch(e) {
-    // Fallback localStorage si window.storage indisponible
-    try { creations = JSON.parse(localStorage.getItem(SK_CREATIONS) || '[]'); } catch(_){ creations=[]; }
-    try { reviews   = JSON.parse(localStorage.getItem(SK_REVIEWS)   || '[]'); } catch(_){ reviews=[]; }
-    setSyncStatus('sync-gallery', 'error');
-    setSyncStatus('sync-reviews', 'error');
-  }
-}
-
-async function saveCreations() {
-  setSyncStatus('sync-gallery', 'syncing');
-  try {
-    await window.storage.set(SK_CREATIONS, JSON.stringify(creations), true);
-    setSyncStatus('sync-gallery', 'synced');
-  } catch(e) {
-    localStorage.setItem(SK_CREATIONS, JSON.stringify(creations));
-    setSyncStatus('sync-gallery', 'error');
-  }
-}
-
-async function saveReviews() {
-  setSyncStatus('sync-reviews', 'syncing');
-  try {
-    await window.storage.set(SK_REVIEWS, JSON.stringify(reviews), true);
-    setSyncStatus('sync-reviews', 'synced');
-  } catch(e) {
-    localStorage.setItem(SK_REVIEWS, JSON.stringify(reviews));
-    setSyncStatus('sync-reviews', 'error');
-  }
-}
-
-/* ═══════════════════════════════════════
-   AUTO-REFRESH toutes les 30 secondes
-   Pour que tous voient les mises à jour
-   ═══════════════════════════════════════ */
-async function refreshData() {
-  await loadSharedData();
-  renderPublicGallery();
-  renderReviews();
+/* ══════════════════════════════
+   FIREBASE REALTIME LISTENERS
+   → mise à jour instantanée
+     pour TOUS les visiteurs
+══════════════════════════════ */
+onValue(creationsRef, snap => {
+  creationsMap = snap.val() || {};
+  fbBadge('live');
+  renderGallery();
   if (isAdmin) renderAdminCards();
+}, () => fbBadge('error'));
+
+onValue(reviewsRef, snap => {
+  reviewsMap = snap.val() || {};
+  renderReviews();
+});
+
+function creationsList() {
+  return Object.entries(creationsMap).map(([k,v])=>({...v,_key:k}));
+}
+function reviewsList() {
+  return Object.entries(reviewsMap).map(([k,v])=>({...v,_key:k}))
+               .sort((a,b)=>(b.ts||0)-(a.ts||0));
 }
 
-/* ═══════════════════════════════════════
+/* ══════════════════════════════
    LANGUAGE
-   ═══════════════════════════════════════ */
-function setLang(l) {
+══════════════════════════════ */
+window.setLang = l => {
   lang = l;
   document.getElementById('btn-fr').classList.toggle('on', l==='fr');
   document.getElementById('btn-en').classList.toggle('on', l==='en');
   document.documentElement.lang = l;
   document.querySelectorAll('[data-fr][data-en]').forEach(el => {
     const v = el.getAttribute('data-'+l);
-    if(v===null) return;
-    if(v.includes('<br>')) el.innerHTML=v; else el.textContent=v;
+    if (v===null) return;
+    if (v.includes('<br>')) el.innerHTML=v; else el.textContent=v;
   });
-  renderPublicGallery(); renderReviews();
-}
+  renderGallery(); renderReviews();
+};
 
-/* ═══════════════════════════════════════
+/* ══════════════════════════════
    CURRENCY
-   ═══════════════════════════════════════ */
+══════════════════════════════ */
 const PRICES = {
   eur:   {s:['€','20'],    p:['€','45'],    e:['€','150']},
   robux: {s:['R$','4 500'],p:['R$','7 500'],e:['R$','25 000']}
 };
-function setCur(c) {
-  curCurrency = c;
+window.setCur = c => {
   document.getElementById('c-eur').classList.toggle('on',   c==='eur');
   document.getElementById('c-robux').classList.toggle('on', c==='robux');
-  const d = PRICES[c];
-  [['s',d.s],['p',d.p],['e',d.e]].forEach(([k,v])=>{
-    document.getElementById('c-'+k).textContent=v[0];
-    document.getElementById('v-'+k).textContent=v[1];
-    const el=document.getElementById('pa-'+k);
+  [['s',PRICES[c].s],['p',PRICES[c].p],['e',PRICES[c].e]].forEach(([k,v])=>{
+    document.getElementById('c-'+k).textContent = v[0];
+    document.getElementById('v-'+k).textContent = v[1];
+    const el = document.getElementById('pa-'+k);
     el.style.transform='scale(1.07)'; el.style.color='#aaa';
-    setTimeout(()=>{ el.style.transform=''; el.style.color=''; },280);
+    setTimeout(()=>{el.style.transform='';el.style.color='';},280);
   });
-}
+};
 
-/* ═══════════════════════════════════════
+/* ══════════════════════════════
    GALLERY — PUBLIC
-   ═══════════════════════════════════════ */
-function renderPublicGallery() {
-  const g = document.getElementById('public-gallery');
-  g.innerHTML = '';
-  const vis = creations.filter(c=>c.img);
-  if(!vis.length){
-    g.innerHTML=`<div class="gallery-empty"><p>${lang==='fr'?'Bientôt disponible...':'Coming soon...'}</p></div>`;
+══════════════════════════════ */
+function renderGallery() {
+  const g = document.getElementById('public-gallery'); g.innerHTML = '';
+  const items = creationsList().filter(c=>c.img);
+  if (!items.length) {
+    g.innerHTML = `<div class="gallery-empty"><p>${lang==='fr'?'Bientôt disponible...':'Coming soon...'}</p></div>`;
     return;
   }
-  vis.forEach(item=>{
-    const d=document.createElement('div'); d.className='gitem';
-    d.innerHTML=`<img src="${item.img}" alt="${item.title}" loading="lazy"/>
+  items.forEach(item => {
+    const d = document.createElement('div'); d.className = 'gitem';
+    d.innerHTML = `<img src="${item.img}" alt="${esc(item.title)}" loading="lazy"/>
       <div class="goverlay"><div class="gov-text">
-        <div class="gov-title">${item.title}</div>
-        ${item.desc?`<div style="font-size:12px;color:rgba(255,255,255,.5);margin-top:4px;line-height:1.4">${item.desc}</div>`:''}
-        <div class="gov-tag" style="margin-top:6px">${item.type||'Roblox Build'}</div>
+        <div class="gov-title">${esc(item.title)}</div>
+        ${item.desc?`<div style="font-size:12px;color:rgba(255,255,255,.5);margin-top:4px;line-height:1.4">${esc(item.desc)}</div>`:''}
+        <div class="gov-tag" style="margin-top:6px">${esc(item.type||'Roblox Build')}</div>
       </div></div>`;
     g.appendChild(d);
   });
 }
 
-/* ═══════════════════════════════════════
-   ADMIN — UNLOCK
-   ═══════════════════════════════════════ */
-document.getElementById('nav-logo').addEventListener('click', e=>{
+/* ══════════════════════════════
+   ADMIN LOGIN
+══════════════════════════════ */
+document.getElementById('nav-logo').addEventListener('click', e => {
   e.preventDefault(); logoClicks++;
   clearTimeout(logoTimer);
-  if(logoClicks>=2){ logoClicks=0; isAdmin ? logout() : openLock(); }
-  else logoTimer=setTimeout(()=>{ logoClicks=0; },600);
+  if (logoClicks >= 2) { logoClicks=0; isAdmin ? logout() : openLock(); }
+  else logoTimer = setTimeout(()=>{ logoClicks=0; }, 600);
 });
-function openLock(){ document.getElementById('admin-lock').classList.add('open'); document.getElementById('lock-err').style.display='none'; document.getElementById('pwd-input').value=''; setTimeout(()=>document.getElementById('pwd-input').focus(),100); }
-function closeLock(){ document.getElementById('admin-lock').classList.remove('open'); document.getElementById('pwd-input').value=''; }
-function tryLogin(){
-  if(document.getElementById('pwd-input').value===ADMIN_PASSWORD){
-    isAdmin=true; closeLock();
-    document.getElementById('admin-panel').style.display='block';
-    renderAdminCards();
-  } else {
-    document.getElementById('lock-err').style.display='block';
-    document.getElementById('pwd-input').value='';
-    document.getElementById('pwd-input').focus();
-    setTimeout(()=>document.getElementById('lock-err').style.display='none',2500);
-  }
+function openLock() {
+  document.getElementById('admin-lock').classList.add('open');
+  document.getElementById('lock-err').style.display = 'none';
+  document.getElementById('pwd-input').value = '';
+  setTimeout(()=>document.getElementById('pwd-input').focus(), 100);
 }
-document.getElementById('pwd-input').addEventListener('keydown',e=>{ if(e.key==='Enter') tryLogin(); });
-function logout(){ isAdmin=false; document.getElementById('admin-panel').style.display='none'; }
+window.closeLock = () => {
+  document.getElementById('admin-lock').classList.remove('open');
+  document.getElementById('pwd-input').value = '';
+};
+window.tryLogin = () => {
+  if (document.getElementById('pwd-input').value === ADMIN_PWD) {
+    isAdmin = true; closeLock();
+    document.getElementById('admin-panel').style.display = 'block';
+    renderAdminCards(); toast('✓ Mode admin activé');
+  } else {
+    document.getElementById('lock-err').style.display = 'block';
+    document.getElementById('pwd-input').value = '';
+    document.getElementById('pwd-input').focus();
+    setTimeout(()=>document.getElementById('lock-err').style.display='none', 2500);
+  }
+};
+document.getElementById('pwd-input').addEventListener('keydown', e=>{ if(e.key==='Enter') tryLogin(); });
+window.logout = () => { isAdmin=false; document.getElementById('admin-panel').style.display='none'; };
 
-/* ═══════════════════════════════════════
+/* ══════════════════════════════
    ADMIN CARDS
-   ═══════════════════════════════════════ */
-function renderAdminCards(){
-  const g=document.getElementById('admin-cards'); g.innerHTML='';
-  if(!creations.length){
-    g.innerHTML=`<div style="grid-column:1/-1;padding:40px 0;text-align:center"><p style="font-family:var(--mono);font-size:11px;color:var(--dim2)">Aucune création — clique sur + NOUVEAU</p></div>`;
+══════════════════════════════ */
+function renderAdminCards() {
+  const g = document.getElementById('admin-cards'); g.innerHTML = '';
+  const items = creationsList();
+  if (!items.length) {
+    g.innerHTML = `<div style="grid-column:1/-1;padding:40px 0;text-align:center"><p style="font-family:var(--mono);font-size:11px;color:var(--dim2)">Aucune création — clique sur + NOUVEAU</p></div>`;
     return;
   }
-  creations.forEach((item,i)=>{
-    const c=document.createElement('div'); c.className='admin-card';
-    const img=item.img?`<img src="${item.img}" alt="${item.title}"/>`:`<div class="admin-card-empty"><span style="font-family:var(--mono);font-size:10px;color:var(--dim2)">PAS D'IMAGE</span></div>`;
-    c.innerHTML=`${img}
+  items.forEach(item => {
+    const c = document.createElement('div'); c.className = 'admin-card';
+    c.innerHTML = `${item.img?`<img src="${item.img}" alt="${esc(item.title)}"/>`:`<div class="admin-card-empty"><span style="font-family:var(--mono);font-size:10px;color:var(--dim2)">PAS D'IMAGE</span></div>`}
       <div class="admin-card-body">
-        <div class="admin-card-title">${item.title||'Sans titre'}</div>
-        ${item.type?`<div style="font-family:var(--mono);font-size:9px;color:var(--dim);letter-spacing:.1em;margin-bottom:6px">${item.type}</div>`:''}
-        ${item.desc?`<div class="admin-card-desc">${item.desc}</div>`:''}
+        <div class="admin-card-title">${esc(item.title||'Sans titre')}</div>
+        ${item.type?`<div style="font-family:var(--mono);font-size:9px;color:var(--dim);letter-spacing:.1em;margin-bottom:6px">${esc(item.type)}</div>`:''}
+        ${item.desc?`<div class="admin-card-desc">${esc(item.desc)}</div>`:''}
       </div>
       <div class="admin-card-foot">
-        <button class="edit-btn" onclick="openCM(${i})">✎ Modifier</button>
-        <button class="del-btn" onclick="deleteCreation(${i})">✕ Supprimer</button>
+        <button class="edit-btn">✎ Modifier</button>
+        <button class="del-btn">✕ Supprimer</button>
       </div>`;
+    c.querySelector('.edit-btn').onclick = () => openCM(item._key);
+    c.querySelector('.del-btn').onclick  = () => deleteCreation(item._key);
     g.appendChild(c);
   });
 }
-async function deleteCreation(i){
-  if(!confirm('Supprimer cette création ?')) return;
-  creations.splice(i,1);
-  await saveCreations();
-  renderPublicGallery(); renderAdminCards();
-  showToast('✓ Création supprimée');
+async function deleteCreation(key) {
+  if (!confirm('Supprimer cette création ?')) return;
+  await remove(ref(db, 'creations/'+key));
+  toast('✓ Création supprimée');
 }
 
-/* ═══════════════════════════════════════
+/* ══════════════════════════════
    CREATION MODAL
-   ═══════════════════════════════════════ */
-function openCM(idx=null){
-  editingIdx=idx; pendingImg=null;
-  const isEdit=(idx!==null);
-  document.getElementById('cm-title-label').textContent = isEdit ? 'MODIFIER LA CRÉATION' : 'NOUVELLE CRÉATION';
-  document.getElementById('cm-publish-btn').textContent = isEdit ? '✓ ENREGISTRER' : '✓ PUBLIER';
-  if(isEdit){
-    const item=creations[idx];
-    document.getElementById('cm-t').value=item.title||'';
-    document.getElementById('cm-d').value=item.desc||'';
-    document.getElementById('cm-ty').value=item.type||'';
-    if(item.img){
-      pendingImg=item.img;
-      const prev=document.getElementById('cm-preview');
-      prev.src=item.img; prev.style.display='block';
+══════════════════════════════ */
+window.openCM = (key=null) => {
+  editingKey=key; pendingImg=null;
+  const isEdit = key!==null;
+  document.getElementById('cm-title-label').textContent = isEdit?'MODIFIER LA CRÉATION':'NOUVELLE CRÉATION';
+  document.getElementById('cm-publish-btn').textContent = isEdit?'✓ ENREGISTRER':'✓ PUBLIER';
+  if (isEdit && creationsMap[key]) {
+    const item = creationsMap[key];
+    document.getElementById('cm-t').value  = item.title||'';
+    document.getElementById('cm-d').value  = item.desc||'';
+    document.getElementById('cm-ty').value = item.type||'';
+    if (item.img) {
+      pendingImg = item.img;
+      const p = document.getElementById('cm-preview'); p.src=item.img; p.style.display='block';
       document.getElementById('cm-drop').classList.add('has-file');
       document.getElementById('cm-icon').style.display='none';
       document.getElementById('cm-drop-p').textContent='Image actuelle (clique pour changer)';
       document.getElementById('cm-drop-s').style.display='none';
-    } else { resetDropZone(); }
+    } else resetDrop();
   } else {
-    document.getElementById('cm-t').value='';
-    document.getElementById('cm-d').value='';
-    document.getElementById('cm-ty').value='';
-    resetDropZone();
+    document.getElementById('cm-t').value=''; document.getElementById('cm-d').value=''; document.getElementById('cm-ty').value='';
+    resetDrop();
   }
   document.getElementById('cm-file').value='';
   document.getElementById('cm-modal').classList.add('open');
-}
-function resetDropZone(){
-  const prev=document.getElementById('cm-preview');
-  prev.src=''; prev.style.display='none';
+};
+function resetDrop() {
+  const p=document.getElementById('cm-preview'); p.src=''; p.style.display='none';
   document.getElementById('cm-drop').classList.remove('has-file');
   document.getElementById('cm-icon').style.display='block';
   document.getElementById('cm-drop-p').textContent='Glisse ton image ici';
   document.getElementById('cm-drop-s').style.display='block';
-  document.getElementById('cm-drop-s').textContent='ou clique — PNG, JPG, WEBP';
 }
-function closeCM(){ document.getElementById('cm-modal').classList.remove('open'); editingIdx=null; }
-
-async function publishCM(){
-  const title=document.getElementById('cm-t').value.trim();
-  if(!title){ document.getElementById('cm-t').focus(); return; }
+window.closeCM = () => { document.getElementById('cm-modal').classList.remove('open'); editingKey=null; };
+window.publishCM = async () => {
+  const title = document.getElementById('cm-t').value.trim();
+  if (!title) { document.getElementById('cm-t').focus(); return; }
   const btn = document.getElementById('cm-publish-btn');
-  btn.textContent = '⏳ Publication...';
-  btn.disabled = true;
-  const obj={ title, desc:document.getElementById('cm-d').value.trim(), type:document.getElementById('cm-ty').value.trim()||'Roblox Build', img:pendingImg };
-  if(editingIdx!==null){ creations[editingIdx]=obj; } else { creations.push(obj); }
-  await saveCreations();
-  renderPublicGallery(); renderAdminCards(); closeCM();
-  btn.textContent = editingIdx!==null ? '✓ ENREGISTRER' : '✓ PUBLIER';
-  btn.disabled = false;
-  showToast('✓ Création publiée — visible par tous !');
-}
+  btn.textContent='⏳ Envoi vers Firebase...'; btn.disabled=true;
+  const obj = { title, desc:document.getElementById('cm-d').value.trim(), type:document.getElementById('cm-ty').value.trim()||'Roblox Build', img:pendingImg||'', ts:Date.now() };
+  if (editingKey) { await set(ref(db,'creations/'+editingKey), obj); toast('✓ Création mise à jour — visible par tous !'); }
+  else            { await push(creationsRef, obj);                   toast('✓ Création publiée — visible par tous en temps réel !'); }
+  btn.textContent=editingKey?'✓ ENREGISTRER':'✓ PUBLIER'; btn.disabled=false;
+  closeCM();
+};
 
-/* drag & drop */
-const cmDrop=document.getElementById('cm-drop');
-const cmFile=document.getElementById('cm-file');
-cmDrop.addEventListener('dragover',e=>{ e.preventDefault(); cmDrop.classList.add('dragover'); });
+// Drag & drop
+const cmDrop=document.getElementById('cm-drop'), cmFile=document.getElementById('cm-file');
+cmDrop.addEventListener('dragover',e=>{e.preventDefault();cmDrop.classList.add('dragover');});
 cmDrop.addEventListener('dragleave',()=>cmDrop.classList.remove('dragover'));
-cmDrop.addEventListener('drop',e=>{ e.preventDefault(); cmDrop.classList.remove('dragover'); const f=e.dataTransfer.files[0]; if(f&&f.type.startsWith('image/')) loadCMPreview(f); });
-cmFile.addEventListener('change',function(){ if(this.files[0]) loadCMPreview(this.files[0]); });
-function loadCMPreview(file){
+cmDrop.addEventListener('drop',e=>{e.preventDefault();cmDrop.classList.remove('dragover');const f=e.dataTransfer.files[0];if(f&&f.type.startsWith('image/'))previewImg(f);});
+cmFile.addEventListener('change',function(){if(this.files[0])previewImg(this.files[0]);});
+function previewImg(file){
   const r=new FileReader(); r.onload=e=>{
     pendingImg=e.target.result;
     const p=document.getElementById('cm-preview'); p.src=pendingImg; p.style.display='block';
@@ -863,255 +801,144 @@ function loadCMPreview(file){
     document.getElementById('cm-drop-s').style.display='none';
   }; r.readAsDataURL(file);
 }
-document.getElementById('cm-modal').addEventListener('click',function(e){ if(e.target===this) closeCM(); });
+document.getElementById('cm-modal').addEventListener('click',function(e){if(e.target===this)closeCM();});
 
-/* ═══════════════════════════════════════
+/* ══════════════════════════════
    REVIEWS
-   ═══════════════════════════════════════ */
-let rfRating = 0;
-
+══════════════════════════════ */
 document.querySelectorAll('.rf-star').forEach(s=>{
-  s.addEventListener('click',()=>{
-    rfRating=parseInt(s.dataset.v);
-    document.querySelectorAll('.rf-star').forEach((st,i)=>st.classList.toggle('on',i<rfRating));
-  });
-  s.addEventListener('mouseenter',()=>{
-    const v=parseInt(s.dataset.v);
-    document.querySelectorAll('.rf-star').forEach((st,i)=>st.classList.toggle('on',i<v));
-  });
+  s.addEventListener('click',()=>{ rfRating=+s.dataset.v; document.querySelectorAll('.rf-star').forEach((x,i)=>x.classList.toggle('on',i<rfRating)); });
+  s.addEventListener('mouseenter',()=>{ const v=+s.dataset.v; document.querySelectorAll('.rf-star').forEach((x,i)=>x.classList.toggle('on',i<v)); });
 });
-document.getElementById('rf-stars').addEventListener('mouseleave',()=>{
-  document.querySelectorAll('.rf-star').forEach((st,i)=>st.classList.toggle('on',i<rfRating));
-});
+document.getElementById('rf-stars').addEventListener('mouseleave',()=>{ document.querySelectorAll('.rf-star').forEach((x,i)=>x.classList.toggle('on',i<rfRating)); });
 
-async function submitReview(){
+window.submitReview = async () => {
   const name=document.getElementById('rf-name').value.trim();
   const plan=document.getElementById('rf-plan').value;
   const text=document.getElementById('rf-text').value.trim();
-  if(!name||!rfRating||!text){
-    alert(lang==='fr'?'Remplis au moins ton pseudo, les étoiles et ton avis !':'Fill in at least your name, stars and review!');
-    return;
-  }
-  const btn = document.querySelector('.review-form .ctrl.on');
-  if(btn){ btn.textContent='⏳ Envoi...'; btn.disabled=true; }
-  const id=Date.now()+'-'+Math.random().toString(36).slice(2,7);
-  reviews.push({ id, name, plan, text, rating:rfRating, date:new Date().toLocaleDateString('fr-FR') });
-  // Sauvegarder le token dans sessionStorage pour pouvoir supprimer son propre avis
-  const myTokens=JSON.parse(sessionStorage.getItem('zrh7_my_reviews')||'[]');
-  myTokens.push(id); sessionStorage.setItem('zrh7_my_reviews',JSON.stringify(myTokens));
-  await saveReviews();
-  // reset form
-  document.getElementById('rf-name').value='';
-  document.getElementById('rf-plan').value='';
-  document.getElementById('rf-text').value='';
-  rfRating=0;
-  document.querySelectorAll('.rf-star').forEach(s=>s.classList.remove('on'));
-  renderReviews();
-  if(btn){ btn.textContent = lang==='fr'?'PUBLIER MON AVIS':'PUBLISH MY REVIEW'; btn.disabled=false; }
-  showToast('✓ Avis publié — merci !');
-}
+  if (!name||!rfRating||!text){ alert('Remplis ton pseudo, les étoiles et ton avis !'); return; }
+  const btn=document.getElementById('submit-review-btn');
+  btn.textContent='⏳ Envoi...'; btn.disabled=true;
+  const newRef = await push(reviewsRef, { name, plan, text, rating:rfRating, date:new Date().toLocaleDateString('fr-FR'), ts:Date.now() });
+  // Sauvegarder la clé pour pouvoir supprimer son propre avis
+  const mine = JSON.parse(sessionStorage.getItem('zrh7_mine')||'[]');
+  mine.push(newRef.key); sessionStorage.setItem('zrh7_mine', JSON.stringify(mine));
+  document.getElementById('rf-name').value=''; document.getElementById('rf-plan').value=''; document.getElementById('rf-text').value='';
+  rfRating=0; document.querySelectorAll('.rf-star').forEach(s=>s.classList.remove('on'));
+  btn.textContent='PUBLIER MON AVIS'; btn.disabled=false;
+  toast('✓ Avis publié — visible par tous en temps réel !');
+};
 
-async function deleteReview(id){
-  const myTokens=JSON.parse(sessionStorage.getItem('zrh7_my_reviews')||'[]');
-  if(!myTokens.includes(id) && !isAdmin){
-    alert(lang==='fr'?'Tu ne peux supprimer que ton propre avis.':'You can only delete your own review.');
-    return;
-  }
-  reviews=reviews.filter(r=>r.id!==id);
-  await saveReviews();
-  renderReviews();
-  showToast('✓ Avis supprimé');
-}
+window.deleteReview = async key => {
+  const mine = JSON.parse(sessionStorage.getItem('zrh7_mine')||'[]');
+  if (!mine.includes(key) && !isAdmin){ alert('Tu ne peux supprimer que ton propre avis.'); return; }
+  await remove(ref(db,'reviews/'+key));
+  toast('✓ Avis supprimé');
+};
 
-function starsHTML(rating, size=16, cls='star'){
-  let h=''; for(let i=1;i<=5;i++) h+=`<span class="${cls}${i<=rating?' on':''}" style="font-size:${size}px">★</span>`; return h;
-}
-
-function renderReviews(){
-  const g=document.getElementById('reviews-grid');
-  const myTokens=JSON.parse(sessionStorage.getItem('zrh7_my_reviews')||'[]');
-  g.innerHTML='';
-  if(!reviews.length){
+function renderReviews() {
+  const g = document.getElementById('reviews-grid'); g.innerHTML='';
+  const mine = JSON.parse(sessionStorage.getItem('zrh7_mine')||'[]');
+  const items = reviewsList();
+  if (!items.length) {
     g.innerHTML=`<div class="reviews-empty" style="grid-column:1/-1"><p>${lang==='fr'?'Pas encore d\'avis — sois le premier !':'No reviews yet — be the first!'}</p></div>`;
     document.getElementById('avg-num').textContent='—';
     document.getElementById('avg-stars').innerHTML='';
     document.getElementById('reviews-count').textContent=lang==='fr'?'aucun avis':'no reviews yet';
     return;
   }
-  const avg=(reviews.reduce((a,r)=>a+r.rating,0)/reviews.length);
+  const avg = items.reduce((a,r)=>a+r.rating,0)/items.length;
   document.getElementById('avg-num').textContent=avg.toFixed(1);
-  document.getElementById('avg-stars').innerHTML=starsHTML(Math.round(avg));
-  document.getElementById('reviews-count').textContent=`${reviews.length} avis`;
-  [...reviews].reverse().forEach(r=>{
-    const isMine=myTokens.includes(r.id) || isAdmin;
-    const card=document.createElement('div'); card.className='review-card';
-    card.innerHTML=`
-      <div class="rc-top">
-        <div>
-          <div class="rc-name">${escHtml(r.name)}</div>
-          ${r.plan?`<div class="rc-plan">${escHtml(r.plan)}</div>`:''}
-        </div>
-        <div style="display:flex;align-items:center;gap:10px">
-          <div class="rc-stars">${starsHTML(r.rating,14,'rc-star')}</div>
-          ${isMine?`<button class="rc-del" onclick="deleteReview('${r.id}')" title="Supprimer">✕</button>`:''}
-        </div>
-      </div>
-      <div class="rc-text">${escHtml(r.text)}</div>
-      <div class="rc-date">${r.date||''}</div>`;
+  document.getElementById('avg-stars').innerHTML=stars(Math.round(avg));
+  document.getElementById('reviews-count').textContent=`${items.length} avis`;
+  items.forEach(r=>{
+    const canDel = mine.includes(r._key)||isAdmin;
+    const card = document.createElement('div'); card.className='review-card';
+    card.innerHTML=`<div class="rc-top"><div><div class="rc-name">${esc(r.name)}</div>${r.plan?`<div class="rc-plan">${esc(r.plan)}</div>`:''}</div>
+      <div style="display:flex;align-items:center;gap:10px"><div class="rc-stars">${stars(r.rating,14,'rc-star')}</div>
+      ${canDel?`<button class="rc-del">✕</button>`:''}</div></div>
+      <div class="rc-text">${esc(r.text)}</div><div class="rc-date">${r.date||''}</div>`;
+    if (canDel) card.querySelector('.rc-del').onclick = ()=>deleteReview(r._key);
     g.appendChild(card);
   });
 }
-function escHtml(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 
-/* ═══════════════════════════════════════
+/* ══════════════════════════════
    AI CHAT
-   ═══════════════════════════════════════ */
-let chatOpen=false, msgCount=0, lastIntent=null;
-function toggleChat(){
-  chatOpen=!chatOpen;
-  document.getElementById('chat-box').classList.toggle('open',chatOpen);
-  if(chatOpen) setTimeout(()=>document.getElementById('chat-input').focus(),200);
-}
-function addMsg(text,role){
-  const msgs=document.getElementById('chat-msgs');
-  const d=document.createElement('div'); d.className='msg '+role;
-  d.style.whiteSpace='pre-wrap'; d.textContent=text;
-  msgs.appendChild(d); msgs.scrollTop=msgs.scrollHeight;
-}
-function showTyping(){ const msgs=document.getElementById('chat-msgs'); const d=document.createElement('div'); d.className='msg bot typing'; d.id='typing-indicator'; d.innerHTML='<div class="tdot"></div><div class="tdot"></div><div class="tdot"></div>'; msgs.appendChild(d); msgs.scrollTop=msgs.scrollHeight; }
-function hideTyping(){ const t=document.getElementById('typing-indicator'); if(t) t.remove(); }
+══════════════════════════════ */
+window.toggleChat = ()=>{ chatOpen=!chatOpen; document.getElementById('chat-box').classList.toggle('open',chatOpen); if(chatOpen)setTimeout(()=>document.getElementById('chat-input').focus(),200); };
+function addMsg(text,role){ const m=document.getElementById('chat-msgs'),d=document.createElement('div'); d.className='msg '+role; d.style.whiteSpace='pre-wrap'; d.textContent=text; m.appendChild(d); m.scrollTop=m.scrollHeight; }
+function showTyping(){ const m=document.getElementById('chat-msgs'),d=document.createElement('div'); d.className='msg bot typing'; d.id='typing'; d.innerHTML='<div class="tdot"></div><div class="tdot"></div><div class="tdot"></div>'; m.appendChild(d); m.scrollTop=m.scrollHeight; }
+function hideTyping(){ const t=document.getElementById('typing'); if(t)t.remove(); }
+const N=s=>s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[''´`]/g,"'");
+const pick=a=>a[Math.floor(Math.random()*a.length)];
 
-const N = s => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[''´`]/g,"'");
-const pick = a => a[Math.floor(Math.random()*a.length)];
-
-const INTENTS = [
-  { id:'greet',    patterns:[['salut','bonjour','hello','hi','hey','coucou','bonsoir','yo','wesh','bah']] },
-  { id:'price',    patterns:[['prix','tarif','coute','coût','combien','cout','budget','formule','plan','offre','package','option','payer','payment','how much','cost','pricing']] },
-  { id:'starter',  patterns:[['starter','20','simple','basique','basic','debutant','debut','petit projet','premier']] },
-  { id:'pro',      patterns:[['pro','populaire','popular','45','milieu','intermediaire']] },
-  { id:'elite',    patterns:[['elite','150','complet','full','monde entier','premium','illimite','max']] },
-  { id:'custom',   patterns:[['mesure','custom','devis','studio','entreprise','equipe','gros projet','contrat','nda']] },
-  { id:'robux',    patterns:[['robux','r$','rb','rbx','roblox money']] },
-  { id:'delay',    patterns:[['delai','livraison','temps','quand','rapide','vite','long','duree','jours','semaine','deadline','delivery','fast','urgent']] },
-  { id:'contact',  patterns:[['contact','discord','commander','commande','joindre','parler','ecrire','dm','message','reach','order','hire','start','lancer']] },
-  { id:'revision', patterns:[['revision','modifier','modification','corriger','retouche','feedback','ajustement']] },
-  { id:'maptype',  patterns:[['map','type','genre','quoi','sorte','build','categorie']] },
-  { id:'rp',       patterns:[['rp','roleplay','role play','ville','quartier','interieur','maison','rue','city']] },
-  { id:'obby',     patterns:[['obby','obstacle','parcours','platformer','jump','saut','course']] },
-  { id:'simul',    patterns:[['simulateur','simulator','tycoon','farming','pet','idle','click']] },
-  { id:'optim',    patterns:[['optim','performance','lag','fps','serveur','fluide','smooth','freeze','lourd']] },
-  { id:'atmo',     patterns:[['ambiance','atmosphere','lore','lumiere','lighting','texture','visuel','beau','esthetique','joli']] },
-  { id:'exp',      patterns:[['experience','depuis','ans','annee','projets','clients','portfolio','skill','competence']] },
-  { id:'avail',    patterns:[['disponible','dispo','libre','occupe','pris','place','slot']] },
-  { id:'source',   patterns:[['source','fichier','rbxl','file']] },
-  { id:'pay',      patterns:[['paiement','payer','virement','paypal','methode','comment payer','how to pay']] },
-  { id:'who',      patterns:[['qui est','zayrho','builder','createur','auteur','cest qui','presenta']] },
-  { id:'thanks',   patterns:[['merci','thanks','parfait','super','cool','nickel','top','genial','ok','okay','great','amazing','bonne journee']] },
-  { id:'help',     patterns:[['aide','help','sais pas','quoi choisir','conseil','recommande','guide','which plan']] },
-  { id:'cheap',    patterns:[['cher','trop cher','expensive','pas les moyens','discount','reduction','negocier','negociation']] },
+const INTENTS=[
+  {id:'greet',   p:['salut','bonjour','hello','hi','hey','coucou','yo']},
+  {id:'price',   p:['prix','tarif','coute','combien','cout','budget','formule','plan','offre','how much','cost']},
+  {id:'starter', p:['starter','20','simple','basique','debutant','petit']},
+  {id:'pro',     p:['pro','populaire','45','milieu']},
+  {id:'elite',   p:['elite','150','complet','full','premium','illimite']},
+  {id:'custom',  p:['mesure','custom','devis','studio','contrat','nda']},
+  {id:'robux',   p:['robux','r$','rbx']},
+  {id:'delay',   p:['delai','livraison','temps','quand','rapide','jours','deadline']},
+  {id:'contact', p:['contact','discord','commander','commande','joindre','dm','order']},
+  {id:'revision',p:['revision','modifier','retouche','feedback']},
+  {id:'maptype', p:['map','type','genre','sorte','build']},
+  {id:'rp',      p:['rp','roleplay','ville','quartier','interieur']},
+  {id:'obby',    p:['obby','obstacle','parcours','jump']},
+  {id:'simul',   p:['simulateur','simulator','tycoon','farming']},
+  {id:'optim',   p:['optim','performance','lag','fps','fluide']},
+  {id:'atmo',    p:['ambiance','atmosphere','lore','lumiere','texture','visuel']},
+  {id:'exp',     p:['experience','ans','annee','projets','clients','portfolio']},
+  {id:'avail',   p:['disponible','dispo','libre','occupe']},
+  {id:'source',  p:['source','fichier','rbxl']},
+  {id:'pay',     p:['paiement','payer','paypal','methode']},
+  {id:'who',     p:['qui est','zayrho','builder','createur']},
+  {id:'thanks',  p:['merci','thanks','parfait','super','cool','top']},
+  {id:'help',    p:['aide','help','quoi choisir','conseil','recommande']},
+  {id:'cheap',   p:['cher','trop cher','expensive','pas les moyens']},
 ];
-
-const ANSWERS = {
-  greet:{fr:['Salut ! 👋 Bienvenue sur le portfolio de Zayrho7. Tu peux me demander tout ce que tu veux — tarifs, délais, types de maps, contact !','Hey ! Content de te voir ici 😄 Une question sur les services de Zayrho7 ? Je suis là !'],en:["Hey! 👋 Welcome to Zayrho7's portfolio. Ask me anything — pricing, deadlines, map types, contact!"]},
-  price:{fr:['Zayrho7 propose 4 formules 💰\n\n🔹 Starter — 20€ / 4 500 R$\n   1 map, thème au choix, 2 révisions\n\n🔸 Pro — 45€ / 7 500 R$ ⭐ populaire\n   Map détaillée, ambiance/lore, 4 révisions, livraison 7j\n\n🔶 Elite — 150€ / 25 000 R$\n   Monde entier, révisions illimitées, fichiers sources\n\n🔷 Sur mesure — à discuter\n   Studio, contrat pro, NDA\n\nTu veux les détails d\'une formule en particulier ?'],en:["Zayrho7 offers 4 plans 💰\n\n🔹 Starter — €20 / 4,500 R$\n🔸 Pro — €45 / 7,500 R$ ⭐\n🔶 Elite — €150 / 25,000 R$\n🔷 Custom — on request\n\nWant details on a specific plan?"]},
-  starter:{fr:['Starter à 20€ (4 500 R$) ✅\n\n• 1 map personnalisée\n• Thème au choix\n• 2 révisions incluses\n\nIdéal pour un obby simple ou un premier projet Roblox !'],en:["Starter at €20 (4,500 R$) ✅\n\n• 1 custom map\n• Theme of your choice\n• 2 revisions\n\nGreat for a simple obby or first Roblox project!"]},
-  pro:{fr:['Plan Pro à 45€ (7 500 R$), le plus choisi ⭐\n\n• Map détaillée & optimisée\n• Ambiance & lore inclus\n• 4 révisions\n• Livraison 7 jours\n\nParfait pour des maps RP élaborées !'],en:["Pro at €45 (7,500 R$), most popular ⭐\n\n• Detailed & optimized map\n• Atmosphere & lore\n• 4 revisions\n• 7-day delivery"]},
-  elite:{fr:['Plan Elite à 150€ (25 000 R$), le package complet 🔥\n\n• Zone / monde entier\n• Level design narratif\n• Révisions illimitées ♾️\n• Support post-livraison\n• Fichiers sources inclus'],en:["Elite at €150 (25,000 R$), complete package 🔥\n\n• Full world\n• Narrative level design\n• Unlimited revisions ♾️\n• Post-delivery support\n• Source files"]},
-  custom:{fr:['Sur Mesure pour les grands projets 🏢\n\n• Brief personnalisé\n• Collaboration en équipe\n• Livraisons par étapes\n• Contrat professionnel\n• NDA possible\n\nContacte Zayrho7 sur Discord : zayrho7'],en:["Custom plan for large-scale projects 🏢\n\n• Custom brief\n• Team collaboration\n• Staged deliveries\n• Pro contract\n• NDA possible\n\nContact Zayrho7 on Discord: zayrho7"]},
-  robux:{fr:['Oui, Zayrho7 accepte les Robux 🎮\n\n• Starter : 4 500 R$\n• Pro : 7 500 R$\n• Elite : 25 000 R$\n• Sur mesure : à discuter'],en:['Yes, Zayrho7 accepts Robux 🎮\n\n• Starter: 4,500 R$\n• Pro: 7,500 R$\n• Elite: 25,000 R$\n• Custom: on request']},
-  delay:{fr:['Délais de Zayrho7 ⏱️\n\n• Starter → 2–4 jours\n• Pro → 5–7 jours\n• Elite → 7–14 jours\n• Sur mesure → à définir\n\nIl ne prend un projet que s\'il est sûr de tenir les délais ✅'],en:["Zayrho7's deadlines ⏱️\n\n• Starter → 2–4 days\n• Pro → 5–7 days\n• Elite → 7–14 days\n• Custom → to define"]},
-  contact:{fr:['Pour contacter Zayrho7 💬\n\n👉 Discord : zayrho7\n\nIl répond en moins de 24h. Prépare une description de ton projet !'],en:["Contact Zayrho7 💬\n\n👉 Discord: zayrho7\n\nReplies within 24h!"]},
-  revision:{fr:['Révisions incluses ✏️\n\n• Starter : 2\n• Pro : 4\n• Elite : illimitées ♾️\n• Sur mesure : à définir'],en:['Included revisions ✏️\n\n• Starter: 2\n• Pro: 4\n• Elite: unlimited ♾️']},
-  maptype:{fr:['Types de maps disponibles 🗺️\n\n🏙️ RP — villes, intérieurs\n🏃 Obby — parcours originaux\n🎮 Simulateur / Tycoon\n⚔️ Aventure / Donjon\n🌍 Monde ouvert / Lore\n🏆 PvP / Compétitif'],en:['Available map types 🗺️\n\n🏙️ RP Maps\n🏃 Obby courses\n🎮 Simulator/Tycoon\n⚔️ Adventure/Dungeon\n🌍 Open world\n🏆 PvP/Competitive']},
-  rp:{fr:['Maps RP, spécialité de Zayrho7 🏙️\n\nVilles détaillées, quartiers, intérieurs réalistes, ambiance jour/nuit...\n\nRecommandé : Pro (45€) ou Elite (150€)'],en:["RP maps are Zayrho7's specialty 🏙️\n\nDetailed cities, districts, realistic interiors, day/night atmosphere...\n\nRecommended: Pro (€45) or Elite (€150)"]},
-  obby:{fr:['Pour un obby, Zayrho7 crée des parcours originaux thématiques 🏃\n\nSci-fi, fantasy, industriel... Starter pour basique, Pro pour plus élaboré !'],en:["Original themed obstacle courses 🏃\n\nSci-fi, fantasy, industrial... Starter for basic, Pro for elaborate!"]},
-  simul:{fr:['Pour un simulateur, l\'environnement visuel est crucial 🎮\n\nZayrho7 construit des mondes optimisés : zones de spawn, biomes, zones de jeu. Plan Pro ou Elite recommandé.'],en:["For simulators, the visual environment is key 🎮\n\nOptimized worlds with spawn zones, biomes, play areas. Pro or Elite recommended."]},
-  optim:{fr:['L\'optimisation est une priorité ⚡\n\nMaps fluides même avec beaucoup de joueurs. Plans Pro, Elite et Sur mesure incluent une optimisation poussée.'],en:["Optimization is a priority ⚡\n\nSmooth maps even with many players. Pro, Elite and Custom include thorough optimization."]},
-  atmo:{fr:['Ambiance & lore — ce qui rend une map mémorable ✨\n\nÉclairages, textures, petits détails... Inclus dès le plan Pro !'],en:["Atmosphere & lore make a map memorable ✨\n\nLighting, textures, details... Included from Pro plan!"]},
-  exp:{fr:['Zayrho7 — 3+ ans sur Roblox Studio 🎖️\n\n• 50+ projets livrés\n• 100% clients satisfaits\n• FR + EN\n• Discord : zayrho7'],en:["Zayrho7 — 3+ years on Roblox Studio 🎖️\n\n• 50+ projects\n• 100% satisfied clients\n• FR + EN\n• Discord: zayrho7"]},
-  avail:{fr:['Zayrho7 est disponible pour de nouvelles commandes ✅\n\nContacte-le sur Discord (zayrho7) !'],en:["Zayrho7 is available for new orders ✅\n\nContact him on Discord (zayrho7)!"]},
-  source:{fr:['Fichiers sources :\n\n✅ Inclus dans Elite et Sur mesure\n❌ Non inclus dans Starter et Pro'],en:["Source files:\n\n✅ Elite and Custom\n❌ Starter and Pro (add-on possible)"]},
-  pay:{fr:['Paiement accepté 💶\n\n• Euros (virement, PayPal...)\n• Robux directement in-game\n\nModalités définies sur Discord avant de commencer.'],en:["Accepted payments 💶\n\n• Euros (bank transfer, PayPal...)\n• Robux in-game"]},
-  who:{fr:['Zayrho7 — Roblox Builder professionnel 🎮\n\n• 3+ ans sur Roblox Studio\n• Spécialisé level design & maps immersives\n• 50+ projets, 100% satisfaits\n• Discord : zayrho7'],en:["Zayrho7 — Professional Roblox Builder 🎮\n\n• 3+ years on Roblox Studio\n• Level design & immersive maps\n• 50+ projects, 100% satisfied\n• Discord: zayrho7"]},
-  thanks:{fr:['Avec plaisir ! 😊 Pour démarrer un projet → Discord : zayrho7 !','Pas de souci ! 🙌 Discord zayrho7 pour une commande. À bientôt !'],en:["You're welcome! 😊 To start a project → Discord: zayrho7!","No problem! 🙌 Discord zayrho7 for orders!"]},
-  help:{fr:['Je vais t\'aider à choisir 🤔\n\nDis-moi :\n1️⃣ Quel type de map (RP, obby, simu, autre ?)\n2️⃣ L\'envergure du projet\n3️⃣ Ton budget approximatif\n\nJe te recommande la bonne formule !'],en:["I'll help you choose 🤔\n\nTell me:\n1️⃣ Map type (RP, obby, simulator?)\n2️⃣ Project scale\n3️⃣ Approximate budget"]},
-  cheap:{fr:['Le plan Starter à 20€ (4 500 R$) est le plus accessible 💰\n\nPour les gros projets avec budget serré, le Sur Mesure permet de tout discuter sur Discord (zayrho7) !'],en:["Starter at €20 (4,500 R$) is most accessible 💰\n\nFor larger projects with tight budgets, Custom lets you discuss everything on Discord!"]}
+const ANS={
+  greet:{fr:["Salut ! 👋 Bienvenue ! Je peux t'aider sur les tarifs, délais, types de maps ou les contacts de Zayrho7 !"],en:["Hey! 👋 Welcome! I can help with pricing, deadlines, map types or Zayrho7's contacts!"]},
+  price:{fr:["Les formules 💰\n🔹 Starter — 20€ / 4 500 R$\n🔸 Pro — 45€ / 7 500 R$ ⭐\n🔶 Elite — 150€ / 25 000 R$\n🔷 Sur mesure — devis\n\nTu veux les détails d'une formule ?"],en:["Plans 💰\n🔹 Starter — €20\n🔸 Pro — €45 ⭐\n🔶 Elite — €150\n🔷 Custom — on request"]},
+  starter:{fr:["Starter = 20€ (4 500 R$) ✅\n• 1 map personnalisée\n• Thème au choix\n• 2 révisions"],en:["Starter = €20 ✅\n• 1 custom map\n• Theme of choice\n• 2 revisions"]},
+  pro:{fr:["Pro = 45€ ⭐ le plus populaire\n• Map détaillée & optimisée\n• Ambiance & lore\n• 4 révisions, livraison 7j"],en:["Pro = €45 ⭐ most popular\n• Detailed & optimized map\n• Atmosphere & lore\n• 4 revisions, 7-day delivery"]},
+  elite:{fr:["Elite = 150€ 🔥\n• Monde entier\n• Révisions illimitées ♾️\n• Support post-livraison\n• Fichiers sources"],en:["Elite = €150 🔥\n• Full world\n• Unlimited revisions ♾️\n• Post-delivery support\n• Source files"]},
+  custom:{fr:["Sur Mesure — prix à discuter 🏢\n• Brief personnalisé\n• Contrat pro + NDA\nContacte : Discord zayrho7"],en:["Custom — price on request 🏢\n• Custom brief\n• Pro contract + NDA\nContact: Discord zayrho7"]},
+  robux:{fr:["Robux acceptés 🎮\n• Starter : 4 500 R$\n• Pro : 7 500 R$\n• Elite : 25 000 R$"],en:["Robux accepted 🎮\n• Starter: 4,500 R$\n• Pro: 7,500 R$\n• Elite: 25,000 R$"]},
+  delay:{fr:["Délais ⏱️\n• Starter → 2–4 jours\n• Pro → 5–7 jours\n• Elite → 7–14 jours"],en:["Deadlines ⏱️\n• Starter → 2–4 days\n• Pro → 5–7 days\n• Elite → 7–14 days"]},
+  contact:{fr:["Contact Zayrho7 💬\n👉 Discord : zayrho7\nRéponse en moins de 24h !"],en:["Contact Zayrho7 💬\n👉 Discord: zayrho7\nReplies within 24h!"]},
+  revision:{fr:["Révisions ✏️\n• Starter : 2\n• Pro : 4\n• Elite : illimitées ♾️"],en:["Revisions ✏️\n• Starter: 2\n• Pro: 4\n• Elite: unlimited ♾️"]},
+  maptype:{fr:["Types de maps 🗺️\n🏙️ RP — villes, intérieurs\n🏃 Obby — parcours originaux\n🎮 Simulateur / Tycoon\n⚔️ Aventure / Donjon\n🌍 Monde ouvert"],en:["Map types 🗺️\n🏙️ RP Maps\n🏃 Obby\n🎮 Simulator/Tycoon\n⚔️ Adventure\n🌍 Open world"]},
+  rp:{fr:["Maps RP, spécialité de Zayrho7 🏙️\nVilles, quartiers, ambiance jour/nuit.\nRecommandé : Pro (45€) ou Elite (150€)"],en:["RP maps are Zayrho7's specialty 🏙️\nCities, districts, day/night atmosphere.\nRecommended: Pro or Elite"]},
+  obby:{fr:["Obbys originaux thématiques 🏃\nSci-fi, fantasy, industriel...\nStarter pour basique, Pro pour élaboré !"],en:["Original themed obbies 🏃\nSci-fi, fantasy, industrial...\nStarter for basic, Pro for elaborate!"]},
+  simul:{fr:["Simulateurs immersifs 🎮\nZones de spawn, biomes, zones de jeu.\nPlan Pro ou Elite recommandé."],en:["Immersive simulators 🎮\nSpawn zones, biomes, play areas.\nPro or Elite recommended."]},
+  optim:{fr:["Optimisation prioritaire ⚡\nMaps fluides même avec beaucoup de joueurs.\nPlans Pro/Elite/Sur mesure."],en:["Optimization is a priority ⚡\nSmooth maps even with many players.\nPro/Elite/Custom plans."]},
+  atmo:{fr:["Ambiance & lore inclus dès le Pro ✨\nÉclairages, textures, détails uniques."],en:["Atmosphere & lore from Pro plan ✨\nLighting, textures, unique details."]},
+  exp:{fr:["Zayrho7 — 3+ ans Roblox Studio 🎖️\n50+ projets, 100% satisfaits.\nDiscord : zayrho7"],en:["Zayrho7 — 3+ years Roblox Studio 🎖️\n50+ projects, 100% satisfied.\nDiscord: zayrho7"]},
+  avail:{fr:["Zayrho7 est disponible ✅\nContacte-le sur Discord : zayrho7 !"],en:["Zayrho7 is available ✅\nContact: Discord zayrho7!"]},
+  source:{fr:["Fichiers sources :\n✅ Elite + Sur mesure\n❌ Starter + Pro (supplément possible)"],en:["Source files:\n✅ Elite + Custom\n❌ Starter + Pro (add-on possible)"]},
+  pay:{fr:["Paiements acceptés 💶\n• Euros (PayPal, virement)\n• Robux in-game"],en:["Accepted payments 💶\n• Euros (PayPal, bank transfer)\n• Robux in-game"]},
+  who:{fr:["Zayrho7 — Roblox Builder pro 🎮\n3+ ans, 50+ projets, 100% satisfaits.\nDiscord : zayrho7"],en:["Zayrho7 — Pro Roblox Builder 🎮\n3+ years, 50+ projects, 100% satisfied.\nDiscord: zayrho7"]},
+  thanks:{fr:["Avec plaisir ! 😊 Pour commander → Discord : zayrho7","Pas de souci ! 🙌"],en:["You're welcome! 😊 To order → Discord: zayrho7","No problem! 🙌"]},
+  help:{fr:["Je vais t'aider 🤔\n\nDis-moi :\n1️⃣ Type de map voulu\n2️⃣ Envergure du projet\n3️⃣ Budget approximatif\n\nJe te recommande la bonne formule !"],en:["I'll help you choose 🤔\n\nTell me:\n1️⃣ Map type\n2️⃣ Project scale\n3️⃣ Budget"]},
+  cheap:{fr:["Starter à 20€ = le plus accessible 💰\nPour gros projet budget serré → Sur Mesure (Discord zayrho7)"],en:["Starter at €20 = most accessible 💰\nLarge project tight budget → Custom (Discord zayrho7)"]},
 };
 
-const SUGGESTIONS_FR = ['C\'est combien ?','Quel est le délai ?','Comment contacter ?','Tu fais quoi comme maps ?'];
-const SUGGESTIONS_EN = ['How much does it cost?','What\'s the deadline?','How to contact?','What maps do you make?'];
+function detectIntent(msg){ const m=N(msg),s={}; INTENTS.forEach(i=>{ let sc=0; i.p.forEach(p=>{if(m.includes(p))sc+=p.split(' ').length;}); if(sc>0)s[i.id]=sc; }); if(!Object.keys(s).length)return null; return Object.entries(s).sort((a,b)=>b[1]-a[1])[0][0]; }
+function getReply(msg){ const l=lang==='fr'?'fr':'en'; const intent=detectIntent(msg); if(intent&&ANS[intent]){ lastIntent=intent; return pick(ANS[intent][l]||ANS[intent].fr); } if(N(msg).trim().length<5&&lastIntent)return pick(ANS[lastIntent][l]||ANS[lastIntent].fr); return pick(lang==='fr'?["Je ne suis pas sûr 😅 Essaie : 'c'est combien ?', 'quel délai ?', 'comment contacter ?'"]:["I'm not sure 😅 Try: 'how much?', 'deadline?', 'how to contact?"]); }
+window.sendMsg = () => { const inp=document.getElementById('chat-input'),text=inp.value.trim(); if(!text)return; inp.value=''; msgCount++; document.getElementById('chat-sugs').innerHTML=''; addMsg(text,'user'); showTyping(); const r=getReply(text); setTimeout(()=>{hideTyping();addMsg(r,'bot');if(msgCount%3===0)setTimeout(renderSugs,600);},Math.min(500+r.length*7,2000)); };
+function renderSugs(){ const b=document.getElementById('chat-sugs'); b.innerHTML=''; ["C'est combien ?","Quel est le délai ?","Comment contacter ?","Tu fais quoi comme maps ?"].forEach(s=>{ const btn=document.createElement('button'); btn.className='chat-sug'; btn.textContent=s; btn.onclick=()=>{document.getElementById('chat-input').value=s;sendMsg();}; b.appendChild(btn); }); }
 
-function renderSuggestions(){
-  const box=document.getElementById('chat-sugs'); box.innerHTML='';
-  const sugs=lang==='fr'?SUGGESTIONS_FR:SUGGESTIONS_EN;
-  sugs.forEach(s=>{ const b=document.createElement('button'); b.className='chat-sug'; b.textContent=s; b.onclick=()=>{ document.getElementById('chat-input').value=s; sendMsg(); }; box.appendChild(b); });
-}
-
-function detectIntent(msg){
-  const m=N(msg); const scores={};
-  INTENTS.forEach(intent=>{
-    let score=0;
-    intent.patterns[0].forEach(p=>{ if(m.includes(p)) score+=p.split(' ').length; });
-    if(score>0) scores[intent.id]=score;
-  });
-  if(!Object.keys(scores).length) return null;
-  return Object.entries(scores).sort((a,b)=>b[1]-a[1])[0][0];
-}
-
-function getReply(msg){
-  const l=lang==='fr'?'fr':'en';
-  const intent=detectIntent(msg);
-  if(intent && ANSWERS[intent]){
-    lastIntent=intent;
-    const pool=ANSWERS[intent][l]||ANSWERS[intent]['fr'];
-    return pick(pool);
-  }
-  const m=N(msg).trim();
-  if(m.length<5 && lastIntent){
-    const pool=ANSWERS[lastIntent][l]||ANSWERS[lastIntent]['fr'];
-    return pick(pool);
-  }
-  const fallbacks={
-    fr:['Je ne suis pas sûr de comprendre 😅 Essaie : "c\'est combien ?", "quel délai ?", "comment contacter ?"','Pour une réponse précise, contacte Zayrho7 sur Discord : zayrho7 😄'],
-    en:["I'm not sure I understand 😅 Try: 'how much?', 'what's the deadline?', 'how to contact?'","For a precise answer, contact Zayrho7 on Discord: zayrho7 😄"]
-  };
-  return pick(fallbacks[l]);
-}
-
-function sendMsg(){
-  const input=document.getElementById('chat-input');
-  const text=input.value.trim(); if(!text) return;
-  input.value=''; msgCount++;
-  document.getElementById('chat-sugs').innerHTML='';
-  addMsg(text,'user'); showTyping();
-  const reply=getReply(text);
-  const delay=Math.min(500+reply.length*7,2000);
-  setTimeout(()=>{ hideTyping(); addMsg(reply,'bot'); if(msgCount%3===0) setTimeout(renderSuggestions,600); },delay);
-}
-
-/* ═══════════════════════════════════════
+/* ══════════════════════════════
    MISC
-   ═══════════════════════════════════════ */
-function goContact(){ document.getElementById('contact').scrollIntoView({behavior:'smooth'}); }
-document.querySelectorAll('a[href^="#"]').forEach(a=>{
-  a.addEventListener('click',e=>{ e.preventDefault(); const t=document.querySelector(a.getAttribute('href')); if(t) t.scrollIntoView({behavior:'smooth'}); });
-});
-const obs=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('in'); }),{threshold:.08});
+══════════════════════════════ */
+window.goContact = ()=>document.getElementById('contact').scrollIntoView({behavior:'smooth'});
+document.querySelectorAll('a[href^="#"]').forEach(a=>{ a.addEventListener('click',e=>{ e.preventDefault(); const t=document.querySelector(a.getAttribute('href')); if(t)t.scrollIntoView({behavior:'smooth'}); }); });
+const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in');}),{threshold:.08});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
-
-/* ═══════════════════════════════════════
-   INIT
-   ═══════════════════════════════════════ */
-async function init() {
-  await loadSharedData();
-  renderPublicGallery();
-  renderReviews();
-  renderSuggestions();
-  // Rafraîchissement automatique toutes les 30 secondes
-  setInterval(refreshData, 30000);
-}
-
-init();
+renderSugs();
 </script>
 </body>
 </html>
