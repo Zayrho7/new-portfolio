@@ -578,7 +578,7 @@ function fbBadge(state) {
   const el  = document.getElementById('fb-badge');
   const txt = document.getElementById('fb-txt');
   el.className = 'fb-badge ' + state;
-  txt.textContent = {connecting:'CONNEXION', live:'LIVE 🔥', error:'OFFLINE'}[state] || state;
+  txt.textContent = {connecting:'CONNEXION', live:'LIVE', error:'OFFLINE'}[state] || state;
 }
 function toast(msg) {
   const t = document.getElementById('toast');
